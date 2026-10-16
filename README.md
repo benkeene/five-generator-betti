@@ -12,3 +12,33 @@ five-generated numerical semigroups S = ⟨n₀ < n₁ < n₂ < n₃ < n₄⟩ o
 Status: PROOF_ATTEMPT for (1), conjecture for (2) (2026-10-16). Informal argument in `docs/`;
 scaffolding plan in `docs/astra/`. Template and reusable library: `~/semigroup-betti`
 (Palomar entry PALOMAR-2026-10-07-000005; four-generator case β₁ ≤ 2w).
+
+## Layout
+- `Challenge.lean` — statements of record F and W (Mathlib-only imports, deliberate `sorry`s).
+- `Solution.lean` — restates the definitions and proves F by a thin call into
+  `FiveGenBetti.Family.spanRank_eq` (admitted). W is not restated: version 1 is family-only.
+- `FiveGenBetti/` — Defs (generic `GenData e`, `toricKer`), Family/ (generators, relations,
+  main theorem), Certificate/ (Apéry predecessor-tree certificates), Examples/Thirteen,
+  `NOTES.md`, `AxiomAudit.lean`.
+- `Targets/FiniteWidth.lean` — W, admitted, outside Solution's import closure;
+  `comparator.json` (family only) and `comparator.all-targets.json` (both; must fail until W is proved).
+- `docs/PROOF.md` (labelled informal proof of F, PROOF_ATTEMPT), `docs/PORTING.md`,
+  `docs/CHECKER.md`, `docs/astra/`, `CORRESPONDENCE.md`.
+
+## Building and checking
+
+```
+lake exe cache get      # on a clean machine; locally .lake/packages is cloned from ~/semigroup-betti
+lake build
+python3 scripts/check-lean-sources.py
+ruby scripts/validate-formalization.rb
+lake env lean FiveGenBetti/AxiomAudit.lean   # expected to show sorryAx while the development is admitted
+./scripts/verify-comparator.sh          # Linux with bubblewrap only; fails until the proofs are complete
+```
+
+Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
+(`c55e6e786f49471c72fbddbec5415808896aec1e`), the same as PALOMAR-2026-10-07-000005. Never commit `.lake`.
+
+## Submission
+Palomar submissions go through https://submit.palomar-registry.org/ with the full 40-character commit SHA. This repository is
+not ready for submission: see `status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §10.

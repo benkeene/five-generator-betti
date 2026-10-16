@@ -1,0 +1,117 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4 — adopted from https://github.com/mathlib-initiative/formalization.yaml
+version: "v0.4"
+
+project:
+  name: "First Betti numbers of five-generated numerical semigroups"
+  description: >-
+    A Lean 4 / Mathlib formalization project for (F) an explicit two-parameter family of
+    minimally five-generated numerical semigroups <m, m+1, m+k, m+2k-1, m+2k>, m = 2kq+1,
+    whose toric ideal has spanRank exactly 4k+2, together with the generic fiber-graph
+    infrastructure, both algebraic bridges, the corrected singleton-counting decomposition
+    beta1 + p = 5 + N, the pair-component antichain lemma and certificate-checker soundness
+    needed for (W) a proposed finite-width bound beta1 <= 2w+2 (4 <= w <= 40). Version 1
+    targets F; W is stated and excluded from the release comparator. Currently a scaffold.
+  authors:
+    - "Ben Keene"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Ben Keene"
+
+repository:
+  role: substantive-development
+
+classification:
+  arxiv: [math.AC, math.CO]
+  msc2020: ["13D02", "20M14", "13F65", "05E40"]
+
+status:
+  scope: >-
+    SCAFFOLD (2026-10-16). Theorem F is a PROOF_ATTEMPT: the informal presentation
+    (docs/PROOF.md) has an explicit generating set, a terminating spanning argument, a
+    dimension proof of generation and a nonredundancy argument, adversarially checked once;
+    the brief's indispensability claim was refuted and corrected to nonredundancy, and the
+    cardinal lower bound needs the graded lemma through I/mI. Theorem W is a conjecture.
+    Both statements of record compile; the development library is admitted. Formal
+    periodicity and the complete width-40 replay are outside version 1.
+  sorry_count: 4
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound", "sorryAx"]
+  main_results:
+    - "FiveGenBetti.family_spanRank_eq"
+
+fidelity:
+  divergences: >-
+    The statements use cardinal-valued Submodule.spanRank of the toric ideal
+    ker(K[X0..X4] -> K[t], Xi |-> t^(n i)). Equality with the factorization-fiber invariant
+    requires a reverse bridge not present in the four-generator template. Nonredundancy of the
+    displayed family presentation is intended; indispensability of every generator is not
+    claimed (N_0 can be exchanged for b e^q - a^(q+2)). The finite-width target is unproved.
+
+sources:
+  - title: "Linear first-Betti bounds for five-generated numerical semigroups (proof attempt, unpublished)"
+    authors: ["Ben Keene"]
+    type: "original-proof"
+    relationship: other
+    note: >-
+      Informal presentation and minimality argument produced by GPT-6 Astra (2026-10-16,
+      docs/astra/) and adversarially checked once; not yet through the full review protocol.
+  - title: "Minimal presentations of shifted numerical monoids"
+    authors: ["Rebecca Conaway", "Felix Gotti", "Jesse Horton", "Christopher O'Neill", "Roberto Pelayo", "Mesa Pracht", "Brian Wissman"]
+    type: "article"
+    id: "https://doi.org/10.1142/S0218196718500030"
+    relationship: background
+    note: "Theorem 4.9: cardinality-preserving bijection of minimal presentations for m > w^2 (periodicity window w^2 < m <= w^2 + w)."
+  - title: "Bounds for syzygies of monomial curves"
+    authors: ["Giulio Caviglia", "Alessio Moscariello", "Alessio Sammartano"]
+    type: "article"
+    id: "https://doi.org/10.1090/proc/16862"
+    relationship: background
+    note: "The quadratic width conjecture and its proof in embedding dimension four for width >= 40."
+
+related_formalizations:
+  - id: "https://palomar-registry.org/entry?id=PALOMAR-2026-10-07-000005&version=1"
+    relationship: other
+    note: >-
+      Four-generator case beta1 <= 2w: template for layout and verification, and source
+      library generalized here (docs/PORTING.md records reused files and the source commit
+      aa266b8a7db2794e49a0053978852ade100d23da).
+
+automation:
+  methods:
+    - method: agent
+      models: ["GPT-6 Astra (OpenAI)", "Claude Fable 5.1 (Anthropic)"]
+      framework: "Codex app-server (for GPT-6 Astra); Claude Code"
+      tool_setup: >-
+        GPT-6 Astra as independent prover, adversarial reviewer and read-only repository
+        auditor; Claude Code writing the Lean scaffold against a pinned local toolchain.
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine (Apple silicon Mac) plus subscription model access"
+      prompting_notes: "Astra role prompts; never told a proposed argument was probably right."
+  spend_usd: "subscription-based"
+  notes: >-
+    Agent agreement is not evidence; theorem status follows the aiseminar review protocol.
+
+review:
+  status: self-assessed
+  reviewers:
+    - "Ben Keene"
+  notes: "Scaffold stage; no completed family-proof review or Lean verification is claimed."
+
+known_gaps:
+  - "Family generation and minimum generator cardinality are not formalized."
+  - "The reverse fiber bridge (betaFiber <= spanRank) is not formalized."
+  - "The finite-width theorem is unproved; periodicity and exhaustive replay are out of version 1."
+
+limitations:
+  - "No novelty claim is made; the family's novelty confidence is 0.70 after a literature audit."
+
+alignment:
+  namespace: "FiveGenBetti"
+  statements:
+    - source: "Theorem F: beta1 = 4k+2 for <m, m+1, m+k, m+2k-1, m+2k>, m = 2kq+1, k >= 3, q >= k-1"
+      lean: "FiveGenBetti.family_spanRank_eq"
+    - source: "Theorem W (conjecture): beta1 <= 2w+2 for minimally five-generated S with 4 <= w <= 40"
+      lean: "FiveGenBetti.beta1_five_le_two_width_add_two"
