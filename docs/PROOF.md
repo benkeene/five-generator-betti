@@ -53,3 +53,18 @@ Singleton components (support of size 1) total exactly 5 over contributing degre
 β₁ + p = 5 + N, p ≤ 2; the bound β₁ ≤ 2w + 2 ⇔ N ≤ 2w − 3 + p; support types 2+2+unused (15),
 2+3 (10), 1+2+2 (15). The four-generator `sigma_le_four` / `ncomp_sub_one_le` do not extend
 (⟨13,14,16,18,19⟩ has σ = 8). Pair-component antichain lemma holds in every embedding dimension.
+
+## Proof B (independent reconstruction, Astra 2026-10-16; agrees with Proof A above)
+Generators H' = {bd − ae, c² − ae, b^{k−i}eⁱ − a^{k−1−i}c dⁱ (0 ≤ i ≤ k−1),
+b^{k−1−i}c eⁱ − a^{k−1−i}d^{i+1} (0 ≤ i ≤ k−2), dᵏ − c e^{k−1}} and G = {c d^{k−1−j} e^{s+j} −
+a^{q+2−j} bʲ (0 ≤ j ≤ k−1), d^{k−1−h} e^{s+1+h} − a^{q+1−h} bʰ c (0 ≤ h ≤ k−2), e^{q+1} − a^{q+1} d},
+s = q − (k−1) (natural subtraction q −̇ (k−1), never (q −̇ k) + 1). Order monomials by
+(ν, −deg_a, deg_b, deg_d, deg_c, deg_e); the first monomial of each relation leads. Standard
+monomials are a^r W with W ∈ {c^ε dᵘ eᵛ : u ≤ k−1, u+v ≤ q−ε} ∪ {bᵘ c^ε eᵛ : u ≥ 1, u+v ≤ k−1−ε}
+(ε ∈ {0,1}); their offsets δ(W) = ν(W) − m|W| = 2k(u+v) − u + kε, resp. 2kv + u + kε, are
+0, …, m−1 once each (consecutive blocks of length 2k per t ≤ q−1). Hence standard monomials have
+distinct ν, any remainder of f ∈ I is 0, J = I, the relations are a Gröbner basis, and
+{ν(W)} = Ap(S; m). Minimality by the binomial-move criterion: for H', no side of another relation
+divides the leading monomial; for G, the degrees (q+2)m + r are distinct and total degree q+1
+cannot change except through the deleted relation. This route avoids the I/𝔪I lemma: a
+Gröbner-basis / move-graph formalization is a candidate Lean plan (`Family.GroebnerRoute`).
