@@ -9,7 +9,8 @@ five-generated numerical semigroups S = ⟨n₀ < n₁ < n₂ < n₃ < n₄⟩ o
 2. β₁(K[S]) ≤ 2w + 2 for every minimally five-generated S with 4 ≤ w ≤ 40 (finite-width
    statement, to be supported by a certified sweep over the periodicity window m ≤ w² + w).
 
-Status: PROOF_ATTEMPT for (1), conjecture for (2) (2026-10-16). Informal argument in `docs/`;
+Status: (1) VERIFIED as an ordinary theorem by the aiseminar review protocol (2026-10-16; four Astra
+passes incl. an independent reconstruction), Lean development admitted; (2) conjecture. Informal argument in `docs/PROOF.md`;
 scaffolding plan in `docs/astra/`. Template and reusable library: `~/semigroup-betti`
 (Palomar entry PALOMAR-2026-10-07-000005; four-generator case β₁ ≤ 2w).
 
