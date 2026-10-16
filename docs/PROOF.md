@@ -41,7 +41,7 @@ K[a..e]/(J, a) has dimension m (construct the basis before using finrank).
 * q ≥ k: every H-degree is below D. q = k − 1: the only collisions are b e^{k−1} − c d^{k−1}
   at D and dᵏ − c e^{k−1} at D + k − 1; only a scalar multiple of the matching N_r can enter,
   and ψ forces it to vanish.
-* Counterexample to indispensability: N₀ + e^{q−k+1}(b e^{k−1} − c d^{k−1}) = b eᵍ − a^{q+2}.
+* Counterexample to indispensability: N₀ + e^{q−k+1}(b e^{k−1} − c d^{k−1}) = b e^q − a^{q+2}.
 
 ## GradedGenerators.spanRank_eq_card_of_weightedHomogeneous_irredundant
 For positive weights, a weighted-homogeneous nonredundant generating set of I has cardinality
