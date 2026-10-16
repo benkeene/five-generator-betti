@@ -6,6 +6,13 @@ boundary q = k − 1) → response → reviewer → independent reconstruction. 
 record the refuted indispensability claim and its correction to nonredundancy.
 
 Variables a, b, c, d, e of weights m, m+1, m+k, m+2k−1, m+2k; m = 2kq + 1, k ≥ 3, q ≥ k − 1.
+Hypotheses made explicit: all exponents are nonnegative integers; the N-degrees use the global index
+0 ≤ r < 2k; S is numerical because it contains the consecutive generators m, m+1; the five generators
+are minimal because m + 2k < 2m; K is any field (no restriction on the characteristic).
+References for the fiber criteria: Charalambous–Katsabekis–Thoma, "Minimal systems of binomial
+generators and the indispensable complex of a toric ideal", Proc. AMS 135 (2007), arXiv:math/0607249,
+Theorem 2.5 (a binomial set generates I_S iff it connects every fiber) and Theorems 2.6–2.7 (minimal
+generators ↔ spanning trees on the components of each fiber graph).
 
 ## Family.Relations
 H (2k + 2): c² − bd, bd − ae, bᵏ − aᵏ⁻¹c, dᵏ − c eᵏ⁻¹, and for 0 ≤ i ≤ k − 2:
@@ -17,38 +24,73 @@ weight identities (`mono_sub_mem_toricKer`).
 
 ## Family.NormalForms
 Four monomial families (A): bⁱeʲ (i ≥ 1, i + j ≤ k − 1); bⁱceʲ (i ≥ 1, i + j ≤ k − 2);
-dᵗeʲ (t < k, t + j ≤ q); c dᵗ eʲ (t < k, t + j ≤ q − 1). Offsets i + 2kj, k + i + 2kj,
-2k(t+j) − t, k + 2k(t+j) − t partition {0, …, 2kq} (split by residue mod 2k); hence exactly
-m = 2kq + 1 normal forms (`normalOffsetEquiv`).
+dᵗeʲ (t < k, t + j ≤ q); c dᵗ eʲ (t < k, t + j ≤ q − 1). Offsets (weight minus m·length):
+i + 2kj, k + i + 2kj, 2k(t+j) − t, k + 2k(t+j) − t. Writing an offset as 2kh + ρ with
+0 ≤ ρ < 2k, the families occupy these ranges of h (an interval whose upper endpoint is below its
+lower endpoint is empty; this handles ρ = 2k − 1 and q = k − 1):
 
-## Family.Generation
-`monomial_normal_form`: every monomial ≡ a^ℓ · (normal form) mod J, by strong induction on
-weighted degree whenever a reduction introduces a; reductions: c², bd, bᵏ introduce a; excess
-bⁱceʲ and bⁱeʲ via the H families; b e^{k−1} → c d^{k−1}; dᵏ → c e^{k−1} (a second one gives c²);
-excess dᵗeʲ, c dᵗ eʲ via U_{2k−1−t}, U_{k−1−t}. Distinct normal forms have distinct residues mod
-m, so equal-weight monomials reduce to the same a^ℓ A; `toricKer_le_ideal_of_mono_sub_mem`
-gives J = I.
+| residue ρ | families and ranges of h |
+|---|---|
+| 0 | eʰ: 0 ≤ h ≤ q |
+| k | c eʰ: 0 ≤ h ≤ q − 1 |
+| 1 ≤ ρ ≤ k − 1 | b-family b^ρ eʰ: 0 ≤ h ≤ k − ρ − 1; cd-family c d^{k−ρ} e^{h−(k−ρ)}: k − ρ ≤ h ≤ q − 1 |
+| k + 1 ≤ ρ ≤ 2k − 1 | bc-family b^{ρ−k} c eʰ: 0 ≤ h ≤ 2k − ρ − 2; d-family d^{2k−ρ} e^{h−(2k−ρ−1)}: 2k − ρ − 1 ≤ h ≤ q − 1 |
+
+So residue 0 has q + 1 offsets and each other residue has q: (q + 1) + (2k − 1)q = 2kq + 1 = m,
+each offset in {0, …, m − 1} exactly once. Hence exactly m normal forms with pairwise distinct
+residues mod m (`normalOffsetEquiv`).
+
+## Family.Generation (direct normal-form argument; the earlier (J,a) = (I,a) route is not used)
+`monomial_normal_form`: every monomial ≡ a^ℓ · (normal form) mod J. Staged reduction: whenever a
+rewrite introduces a positive power of a, extract it and apply strong induction on the weight of
+the residual (the weight of the whole monomial is preserved by every rewrite, so the induction is
+on the residual only); otherwise the rewrites are b e^{k−1} → c d^{k−1} (removes b) and
+dᵏ → c e^{k−1} (lowers the d-exponent; a second application creates c², which introduces a).
+Reductions: c², bd, bᵏ introduce a; excess bⁱceʲ and bⁱeʲ via the H families; excess dᵗeʲ and
+c dᵗ eʲ via U_{2k−1−t} and U_{k−1−t} (both introduce a; at q = k − 1, t = k − 1 the divisor is
+c d^{k−1} with e-exponent 0). Distinct normal forms have distinct residues mod m, so two monomials
+of equal weight reduce to the same a^ℓ A, and the binomial of two equal-weight monomials lies in J;
+since I is spanned by such binomials (`toricKer_le_ideal_of_mono_sub_mem`, the coefficient-sum
+argument of the four-generator library), J = I.
 
 ## Family.Apery
-Weights of (A) are exactly Ap(S; m); |Ap| = m; (J, a) = (I, a); the quotient
-K[a..e]/(J, a) has dimension m (construct the basis before using finrank).
+Every semigroup element has weight ℓm + ν(W) for a unique normal form W in its residue (ℓ ≥ 0), so
+ν(W) is the least element of S in that residue: the weights of (A) are exactly Ap(S; m) and
+|Ap(S; m)| = m. Consequently (J, a) = (I, a) and K[a..e]/(J, a) has dimension m (basis: the normal
+forms; construct it before using finrank).
 
 ## Family.Minimality (nonredundancy, not indispensability)
-* H: the two quadratics are independent; the 2k degree-k relations have pairwise disjoint
-  supports modulo (a, c², bd).
-* N: the N-degrees form an interval of width 2k − 1 < m; the monomial map
-  ψ: (a,b,c,d,e) ↦ (s, st, stᵏ, st^{2k−1}, st^{2k}) kills H and ψ(N_r) = s^{q+1} tʳ (tᵐ − s) ≠ 0.
-* q ≥ k: every H-degree is below D. q = k − 1: the only collisions are b e^{k−1} − c d^{k−1}
-  at D and dᵏ − c e^{k−1} at D + k − 1; only a scalar multiple of the matching N_r can enter,
-  and ψ forces it to vanish.
+Suppose a relation f of the list lies in the ideal generated by the others, f = Σ g_i f_i. Project
+to the homogeneous component of f (ordinary degree for H, weighted degree D + r for N): the
+projected identity still holds, and only components of the g_i of the right degree survive.
+* H: project to ordinary degree k (the two quadratics are linearly independent and generate the
+  monomial ideal (c², bd) modulo a). The other degree-k relations then appear with scalar
+  coefficients and the quadratic consequences vanish modulo (a, c², bd); the 2k degree-k relations
+  have pairwise disjoint nonzero supports in K[b,c,d,e]/(c², bd), contradiction.
+* N: project to weighted degree D + r. Another N_j (j ≠ r) would need a multiplier of weight
+  |r − j| < m, impossible for a nonconstant monomial; so only H-relations (with arbitrary
+  multipliers) and scalar multiples of N_r itself can occur. The monomial map
+  ψ: (a,b,c,d,e) ↦ (s, st, stᵏ, st^{2k−1}, st^{2k}) kills H (its relations are length-homogeneous)
+  and ψ(N_r) = s^{q+1} tʳ (tᵐ − s) ≠ 0 in every characteristic, contradiction.
+* q ≥ k: every H-degree is below D, so H cannot reach the N-band anyway. q = k − 1: the degree-k
+  H-offsets are k, k(2k−1), (2k−1)(i+1), 3k−1+(2k−1)i; the only H-degrees in the N-band are
+  b e^{k−1} − c d^{k−1} at D and dᵏ − c e^{k−1} at D + k − 1, and all H-degrees are below D + m,
+  so in a putative redundancy of such an H-relation only the matching scalar N_r can enter, and ψ
+  forces that scalar to vanish; minimality of H then excludes redundancy.
 * Counterexample to indispensability: N₀ + e^{q−k+1}(b e^{k−1} − c d^{k−1}) = b e^q − a^{q+2}.
 
 ## GradedGenerators.spanRank_eq_card_of_weightedHomogeneous_irredundant
-For positive weights, a weighted-homogeneous nonredundant generating set of I has cardinality
-spanRank I: its classes span and are independent in I/𝔪I, and every generating set spans I/𝔪I.
-(Do not apply a local-ring Nakayama theorem to the polynomial ring.)
+Let 𝔪 = (a,b,c,d,e) and let f_1, …, f_N be weighted-homogeneous, of positive weights, generating I
+and nonredundant. In the K-vector space I/𝔪I the classes [f_i] span (every element of I is
+Σ g_i f_i ≡ Σ g_i(0) f_i). They are independent: if Σ λ_i f_i ∈ 𝔪I with some λ_j ≠ 0, pick a
+weight d with λ_j ≠ 0 for some f_j of weight d and project to weight d; the weight-d part of an
+element of 𝔪I is a combination of generators of weight strictly less than d (the coefficients have
+positive weight), so Σ_{wt f_i = d} λ_i f_i ∈ (f_i : wt f_i < d) + ..., and solving for f_j
+expresses it through the others, contradicting nonredundancy. Hence dim_K I/𝔪I = N. Any generating
+set of I maps onto a spanning set of I/𝔪I, so it has at least N elements: μ(I) = spanRank I = N.
+Works in every characteristic; no local-ring Nakayama is used.
 
-## Decomposition (for W; `Decomposition.lean`)
+## Decomposition (for the finite-width conjecture W only; not used by Theorem F)
 Singleton components (support of size 1) total exactly 5 over contributing degrees; t_d ≤ 2;
 β₁ + p = 5 + N, p ≤ 2; the bound β₁ ≤ 2w + 2 ⇔ N ≤ 2w − 3 + p; support types 2+2+unused (15),
 2+3 (10), 1+2+2 (15). The four-generator `sigma_le_four` / `ncomp_sub_one_le` do not extend
@@ -66,5 +108,13 @@ monomials are a^r W with W ∈ {c^ε dᵘ eᵛ : u ≤ k−1, u+v ≤ q−ε} �
 distinct ν, any remainder of f ∈ I is 0, J = I, the relations are a Gröbner basis, and
 {ν(W)} = Ap(S; m). Minimality by the binomial-move criterion: for H', no side of another relation
 divides the leading monomial; for G, the degrees (q+2)m + r are distinct and total degree q+1
-cannot change except through the deleted relation. This route avoids the I/𝔪I lemma: a
-Gröbner-basis / move-graph formalization is a candidate Lean plan (`Family.GroebnerRoute`).
+cannot change except through the deleted relation. Comparison with Proof A (reviewer 20261016T191635): the two generating sets are equivalent, not
+identical: c² − ae = (c² − bd) + (bd − ae); B's indexed family b^{k−i}eⁱ − a^{k−1−i}c dⁱ merges A's
+bᵏ − a^{k−1}c with its second family shifted by one; and B's last inhomogeneous relation
+e^{q+1} − a^{q+1}d = N_{2k−1} + a^{q+2−k}(b^{k−1}c − a^{k−1}d). Both have 4k + 2 relations, the same
+standard monomials and the same Apéry set. A's list is not a Gröbner basis for B's order (c² − bd
+and bd − ae both lead with bd), which does not affect A's normal-form proof. B's move-graph
+argument proves nonredundancy; equality with μ(I) over arbitrary polynomial generating sets still
+needs the graded lemma above (or Charalambous–Katsabekis–Thoma Thm 2.5–2.7 for binomial generating
+sets). Lean plan: Proof A as the primary route (staged induction, no custom monomial order); B kept
+as an independent check (Mathlib has `MonomialOrder.div`).
