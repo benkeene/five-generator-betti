@@ -27,11 +27,10 @@ classification:
 
 status:
   scope: >-
-    SCAFFOLD (2026-10-16). Theorem F is a PROOF_ATTEMPT: the informal presentation
-    (docs/PROOF.md) has an explicit generating set, a terminating spanning argument, a
-    dimension proof of generation and a nonredundancy argument, adversarially checked once;
-    the brief's indispensability claim was refuted and corrected to nonredundancy, and the
-    cardinal lower bound needs the graded lemma through I/mI. Theorem W is a conjecture.
+    SCAFFOLD (2026-10-16). Theorem F is an ordinary theorem by the laboratory's review
+    protocol (adversary, reviewer, independent reconstruction and confirming review, all
+    recorded in docs/PROOF.md and the aiseminar claim_0005 packet); its informal proof
+    (docs/PROOF.md) is complete and not yet formalized. Theorem W is a conjecture.
     Both statements of record compile; the development library is admitted. Formal
     periodicity and the complete width-40 replay are outside version 1.
   sorry_count: 4
@@ -98,7 +97,13 @@ review:
   status: self-assessed
   reviewers:
     - "Ben Keene"
-  notes: "Scaffold stage; no completed family-proof review or Lean verification is claimed."
+    - "GPT-6 Astra (adversary, reviewer, independent prover; four passes, 2026-10-16)"
+  notes: >-
+    The informal proof of Theorem F passed an adversary pass (objections answered), a reviewer
+    pass (fixes applied), an independent reconstruction from the statement alone, and a
+    confirming reviewer pass that replayed the 32 in-range small instances and their
+    presentation checks (aiseminar experiments/local/2026-10-16_semigroup_e5_family_tests).
+    No external human review. Nothing is Lean-verified yet.
 
 known_gaps:
   - "Family generation and minimum generator cardinality are not formalized."
