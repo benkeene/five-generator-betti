@@ -36,4 +36,37 @@ theorem thirteen_spanRank_eq_fourteen
   simpa only [hn] using
     Family.spanRank_eq K 3 2 (by decide) (by decide)
 
+/-! Benchmarks at `(k, q) = (3, 2)` (plan §6), by kernel `decide`. -/
+
+open Family in
+theorem thirteen_relIndex_card : Fintype.card (RelIndex 3) = 14 := by decide
+
+open Family in
+theorem thirteen_normalForm_card : Fintype.card (NormalForm 3 2) = 13 := by decide
+
+open Family in
+theorem thirteen_relation_weights :
+    ∀ i : RelIndex 3, weight (gens 3 2) (relExp 3 2 i).1 = weight (gens 3 2) (relExp 3 2 i).2 := by
+  decide
+
+open Family in
+theorem thirteen_N_degrees :
+    Finset.univ.image (fun i : NIndex 3 => relationDegree 3 2 (.inr i)) = Finset.Icc 52 57 := by
+  decide
+
+open Family in
+theorem thirteen_normalOffsets :
+    Finset.univ.image (@normalOffset 3 2) = Finset.range 13 := by
+  decide
+
+open Family in
+theorem thirteen_normalWeights :
+    Finset.univ.image (fun u : NormalForm 3 2 => weight (gens 3 2) (normalExp u)) =
+      {0, 14, 28, 16, 30, 18, 19, 33, 34, 35, 36, 37, 38} := by
+  decide
+
+theorem thirteen_gens : Family.gens 3 2 = thirteen := by
+  funext i
+  fin_cases i <;> rfl
+
 end FiveGenBetti.Examples
