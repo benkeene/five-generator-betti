@@ -1,18 +1,18 @@
 # Correspondence: informal statements ↔ formal statements (2026-10-16)
 
-Status (commit of record b0a3671; Lean sources at 0a2a156 differ only in Solution.lean comments):
+Status (commit of record 793e759; Lean sources at 9006821 differ only in Solution.lean comments):
 Theorem F is a sorry-free Lean development, kernel-replayed locally (literal 23-module `leanchecker`
-replay at 0a2a156, §11). Astra reviewer pass 1 on the formal development (2026-10-17):
+replay at 9006821, §11). Astra reviewer pass 1 on the formal development (2026-10-17):
 ACCEPT_WITH_FIXES 0.98; the reviewer judges that F qualifies for FORMALLY_VERIFIED under aiseminar
 AGENTS.md §3; lab status (aiseminar claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F
 with the scope of §2. Independent statement reconstruction: done, equivalence with
-`family_spanRank_eq` checked in Lean (§13). Linux CI comparator: passed at 10d4722 (2026-10-17,
+`family_spanRank_eq` checked in Lean (§13). Linux CI comparator: passed at 0223cfc (2026-10-17,
 https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; con-ron, nanoda and
 the Lean default kernel accepted the solution; §11). Theorem W is admitted
 (`Targets/FiniteWidth.lean`, outside Solution's import closure and not in `defaultTargets`).
 Adversary passes on the formal development ('meaning', 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97;
 their documentation fixes are applied here; the reviewer pass-1 documentation fixes are applied in the
-commit following 0a2a156. Packaging commit of 2026-10-17 (after 10d4722): two further statements of
+commit following 9006821. Packaging commit of 2026-10-17 (after 0223cfc): two further statements of
 record for F, `familyGens_minimallyGenerates` and `family_presentation` (§2, §4, §8), added to
 `comparator.json`; the frozen-file headers and docstrings were corrected (comment-only, §2); the
 vendored four-generator copy was removed (docs/PORTING.md). The CI comparator has not yet run on that
@@ -21,7 +21,7 @@ commit. Commands and outcomes are in §11.
 ## 1. Informal claims and status
 * **F** (informal: VERIFIED as an ordinary theorem, aiseminar claim_0005; formal: sorry-free,
   kernel-replayed locally, reviewer pass 1 ACCEPT_WITH_FIXES 0.98; CI comparator passed at
-  10d4722, 2026-10-17): for every field K, k ≥ 3, q ≥ k − 1, m = 2kq + 1, the toric ideal of
+  0223cfc, 2026-10-17): for every field K, k ≥ 3, q ≥ k − 1, m = 2kq + 1, the toric ideal of
   ⟨m, m+1, m+k, m+2k−1, m+2k⟩ has minimal number of generators 4k + 2.
 * **W** (conjecture): β₁ ≤ 2w + 2 for every minimally five-generated numerical semigroup of
   width 4 ≤ w ≤ 40. Out of version 1.
@@ -45,7 +45,7 @@ For W: `FiveGenBetti.beta1_five_le_two_width_add_two`. W's admitted development 
 `FiveGenBetti.Targets.beta1_five_le_two_width_add_two` (outside Solution's import closure;
 `comparator.all-targets.json` must fail until proved).
 Frozen-file text, corrected 2026-10-17 (comment-only; the comparator compares elaborated
-statements, and comment-only edits to `Solution.lean` had already passed it at 10d4722): the
+statements, and comment-only edits to `Solution.lean` had already passed it at 0223cfc): the
 module headers no longer say PROOF_ATTEMPT or "formal review pending", and the docstrings of
 `familyGens` and Theorem F no longer call the family "extremal" (F proves attainment of 2w + 2
 only; extremality among all minimally five-generated semigroups is the conjecture W). All
@@ -83,7 +83,7 @@ Lower bridge β_fiber ≤ μ(I): not formalized, and not needed for F, which is 
 applied to the explicit presentation. F therefore does not formally assert equality with `betaFiber`.
 
 ## 8. Family correspondence table
-| informal | Lean (all proved, sorry-free at b0a3671) |
+| informal | Lean (all proved, sorry-free at 793e759) |
 |---|---|
 | relations H (2k+2), N (2k) | `Family.Relations` |
 | normal forms (A), offsets partition {0..2kq} | `Family.NormalForms` |
@@ -95,7 +95,7 @@ applied to the explicit presentation. F therefore does not formally assert equal
 | explicit presentation: generation, nonredundancy, count 4k + 2 | public `family_presentation` (Solution), from `familyIdeal_eq_toricKer`, `relation_nonredundant`, `relIndex_card` |
 
 Scope of the statements of record: until the 2026-10-17 packaging commit, `Challenge.lean` and
-`comparator.json` froze only the invariant μ(I) = 4k + 2 (the comparator pass at 10d4722 covers that
+`comparator.json` froze only the invariant μ(I) = 4k + 2 (the comparator pass at 0223cfc covers that
 statement alone). Since then the displayed presentation (generation, nonredundancy, count) and
 minimal generation are statements of record as well (§2), as suggested by both adversaries and the
 reviewer. `Examples/Thirteen.lean` is a specialisation of F at (k,q) = (3,2), not an independent
@@ -114,37 +114,37 @@ Formal periodicity, the complete width-40 replay, novelty, the reverse fiber bri
 | date | command | commit | outcome |
 |---|---|---|---|
 | 2026-10-16 | `lake build` | scaffold | success, 1577 jobs, sorry warnings only |
-| 2026-10-16 | `lake build` | b0a3671 | exit 0, 8984 jobs; no `declaration uses sorry` in any module of Solution's import closure (only Challenge's deliberate admissions) |
-| 2026-10-16 | `lake env lean FiveGenBetti/Family/Minimality.lean` | b0a3671 | 0 sorries, 0 errors |
-| 2026-10-16 | `#print axioms` for `FiveGenBetti.family_spanRank_eq` (from Solution), `FiveGenBetti.Family.spanRank_eq`, `FiveGenBetti.Examples.thirteen_spanRank_eq_fourteen` | b0a3671 | [propext, Classical.choice, Quot.sound] each |
-| 2026-10-16 | `#print axioms` for the nine Minimality declarations (`psi_H`, `psi_N`, `psi_N_ne_zero`, `H_nonredundant`, `N_nonredundant`, `H_degree_lt_D`, `H_boundary_collisions`, `H_degree_lt_D_add_m`, `relation_nonredundant`) | b0a3671 | [propext, Classical.choice, Quot.sound] each |
-| 2026-10-16 | `lake env leanchecker FiveGenBetti.Family.Minimality FiveGenBetti.Family.Main FiveGenBetti.Examples.Thirteen Solution` | b0a3671 | exit 0 |
-| 2026-10-16 | `lake env lean FiveGenBetti/AxiomAudit.lean` (informational; not run in CI; does not fail on extra axioms) | b0a3671 | prints only `[propext, Classical.choice, Quot.sound]` for `family_spanRank_eq` |
-| 2026-10-16 | `python3 scripts/check-lean-sources.py` (headers, symlinks, sizes only) | b0a3671 | satisfied |
-| 2026-10-16 | `ruby scripts/validate-formalization.rb` (metadata shape only, not status) | b0a3671 | passes |
-| 2026-10-16 | forbidden-construct scan of the Minimality diff | b0a3671 | 0 findings |
-| 2026-10-16 (corrected 2026-10-17) | `git diff --stat 2869b0b b0a3671 -- FiveGenBetti/Defs.lean FiveGenBetti/Interface.lean FiveGenBetti/Certificate/Defs.lean FiveGenBetti/Family/Data.lean FiveGenBetti/Family/Defs.lean Challenge.lean Solution.lean` | b0a3671 | `FiveGenBetti/Family/Defs.lean \| 10 ++++++++--` only: the two `sorry` bodies of `gens_strictMono`, `gens_gcd` replaced by proofs (02409bc); all definitions and theorem signatures unchanged. (The earlier entry "byte-identical" was false.) |
-| 2026-10-17 | same, `git diff --stat 2869b0b HEAD -- <same 7 files>` | 0a2a156 | `Family/Defs.lean \| 10 ++++++++--`, `Solution.lean \| 14 ++++++++------`; the Solution.lean changes (956ab8d, 0a2a156 = amended 2b736c9) are comment-only (module docstrings) |
-| 2026-10-16 (historical, imprecise) | `lake env leanchecker <descriptive placeholder: "all 22 built modules: Challenge, Solution, FiveGenBetti.*">`; literal argv not retained, so whether the umbrella `FiveGenBetti` was included is unknown (there are 23 built modules) | b0a3671 | exit 0, 13 min 19 s wall; superseded by the literal replay below |
-| 2026-10-17 | `lake build` (before the replay) | 0a2a156 | exit 0, 8984 jobs |
-| 2026-10-17 | `lake env leanchecker FiveGenBetti Challenge Solution FiveGenBetti.Algebra FiveGenBetti.Bridge FiveGenBetti.Certificate.Defs FiveGenBetti.Defs FiveGenBetti.Examples.Thirteen FiveGenBetti.Family.Apery FiveGenBetti.Family.Data FiveGenBetti.Family.Defs FiveGenBetti.Family.Generation FiveGenBetti.Family.Lemmas FiveGenBetti.Family.Main FiveGenBetti.Family.Minimality FiveGenBetti.Family.NormalForms FiveGenBetti.Family.Relations FiveGenBetti.Fiber FiveGenBetti.Graded.Indecomposables FiveGenBetti.Graded.Projection FiveGenBetti.GradedGenerators FiveGenBetti.Interface FiveGenBetti.Main` (23 modules: every module with an `.olean` under `.lake/build/lib/lean`, i.e. the umbrella `FiveGenBetti`, `Challenge`, `Solution` and the 20 `FiveGenBetti.*` descendants; `FiveGenBetti.AxiomAudit` has no olean and `Targets.FiniteWidth` is not built; list computed by a shell loop over the oleans) | 0a2a156 (Lean sources = b0a3671 except Solution.lean comments) | exit 0, 569 s wall (9 min 29 s; `/usr/bin/time -l`: 570.16 s real, max RSS 29.5 GB), no output. Two earlier attempts of the identical command the same morning were killed by SIGKILL (rc 137, after 425 s and 418 s, no output; the first concurrently with other Lean processes; cause not established, likely memory pressure) and are not counted as replays |
-| 2026-10-17 | Linux comparator `scripts/verify-comparator.sh` with bundled NanoDa / con-ron (GitHub Actions, bubblewrap; job "Check statement against solution", run https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; all four jobs success) | 10d4722 (Lean sources = b0a3671 except Solution.lean comments) | build 8981 jobs; `FiveGenBetti.family_spanRank_eq` plus `propext`, `Quot.sound`, `Classical.choice` exported; con-ron accepted 22291 declarations (`--verified`), nanoda accepted, Lean default kernel accepted; `Your solution is okay!` |
-| 2026-10-17 | `git diff --stat 2869b0b -- <same 7 frozen files>` after the packaging edits (working tree) | packaging commit | `Challenge.lean \| 74 +++…`, `Family/Defs.lean \| 10` (as before), `Solution.lean \| 90 +++…`: Challenge/Solution gain the definitions `FamilyRelIndex`, `familyRelExp`, `familyRelation`, the theorems `familyGens_minimallyGenerates`, `family_presentation`, three Mathlib imports (`Data.Finsupp.Defs`, `Data.Fintype.Sum`, `RingTheory.Ideal.Span`) and comment edits; `toricIdeal`, `familyGens`, `MinimallyGenerates`, `family_spanRank_eq`, `beta1_five_le_two_width_add_two` unchanged |
+| 2026-10-16 | `lake build` | 793e759 | exit 0, 8984 jobs; no `declaration uses sorry` in any module of Solution's import closure (only Challenge's deliberate admissions) |
+| 2026-10-16 | `lake env lean FiveGenBetti/Family/Minimality.lean` | 793e759 | 0 sorries, 0 errors |
+| 2026-10-16 | `#print axioms` for `FiveGenBetti.family_spanRank_eq` (from Solution), `FiveGenBetti.Family.spanRank_eq`, `FiveGenBetti.Examples.thirteen_spanRank_eq_fourteen` | 793e759 | [propext, Classical.choice, Quot.sound] each |
+| 2026-10-16 | `#print axioms` for the nine Minimality declarations (`psi_H`, `psi_N`, `psi_N_ne_zero`, `H_nonredundant`, `N_nonredundant`, `H_degree_lt_D`, `H_boundary_collisions`, `H_degree_lt_D_add_m`, `relation_nonredundant`) | 793e759 | [propext, Classical.choice, Quot.sound] each |
+| 2026-10-16 | `lake env leanchecker FiveGenBetti.Family.Minimality FiveGenBetti.Family.Main FiveGenBetti.Examples.Thirteen Solution` | 793e759 | exit 0 |
+| 2026-10-16 | `lake env lean FiveGenBetti/AxiomAudit.lean` (informational; not run in CI; does not fail on extra axioms) | 793e759 | prints only `[propext, Classical.choice, Quot.sound]` for `family_spanRank_eq` |
+| 2026-10-16 | `python3 scripts/check-lean-sources.py` (headers, symlinks, sizes only) | 793e759 | satisfied |
+| 2026-10-16 | `ruby scripts/validate-formalization.rb` (metadata shape only, not status) | 793e759 | passes |
+| 2026-10-16 | forbidden-construct scan of the Minimality diff | 793e759 | 0 findings |
+| 2026-10-16 (corrected 2026-10-17) | `git diff --stat dd41852 793e759 -- FiveGenBetti/Defs.lean FiveGenBetti/Interface.lean FiveGenBetti/Certificate/Defs.lean FiveGenBetti/Family/Data.lean FiveGenBetti/Family/Defs.lean Challenge.lean Solution.lean` | 793e759 | `FiveGenBetti/Family/Defs.lean \| 10 ++++++++--` only: the two `sorry` bodies of `gens_strictMono`, `gens_gcd` replaced by proofs (e60f586); all definitions and theorem signatures unchanged. (The earlier entry "byte-identical" was false.) |
+| 2026-10-17 | same, `git diff --stat dd41852 HEAD -- <same 7 files>` | 9006821 | `Family/Defs.lean \| 10 ++++++++--`, `Solution.lean \| 14 ++++++++------`; the Solution.lean changes (d8d3bd7, 9006821 = amended 2b736c9) are comment-only (module docstrings) |
+| 2026-10-16 (historical, imprecise) | `lake env leanchecker <descriptive placeholder: "all 22 built modules: Challenge, Solution, FiveGenBetti.*">`; literal argv not retained, so whether the umbrella `FiveGenBetti` was included is unknown (there are 23 built modules) | 793e759 | exit 0, 13 min 19 s wall; superseded by the literal replay below |
+| 2026-10-17 | `lake build` (before the replay) | 9006821 | exit 0, 8984 jobs |
+| 2026-10-17 | `lake env leanchecker FiveGenBetti Challenge Solution FiveGenBetti.Algebra FiveGenBetti.Bridge FiveGenBetti.Certificate.Defs FiveGenBetti.Defs FiveGenBetti.Examples.Thirteen FiveGenBetti.Family.Apery FiveGenBetti.Family.Data FiveGenBetti.Family.Defs FiveGenBetti.Family.Generation FiveGenBetti.Family.Lemmas FiveGenBetti.Family.Main FiveGenBetti.Family.Minimality FiveGenBetti.Family.NormalForms FiveGenBetti.Family.Relations FiveGenBetti.Fiber FiveGenBetti.Graded.Indecomposables FiveGenBetti.Graded.Projection FiveGenBetti.GradedGenerators FiveGenBetti.Interface FiveGenBetti.Main` (23 modules: every module with an `.olean` under `.lake/build/lib/lean`, i.e. the umbrella `FiveGenBetti`, `Challenge`, `Solution` and the 20 `FiveGenBetti.*` descendants; `FiveGenBetti.AxiomAudit` has no olean and `Targets.FiniteWidth` is not built; list computed by a shell loop over the oleans) | 9006821 (Lean sources = 793e759 except Solution.lean comments) | exit 0, 569 s wall (9 min 29 s; `/usr/bin/time -l`: 570.16 s real, max RSS 29.5 GB), no output. Two earlier attempts of the identical command the same morning were killed by SIGKILL (rc 137, after 425 s and 418 s, no output; the first concurrently with other Lean processes; cause not established, likely memory pressure) and are not counted as replays |
+| 2026-10-17 | Linux comparator `scripts/verify-comparator.sh` with bundled NanoDa / con-ron (GitHub Actions, bubblewrap; job "Check statement against solution", run https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; all four jobs success) | 0223cfc (Lean sources = 793e759 except Solution.lean comments) | build 8981 jobs; `FiveGenBetti.family_spanRank_eq` plus `propext`, `Quot.sound`, `Classical.choice` exported; con-ron accepted 22291 declarations (`--verified`), nanoda accepted, Lean default kernel accepted; `Your solution is okay!` |
+| 2026-10-17 | `git diff --stat dd41852 -- <same 7 frozen files>` after the packaging edits (working tree) | packaging commit | `Challenge.lean \| 74 +++…`, `Family/Defs.lean \| 10` (as before), `Solution.lean \| 90 +++…`: Challenge/Solution gain the definitions `FamilyRelIndex`, `familyRelExp`, `familyRelation`, the theorems `familyGens_minimallyGenerates`, `family_presentation`, three Mathlib imports (`Data.Finsupp.Defs`, `Data.Fintype.Sum`, `RingTheory.Ideal.Span`) and comment edits; `toricIdeal`, `familyGens`, `MinimallyGenerates`, `family_spanRank_eq`, `beta1_five_le_two_width_add_two` unchanged |
 | 2026-10-17 | `lake env lean Challenge.lean` | packaging commit | exit 0; `declaration uses sorry` at the four deliberate admissions only (lines 109, 114, 121, 130) |
 | 2026-10-17 | `lake build` (default targets, with the new module `FiveGenBetti.Family.MinimalGeneration`) | packaging commit | exit 0, 8985 jobs; `declaration uses sorry` only for the four Challenge admissions |
 | 2026-10-17 | `lake env lean FiveGenBetti/AxiomAudit.lean` (now prints `family_spanRank_eq`, `familyGens_minimallyGenerates`, `family_presentation`) | packaging commit | `[propext, Classical.choice, Quot.sound]` for each of the three |
 | 2026-10-17 | `python3 scripts/check-lean-sources.py`; `ruby scripts/validate-formalization.rb` | packaging commit | both pass |
-| 2026-10-17 | `lake env leanchecker Challenge Solution FiveGenBetti.Family.MinimalGeneration FiveGenBetti` (the modules changed or added by the packaging edits; the other 19 `FiveGenBetti.*` modules are byte-identical to 0a2a156 and covered by the 23-module replay above) | packaging commit | exit 0, 560 s wall (`/usr/bin/time -l`: 559.82 s real, max RSS 27.1 GB), no output |
-| — | Linux CI comparator on the packaging commit (three theorem names) | — | PENDING (passed at 10d4722 for `family_spanRank_eq` alone) |
+| 2026-10-17 | `lake env leanchecker Challenge Solution FiveGenBetti.Family.MinimalGeneration FiveGenBetti` (the modules changed or added by the packaging edits; the other 19 `FiveGenBetti.*` modules are byte-identical to 9006821 and covered by the 23-module replay above) | packaging commit | exit 0, 560 s wall (`/usr/bin/time -l`: 559.82 s real, max RSS 27.1 GB), no output |
+| — | Linux CI comparator on the packaging commit (three theorem names) | — | PENDING (passed at 0223cfc for `family_spanRank_eq` alone) |
 | — | `leanchecker --fresh` (optional) | — | NOT RUN |
 
-Commit anchoring: e1554c4 differs from b0a3671 only in `FiveGenBetti/NOTES.md`; all Lean sources
+Commit anchoring: 215661b differs from 793e759 only in `FiveGenBetti/NOTES.md`; all Lean sources
 are identical. The nine Minimality proofs were produced by GPT-6 Astra (job
 five-generator-betti/20261016T233235, aiseminar `agents/runs/2026-10-16_betti-B5-minimality/reply_r1.md`)
 and applied mechanically. Negative control recorded by the 'trust' adversary: under `import Challenge`
 the same axiom query reports `sorryAx` and `leanchecker Challenge` still exits 0, so replay exit codes
 alone do not exclude admissions; the axiom list is checked separately. Adversary-reported and
-independently re-run by the reviewer (pass 1, 2026-10-17, at 4c9349b; not re-run by the orchestrator):
+independently re-run by the reviewer (pass 1, 2026-10-17, at 2d32ff7; not re-run by the orchestrator):
 `lake env leanexport Solution -- FiveGenBetti.family_spanRank_eq | lake env leanchecker --from-export
 /dev/stdin`, EXPORT_EXIT 0, CHECKER_EXIT 0, 17.55 s (Lean's default kernel, empty environment; not an
 external kernel).
@@ -177,7 +177,7 @@ spanning Finset of card `n` gives `spanRank I ≤ n`, and an attaining set of sm
 spanning Finset of card `< n`. It is not needed here and was not checked in Lean.)
 
 Lean check (direction: statement of record ⇒ reconstruction, which is the direction that matters
-for trusting the formal statement). Run at 0a2a156 from the repository root, the scratch file not
+for trusting the formal statement). Run at 9006821 from the repository root, the scratch file not
 added to the repository: `lake env lean --stdin < recon_equiv.lean` (SHA-256 of input
 `480ff7cca25003bc2333496817087336887255610684c86978a6d7ec9724220f`). Input:
 
@@ -270,3 +270,27 @@ and the full proposition `TheoremFStatement.F` are proved from `FiveGenBetti.fam
 axioms `[propext, Classical.choice, Quot.sound]`. The reconstruction's own definitions are pasted
 unchanged (only `import Mathlib` replaced by `import Solution`). Fresh elaboration against the built
 oleans, not a kernel replay of the scratch file.
+
+## 14. Attribution rewrite, 2026-10-17
+
+All 32 commits of this repository were rewritten on 2026-10-17 to add trailers naming GPT-6 Astra
+as co-author of the commits whose content it wrote; nothing else changed (every tree, author,
+committer and date is identical, and every other commit message is byte-identical). The trailers
+are `Astra-Job`, `Astra-Thread`, `Astra-Model`, `Astra-Snapshot`, `Astra-Reply` and
+`Co-authored-by: GPT-6 Astra <noreply@openai.com>` (OpenAI's own Codex attribution address).
+
+| before | after | Astra-written content |
+|---|---|---|
+| `2a6cea1` | `2e7d5e6` | docs/astra workflow reply |
+| `6487d81` | `7ce7106` | docs/astra scaffold plan |
+| `2857d99` | `59b9cb6` | docs/astra two-stream Lean plan |
+| `b0a3671` | `793e759` | Lean proofs from the B5 minimality job (Family/Minimality.lean) |
+
+Because the root commit was among them, every hash changed. The pre-rewrite history remains
+reachable under `refs/archive/pre-attribution/*` on the remote and locally, so every pre-rewrite hash
+cited anywhere still resolves (`git fetch origin 'refs/archive/*:refs/archive/*'`). The full map is
+`docs/commit-map-2026-10-17.txt`. Hashes in this file and the other living records (README, formalization.yaml,
+NOTES, PROOF.md, Solution.lean docstring, the aiseminar claim packet) were converted with the map;
+the frozen documents (Astra transcripts and replies, `docs/astra/`, `docs/tooling/`, the briefs) keep the
+pre-rewrite hashes they were written against. GitHub Actions run pages name the pre-rewrite commit
+they ran on; the post-rewrite commit cited next to each run has the identical tree.

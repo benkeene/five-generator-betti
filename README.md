@@ -16,10 +16,10 @@ reviewer pass 1 on the formal development (2026-10-17) returned ACCEPT_WITH_FIXE
 that F qualifies for FORMALLY_VERIFIED under the lab's AGENTS.md §3; an independent statement
 reconstruction was checked equivalent in Lean (`CORRESPONDENCE.md` §13). Lab status (aiseminar
 claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F with the scope in `CORRESPONDENCE.md` §2.
-CI comparator passed at 10d4722 (2026-10-17, GitHub Actions run
+CI comparator passed at 0223cfc (2026-10-17, GitHub Actions run
 https://github.com/benkeene/five-generator-betti/actions/runs/39005390724): statement and axiom
 check passed, and con-ron, nanoda and the Lean default kernel accepted the solution;
-`leanchecker --fresh` has not been run (optional). Packaging additions of 2026-10-17 (after 10d4722): two further
+`leanchecker --fresh` has not been run (optional). Packaging additions of 2026-10-17 (after 0223cfc): two further
 statements of record for F, `FiveGenBetti.familyGens_minimallyGenerates` (the five generators are a minimal generating
 set) and `FiveGenBetti.family_presentation` (the explicit `4k+2` binomials generate the toric ideal, none is redundant,
 and there are `4k+2` of them), both listed in `comparator.json` and proved in `Solution.lean` by thin calls into the
@@ -54,7 +54,7 @@ lake build
 python3 scripts/check-lean-sources.py
 ruby scripts/validate-formalization.rb
 lake env lean FiveGenBetti/AxiomAudit.lean   # informational only (not run in CI): expect propext, Classical.choice, Quot.sound for all three statements
-./scripts/verify-comparator.sh          # Linux with bubblewrap only; passed in CI at 10d4722
+./scripts/verify-comparator.sh          # Linux with bubblewrap only; passed in CI at 0223cfc
 ```
 
 Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
@@ -63,7 +63,7 @@ Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 ## Submission
 Palomar submissions go through https://submit.palomar-registry.org/ with the full 40-character commit SHA. This repository is
 ready for submission from the registry's side once the CI comparator passes on the commit to be
-submitted: it passed at 10d4722 (2026-10-17,
+submitted: it passed at 0223cfc (2026-10-17,
 https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; con-ron, nanoda
 and the Lean default kernel accepted the solution) for `family_spanRank_eq` alone, and the
 2026-10-17 packaging commit adds `familyGens_minimallyGenerates` and `family_presentation` to

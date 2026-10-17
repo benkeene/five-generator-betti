@@ -50,7 +50,7 @@ PALOMAR-2026-10-07-000005.
 /-! ## Proofs (this module)
 
 The definitions of `Challenge.lean` restated verbatim and Theorem F proved by a thin bridge into the
-development library (`FiveGenBetti.Family.spanRank_eq`, sorry-free since b0a3671). This module
+development library (`FiveGenBetti.Family.spanRank_eq`, sorry-free since 793e759). This module
 does not import `Challenge`; the comparator checks that statements and definitions agree. Theorem W
 is not restated here (version 1 is family-only; see `Targets/FiniteWidth.lean`). -/
 

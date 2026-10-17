@@ -12,7 +12,7 @@ project:
     infrastructure, both algebraic bridges (only the upper bridge is formalized; the reverse
     bridge is not), the corrected singleton-counting decomposition beta1 + p = 5 + N, the
     pair-component antichain lemma and certificate-checker soundness (not yet written). Version 1
-    targets F; W is stated and excluded from the release comparator. F is sorry-free at b0a3671.
+    targets F; W is stated and excluded from the release comparator. F is sorry-free at 793e759.
   authors:
     - "Ben Keene"
   license: "Apache-2.0"
@@ -28,13 +28,13 @@ classification:
 
 status:
   scope: >-
-    Theorem F (2026-10-16, commit of record b0a3671): sorry-free Lean development,
-    kernel-replayed locally (literal 23-module leanchecker replay at 0a2a156, whose Lean
-    sources differ from b0a3671 only in Solution.lean comments). Astra reviewer pass 1 on the
+    Theorem F (2026-10-16, commit of record 793e759): sorry-free Lean development,
+    kernel-replayed locally (literal 23-module leanchecker replay at 9006821, whose Lean
+    sources differ from 793e759 only in Solution.lean comments). Astra reviewer pass 1 on the
     formal development (2026-10-17): ACCEPT_WITH_FIXES 0.98; the reviewer judges that F
     qualifies for FORMALLY_VERIFIED under aiseminar AGENTS.md section 3. Independent statement
     reconstruction done and checked equivalent in Lean (CORRESPONDENCE.md section 13). Lab status
-    (aiseminar claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F. CI comparator at 10d4722
+    (aiseminar claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F. CI comparator at 0223cfc
     (2026-10-17, GitHub Actions run 39005390724): "Your solution is okay!"; con-ron (22291
     declarations, --verified), nanoda and the Lean default kernel accepted the solution, for
     family_spanRank_eq alone. Packaging commit of 2026-10-17: two further statements of record
@@ -121,8 +121,8 @@ review:
   reviewers:
     - "Ben Keene"
     - "GPT-6 Astra (adversary, reviewer, independent prover; four passes on the informal proof, 2026-10-16)"
-    - "GPT-6 Astra (adversary 'meaning' and 'trust' on the formal development at b0a3671, 2026-10-16)"
-    - "GPT-6 Astra (reviewer-formal pass 1 at 4c9349b, and independent statement reconstruction, 2026-10-17)"
+    - "GPT-6 Astra (adversary 'meaning' and 'trust' on the formal development at 793e759, 2026-10-16)"
+    - "GPT-6 Astra (reviewer-formal pass 1 at 2d32ff7, and independent statement reconstruction, 2026-10-17)"
   notes: >-
     The informal proof of Theorem F passed an adversary pass (objections answered), a reviewer
     pass (fixes applied), an independent reconstruction from the statement alone, and a
@@ -131,27 +131,27 @@ review:
     No external human review. Formal development: adversary passes 'meaning' and 'trust'
     (2026-10-16, aiseminar agents/astra/transcripts/20261016T234404_adversary-*_claim_0005.md),
     both ACCEPT_WITH_FIXES 0.97, no mathematical counterexample or verification-chain escape;
-    their documentation/provenance fixes were applied in 956ab8d and 4c9349b, except the
+    their documentation/provenance fixes were applied in d8d3bd7 and 2d32ff7, except the
     stale header of the frozen Challenge.lean and the Linux comparator request (the latter since
-    met: CI comparator passed at 10d4722, 2026-10-17). Reviewer pass 1
+    met: CI comparator passed at 0223cfc, 2026-10-17). Reviewer pass 1
     (2026-10-17, aiseminar agents/astra/transcripts/20261017T000811_reviewer-formal_claim_0005.md):
     ACCEPT_WITH_FIXES 0.98, no mathematical gap; its documentation fixes (byte-identity record,
     replay record, minimality exposition, scope and status wording) are applied in the commit
-    following 0a2a156. Independent statement reconstruction (20261017T000811_statement-recon):
+    following 9006821. Independent statement reconstruction (20261017T000811_statement-recon):
     checked equivalent in Lean (CORRESPONDENCE.md section 13). Kernel replay, literal:
-    "lake env leanchecker FiveGenBetti Challenge Solution FiveGenBetti.Algebra FiveGenBetti.Bridge FiveGenBetti.Certificate.Defs FiveGenBetti.Defs FiveGenBetti.Examples.Thirteen FiveGenBetti.Family.Apery FiveGenBetti.Family.Data FiveGenBetti.Family.Defs FiveGenBetti.Family.Generation FiveGenBetti.Family.Lemmas FiveGenBetti.Family.Main FiveGenBetti.Family.Minimality FiveGenBetti.Family.NormalForms FiveGenBetti.Family.Relations FiveGenBetti.Fiber FiveGenBetti.Graded.Indecomposables FiveGenBetti.Graded.Projection FiveGenBetti.GradedGenerators FiveGenBetti.Interface FiveGenBetti.Main" (23 modules: umbrella FiveGenBetti, Challenge, Solution and the 20 FiveGenBetti.* modules with oleans; AxiomAudit and Targets.FiniteWidth have none) at 0a2a156, exit 0, 569 s wall (two earlier identical attempts were SIGKILLed, rc 137, not counted). The 2026-10-16 record "all 22 built modules ... 13 min 19 s" at b0a3671 did not
+    "lake env leanchecker FiveGenBetti Challenge Solution FiveGenBetti.Algebra FiveGenBetti.Bridge FiveGenBetti.Certificate.Defs FiveGenBetti.Defs FiveGenBetti.Examples.Thirteen FiveGenBetti.Family.Apery FiveGenBetti.Family.Data FiveGenBetti.Family.Defs FiveGenBetti.Family.Generation FiveGenBetti.Family.Lemmas FiveGenBetti.Family.Main FiveGenBetti.Family.Minimality FiveGenBetti.Family.NormalForms FiveGenBetti.Family.Relations FiveGenBetti.Fiber FiveGenBetti.Graded.Indecomposables FiveGenBetti.Graded.Projection FiveGenBetti.GradedGenerators FiveGenBetti.Interface FiveGenBetti.Main" (23 modules: umbrella FiveGenBetti, Challenge, Solution and the 20 FiveGenBetti.* modules with oleans; AxiomAudit and Targets.FiniteWidth have none) at 9006821, exit 0, 569 s wall (two earlier identical attempts were SIGKILLed, rc 137, not counted). The 2026-10-16 record "all 22 built modules ... 13 min 19 s" at 793e759 did not
     retain its literal argv and is superseded. The nine Minimality proofs were produced by GPT-6
     Astra and applied mechanically.
     Lab status (aiseminar claim_0005 STATUS.yaml, 2026-10-17, commit 11ce3ea): FORMALLY_VERIFIED for
     Theorem F (Solution closure; displayed-presentation corollary and conjecture W are not records).
-    CI comparator passed at 10d4722 (2026-10-17,
+    CI comparator passed at 0223cfc (2026-10-17,
     https://github.com/benkeene/five-generator-betti/actions/runs/39005390724): con-ron,
     nanoda and the Lean default kernel accepted. leanchecker --fresh not run (optional).
 
 known_gaps:
-  - "leanchecker --fresh not run (optional; the Linux CI comparator with NanoDa/con-ron passed at 10d4722, and the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
+  - "leanchecker --fresh not run (optional; the Linux CI comparator with NanoDa/con-ron passed at 0223cfc, and the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
   - "Repository is private (owner's decision); the registry must be able to clone it before submission."
-  - "The CI comparator pass at 10d4722 covers family_spanRank_eq alone; it has not yet run on the 2026-10-17 packaging commit that adds family_presentation and familyGens_minimallyGenerates to comparator.json."
+  - "The CI comparator pass at 0223cfc covers family_spanRank_eq alone; it has not yet run on the 2026-10-17 packaging commit that adds family_presentation and familyGens_minimallyGenerates to comparator.json."
   - "The reverse fiber bridge (betaFiber <= spanRank) is not formalized; it is not needed for F, which does not assert equality with betaFiber."
   - "The finite-width theorem is unproved; periodicity and exhaustive replay are out of version 1."
 

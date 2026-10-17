@@ -1,15 +1,15 @@
 # Development notes
 
 Plan of record: `docs/astra/2026-10-16_lean_plan.md` (§0 ownership and DAG, §1 frozen interfaces,
-§2 stream A, §3 stream B, §4 integration). State (2026-10-16, b0a3671): Theorem F is sorry-free. Every Stream A and Stream B declaration is proved;
+§2 stream A, §3 stream B, §4 integration). State (2026-10-16, 793e759): Theorem F is sorry-free. Every Stream A and Stream B declaration is proved;
 `FiveGenBetti.family_spanRank_eq` depends only on propext, Classical.choice, Quot.sound; `lake env leanchecker`
 replays Minimality/Main/Thirteen/Solution with exit 0. In the development library only Targets W (conjecture, outside Solution) is admitted; the root `Challenge.lean` deliberately keeps its statement-of-record admissions.
 `lake env lean FiveGenBetti/AxiomAudit.lean` now prints only propext, Classical.choice, Quot.sound (it is informational
 and not run in CI; a green build or replay exit code alone does not exclude admissions). Adversary passes 'meaning' and
 'trust' (2026-10-16) returned ACCEPT_WITH_FIXES 0.97 (documentation fixes applied). Reviewer pass 1 (2026-10-17): ACCEPT_WITH_FIXES
-0.98; independent statement reconstruction checked equivalent in Lean (CORRESPONDENCE §13). CI comparator passed at 10d4722
+0.98; independent statement reconstruction checked equivalent in Lean (CORRESPONDENCE §13). CI comparator passed at 0223cfc
 (2026-10-17; con-ron, nanoda, Lean kernel accepted); lab status FORMALLY_VERIFIED (claim_0005).
-Packaging (2026-10-17, after 10d4722): `Family/MinimalGeneration.lean` (new module, `gens_minimallyGenerates`), and two
+Packaging (2026-10-17, after 0223cfc): `Family/MinimalGeneration.lean` (new module, `gens_minimallyGenerates`), and two
 further statements of record in Challenge/Solution, `familyGens_minimallyGenerates` and `family_presentation` (CI comparator
 pending on that commit). Audit record: `CORRESPONDENCE.md` §11.
 
