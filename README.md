@@ -14,8 +14,9 @@ passes incl. an independent reconstruction). Its Lean development is a sorry-fre
 kernel-replayed locally (literal 23-module `leanchecker` replay, `CORRESPONDENCE.md` §11). The Astra
 reviewer pass 1 on the formal development (2026-10-17) returned ACCEPT_WITH_FIXES 0.98 and judged
 that F qualifies for FORMALLY_VERIFIED under the lab's AGENTS.md §3; an independent statement
-reconstruction was checked equivalent in Lean (`CORRESPONDENCE.md` §13). The lab status is still
-VERIFIED until the promotion step is recorded; the CI comparator has not been run. `#print axioms FiveGenBetti.family_spanRank_eq` (from `Solution`) is
+reconstruction was checked equivalent in Lean (`CORRESPONDENCE.md` §13). Lab status (aiseminar
+claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F with the scope in `CORRESPONDENCE.md` §2;
+the CI comparator, `leanchecker --fresh` and NanoDa/con-ron have not been run. `#print axioms FiveGenBetti.family_spanRank_eq` (from `Solution`) is
 [propext, Classical.choice, Quot.sound]. Adversary passes on the formal development ('meaning',
 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97, documentation fixes applied. (2) conjecture, admitted in
 `Targets/FiniteWidth.lean` outside Solution's import closure. Informal argument in `docs/PROOF.md`;
