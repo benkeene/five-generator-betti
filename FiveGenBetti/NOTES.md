@@ -26,12 +26,12 @@ lemmas); **stub** = `sorry` body; **frozen** = shared interface, not to be edite
 |---|---|---|---|
 | `toricMap` | Algebra.lean | A | def |
 | `mono_coe` | Algebra.lean | A | proved |
-| `toricMap_monomial` | Algebra.lean | A | stub |
-| `toricMap_mono` | Algebra.lean | A | stub |
+| `toricMap_monomial` | Algebra.lean | A | proved (sorry-free) |
+| `toricMap_mono` | Algebra.lean | A | proved (sorry-free) |
 | `mem_toricKer` | Algebra.lean | A | proved |
-| `mono_sub_mem_toricKer` | Algebra.lean | A | stub |
-| `coeff_sum_eq_zero` | Algebra.lean | A | stub |
-| `toricKer_le_ideal_of_mono_sub_mem` (handoff to B) | Algebra.lean | A | stub |
+| `mono_sub_mem_toricKer` | Algebra.lean | A | proved (sorry-free) |
+| `coeff_sum_eq_zero` | Algebra.lean | A | proved (sorry-free) |
+| `toricKer_le_ideal_of_mono_sub_mem` (handoff to B) | Algebra.lean | A | proved (sorry-free) |
 | `SharesVar`, its `DecidableRel` instance | Fiber.lean | A | def |
 | `SharesVar.symm` | Fiber.lean | A | proved |
 | `GenData.nabla`, `ncomp`, `contributes`, `betaFiber` (+ decidability instances) | Fiber.lean | A | def |
@@ -56,8 +56,8 @@ lemmas); **stub** = `sorry` body; **frozen** = shared interface, not to be edite
 | `card_le_spanRank_of_independent_generatorClass` | GradedGenerators.lean | A | proved |
 | `spanRank_eq_card_of_weightedHomogeneous_irredundant` (handoff to B) | GradedGenerators.lean | A | stub |
 
-The plan's private helpers `degreeRoot` / `weight_degreeRoot` (§2 A1) are not yet in Algebra.lean;
-A adds them (privately) when proving `toricKer_le_ideal_of_mono_sub_mem`.
+The plan's helpers `degreeRoot` / `weight_degreeRoot` (§2 A1) are private in Algebra.lean, together
+with `toricKer_le_ideal_aux` (the proof body of the handoff, inside `section Helpers`).
 
 ## Stream B
 
