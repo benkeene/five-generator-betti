@@ -47,11 +47,12 @@ lemmas); **stub** = `sorry` body; **frozen** = shared interface, not to be edite
 | `homogeneous_mem_span_range` (handoff to B) | Graded/Projection.lean | A | proved (sorry-free) |
 | `weighted_component_eq_zero_of_small` (handoff to B) | Graded/Projection.lean | A | proved (sorry-free) |
 | `augmentationIdeal`, `decomposables`, `Indecomposables`, `indecomposablesMk` | Graded/Indecomposables.lean | A | def |
-| `mem_augmentationIdeal_iff` | Graded/Indecomposables.lean | A | stub |
-| `indecomposablesMk_mul` | Graded/Indecomposables.lean | A | stub |
-| `span_indecomposablesMk_eq_top` | Graded/Indecomposables.lean | A | stub |
+| `mem_augmentationIdeal_iff` | Graded/Indecomposables.lean | A | proved (sorry-free) |
+| `indecomposablesMk_mul` | Graded/Indecomposables.lean | A | proved (sorry-free) |
+| `span_indecomposablesMk_eq_top` | Graded/Indecomposables.lean | A | proved (sorry-free) |
 | `generatorClass` | Graded/Indecomposables.lean | A | def |
-| `linearIndependent_generatorClass` | Graded/Indecomposables.lean | A | stub |
+| `sub_C_coeff_zero_mem_augmentationIdeal`, `indecomposablesMk_eq_zero_iff` (new A helpers) | Graded/Indecomposables.lean | A | proved (sorry-free) |
+| `linearIndependent_generatorClass` | Graded/Indecomposables.lean | A | proved (sorry-free) |
 | `card_le_card_of_span_eq` | GradedGenerators.lean | A | stub |
 | `card_le_spanRank_of_independent_generatorClass` | GradedGenerators.lean | A | proved |
 | `spanRank_eq_card_of_weightedHomogeneous_irredundant` (handoff to B) | GradedGenerators.lean | A | stub |
@@ -115,6 +116,7 @@ needed. Layout-only choices (no change to any statement):
 * `gens_pos` lives in Family/Defs.lean (plan §3 B1 adds it next to `gens_strictMono`/`gens_gcd`).
 
 Linter noise accepted from verbatim plan text: the unused hypothesis `hm : 0 < m` in the frozen
-signature of `weighted_component_eq_zero_of_small` (implied by `0 < n < m`); `linter.style.whitespace` ("`k-1` should be written
+signature of `weighted_component_eq_zero_of_small` (implied by `0 < n < m`); the unused `hd : ∀ i, 0 < d i`
+in `linearIndependent_generatorClass` (the independence argument does not need positive degrees); `linter.style.whitespace` ("`k-1` should be written
 `k - 1`", 32 instances) and the unused-`[Fintype ι]` linter on `linearIndependent_generatorClass`.
 Fixing either would alter frozen text; leave them, or clean up together after completion.
