@@ -1,7 +1,7 @@
 # Correspondence: informal statements ↔ formal statements (2026-10-16)
 
 Status (commit of record b0a3671): Theorem F is a sorry-free Lean development, kernel-replayed
-locally (per module), pending reviewer pass, independent statement reconstruction, and CI
+locally (per module, all 22 built modules), pending reviewer pass, independent statement reconstruction, and CI
 comparator. It is not yet "formally verified" under the aiseminar protocol. Theorem W is admitted
 (`Targets/FiniteWidth.lean`, outside Solution's import closure and not in `defaultTargets`).
 Adversary passes on the formal development ('meaning', 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97;
@@ -91,7 +91,7 @@ Formal periodicity, the complete width-40 replay, novelty, the reverse fiber bri
 | 2026-10-16 | `ruby scripts/validate-formalization.rb` (metadata shape only, not status) | b0a3671 | passes |
 | 2026-10-16 | forbidden-construct scan of the Minimality diff | b0a3671 | 0 findings |
 | 2026-10-16 | frozen files (Defs, Interface, Certificate/Defs, Family/Data, Family/Defs, Challenge, Solution) vs bootstrap 2869b0b | b0a3671 | byte-identical |
-| TODO(orchestrator): full-sweep row | `lake env leanchecker` over all 22 built modules | b0a3671 | RUNNING, outcome not yet recorded |
+| 2026-10-16 | `lake env leanchecker <all 22 built modules: Challenge, Solution, FiveGenBetti.*, excluding AxiomAudit (standalone probe, no olean) and Targets.FiniteWidth (not in defaultTargets, admitted W)>` | b0a3671 | exit 0, 13 min 19 s wall |
 | — | Linux comparator (`scripts/verify-comparator.sh`, CI) | b0a3671 | NOT RUN |
 | — | NanoDa / con-ron external kernels; `leanchecker --fresh` | b0a3671 | NOT RUN |
 
