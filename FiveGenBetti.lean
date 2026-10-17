@@ -16,6 +16,7 @@ public import FiveGenBetti.Graded.Indecomposables
 public import FiveGenBetti.GradedGenerators
 public import FiveGenBetti.Family.Defs
 public import FiveGenBetti.Family.Data
+public import FiveGenBetti.Family.Lemmas
 public import FiveGenBetti.Family.Relations
 public import FiveGenBetti.Family.NormalForms
 public import FiveGenBetti.Family.Generation

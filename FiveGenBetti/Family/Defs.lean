@@ -44,9 +44,15 @@ theorem gens_pos (k q : ℕ) (i : Fin 5) :
   fin_cases i <;> simp [gens]
 
 theorem gens_strictMono (k q : ℕ) (hk : 3 ≤ k) : StrictMono (gens k q) := by
-  sorry
+  rw [Fin.strictMono_iff_lt_succ]
+  intro i
+  fin_cases i <;> simp [gens] <;> omega
 
 theorem gens_gcd (k q : ℕ) : Finset.univ.gcd (gens k q) = 1 := by
-  sorry
+  have h0 : Finset.univ.gcd (gens k q) ∣ gens k q 0 := Finset.gcd_dvd (Finset.mem_univ _)
+  have h1 : Finset.univ.gcd (gens k q) ∣ gens k q 1 := Finset.gcd_dvd (Finset.mem_univ _)
+  have h := Nat.dvd_sub h1 h0
+  simp only [gens_one, gens_zero, Nat.add_sub_cancel_left] at h
+  exact Nat.dvd_one.mp h
 
 end FiveGenBetti.Family
