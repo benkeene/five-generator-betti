@@ -22,6 +22,9 @@ lemmas); **stub** = `sorry` body; **frozen** = shared interface, not to be edite
 
 ## Stream A
 
+All Stream A files are sorry-free (A1–A5); every handoff's `#print axioms` is
+`[propext, Classical.choice, Quot.sound]`.
+
 | declaration | file | owner | status |
 |---|---|---|---|
 | `toricMap` | Algebra.lean | A | def |
@@ -35,14 +38,17 @@ lemmas); **stub** = `sorry` body; **frozen** = shared interface, not to be edite
 | `SharesVar`, its `DecidableRel` instance | Fiber.lean | A | def |
 | `SharesVar.symm` | Fiber.lean | A | proved |
 | `GenData.nabla`, `ncomp`, `contributes`, `betaFiber` (+ decidability instances) | Fiber.lean | A | def |
-| `GenData.mem_fiber` | Fiber.lean | A | stub |
-| `GenData.reachable_of_coord_gt` | Fiber.lean | A | stub |
-| `GenData.coord_le_of_contributes` | Fiber.lean | A | stub |
-| `GenData.le_cutoff_of_contributes` | Fiber.lean | A | stub |
-| `GenData.ncomp_le_one_of_cutoff_lt` | Fiber.lean | A | stub |
-| `GenData.betaFiber_eq_sum_of_le` | Fiber.lean | A | stub |
-| `X_mul_mono` | Bridge.lean | A | stub |
-| `GenData.spanRank_toricKer_le_beta1` | Bridge.lean | A | stub |
+| `GenData.mem_fiber` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.reachable_of_coord_gt` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.coord_le_of_contributes` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.le_cutoff_of_contributes` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.ncomp_le_one_of_cutoff_lt` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.betaFiber_eq_sum_of_le` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.n_pos`, `nu_zero`, `nu_add`, `nu_single`, `nu_sub`, `single_le_nu`, `m_mul_le_nu`, `nu_pos_of_pos`, `le_div_m_of_nu_eq`, `nu_replace`, `reachable_of_sharesVar`, `ncomp_le_one_of_reachable`, `exists_not_reachable`, `reachable_of_bridge` (new A helpers, vendor port) | Fiber.lean | A | proved (sorry-free) |
+| `X_mul_mono` | Bridge.lean | A | proved (sorry-free) |
+| `GenData.rep`, `genSet`, `binomGens` | Bridge.lean | A | def |
+| `GenData.nu_rep`, `rep_mk`, `card_genSet_le`, `card_binomGens_le`, `binomGens_subset_toricKer`, `sub_mem_of_sharesVar`, `sub_mem_of_reachable`, `rep_sub_rep_mem`, `mono_sub_mem_span`, `toricKer_eq_span` (new A helpers, vendor port; containment via A1's handoff) | Bridge.lean | A | proved (sorry-free) |
+| `GenData.spanRank_toricKer_le_beta1` | Bridge.lean | A | proved (sorry-free) |
 | `homogeneousComponent_mul_right` | Graded/Projection.lean | A | proved (sorry-free) |
 | `homogeneous_mem_span_range` (handoff to B) | Graded/Projection.lean | A | proved (sorry-free) |
 | `weighted_component_eq_zero_of_small` (handoff to B) | Graded/Projection.lean | A | proved (sorry-free) |
