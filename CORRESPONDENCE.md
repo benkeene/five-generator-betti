@@ -4,9 +4,11 @@ Status (commit of record b0a3671; Lean sources at 0a2a156 differ only in Solutio
 Theorem F is a sorry-free Lean development, kernel-replayed locally (literal 23-module `leanchecker`
 replay at 0a2a156, §11). Astra reviewer pass 1 on the formal development (2026-10-17):
 ACCEPT_WITH_FIXES 0.98; the reviewer judges that F qualifies for FORMALLY_VERIFIED under aiseminar
-AGENTS.md §3 (reviewer's judgement, recorded here; the lab status remains VERIFIED until the
-promotion step is recorded in claim_0005). Independent statement reconstruction: done, equivalence
-with `family_spanRank_eq` checked in Lean (§13). Linux CI comparator: not run. Theorem W is admitted
+AGENTS.md §3; lab status (aiseminar claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F
+with the scope of §2. Independent statement reconstruction: done, equivalence with
+`family_spanRank_eq` checked in Lean (§13). Linux CI comparator: passed at 10d4722 (2026-10-17,
+https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; con-ron, nanoda and
+the Lean default kernel accepted the solution; §11). Theorem W is admitted
 (`Targets/FiniteWidth.lean`, outside Solution's import closure and not in `defaultTargets`).
 Adversary passes on the formal development ('meaning', 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97;
 their documentation fixes are applied here; the reviewer pass-1 documentation fixes are applied in the
@@ -14,7 +16,8 @@ commit following 0a2a156. Commands and outcomes are in §11.
 
 ## 1. Informal claims and status
 * **F** (informal: VERIFIED as an ordinary theorem, aiseminar claim_0005; formal: sorry-free,
-  kernel-replayed locally, reviewer pass 1 ACCEPT_WITH_FIXES 0.98; CI comparator not run): for every field K, k ≥ 3, q ≥ k − 1, m = 2kq + 1, the toric ideal of
+  kernel-replayed locally, reviewer pass 1 ACCEPT_WITH_FIXES 0.98; CI comparator passed at
+  10d4722, 2026-10-17): for every field K, k ≥ 3, q ≥ k − 1, m = 2kq + 1, the toric ideal of
   ⟨m, m+1, m+k, m+2k−1, m+2k⟩ has minimal number of generators 4k + 2.
 * **W** (conjecture): β₁ ≤ 2w + 2 for every minimally five-generated numerical semigroup of
   width 4 ≤ w ≤ 40. Out of version 1.
@@ -105,8 +108,8 @@ Formal periodicity, the complete width-40 replay, novelty, the reverse fiber bri
 | 2026-10-16 (historical, imprecise) | `lake env leanchecker <descriptive placeholder: "all 22 built modules: Challenge, Solution, FiveGenBetti.*">`; literal argv not retained, so whether the umbrella `FiveGenBetti` was included is unknown (there are 23 built modules) | b0a3671 | exit 0, 13 min 19 s wall; superseded by the literal replay below |
 | 2026-10-17 | `lake build` (before the replay) | 0a2a156 | exit 0, 8984 jobs |
 | 2026-10-17 | `lake env leanchecker FiveGenBetti Challenge Solution FiveGenBetti.Algebra FiveGenBetti.Bridge FiveGenBetti.Certificate.Defs FiveGenBetti.Defs FiveGenBetti.Examples.Thirteen FiveGenBetti.Family.Apery FiveGenBetti.Family.Data FiveGenBetti.Family.Defs FiveGenBetti.Family.Generation FiveGenBetti.Family.Lemmas FiveGenBetti.Family.Main FiveGenBetti.Family.Minimality FiveGenBetti.Family.NormalForms FiveGenBetti.Family.Relations FiveGenBetti.Fiber FiveGenBetti.Graded.Indecomposables FiveGenBetti.Graded.Projection FiveGenBetti.GradedGenerators FiveGenBetti.Interface FiveGenBetti.Main` (23 modules: every module with an `.olean` under `.lake/build/lib/lean`, i.e. the umbrella `FiveGenBetti`, `Challenge`, `Solution` and the 20 `FiveGenBetti.*` descendants; `FiveGenBetti.AxiomAudit` has no olean and `Targets.FiniteWidth` is not built; list computed by a shell loop over the oleans) | 0a2a156 (Lean sources = b0a3671 except Solution.lean comments) | exit 0, 569 s wall (9 min 29 s; `/usr/bin/time -l`: 570.16 s real, max RSS 29.5 GB), no output. Two earlier attempts of the identical command the same morning were killed by SIGKILL (rc 137, after 425 s and 418 s, no output; the first concurrently with other Lean processes; cause not established, likely memory pressure) and are not counted as replays |
-| — | Linux comparator (`scripts/verify-comparator.sh`, CI) | b0a3671 | NOT RUN |
-| — | NanoDa / con-ron external kernels; `leanchecker --fresh` | b0a3671 | NOT RUN |
+| 2026-10-17 | Linux comparator `scripts/verify-comparator.sh` with bundled NanoDa / con-ron (GitHub Actions, bubblewrap; job "Check statement against solution", run https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; all four jobs success) | 10d4722 (Lean sources = b0a3671 except Solution.lean comments) | build 8981 jobs; `FiveGenBetti.family_spanRank_eq` plus `propext`, `Quot.sound`, `Classical.choice` exported; con-ron accepted 22291 declarations (`--verified`), nanoda accepted, Lean default kernel accepted; `Your solution is okay!` |
+| — | `leanchecker --fresh` (optional) | — | NOT RUN |
 
 Commit anchoring: e1554c4 differs from b0a3671 only in `FiveGenBetti/NOTES.md`; all Lean sources
 are identical. The nine Minimality proofs were produced by GPT-6 Astra (job

@@ -33,8 +33,12 @@ status:
     sources differ from b0a3671 only in Solution.lean comments). Astra reviewer pass 1 on the
     formal development (2026-10-17): ACCEPT_WITH_FIXES 0.98; the reviewer judges that F
     qualifies for FORMALLY_VERIFIED under aiseminar AGENTS.md section 3. Independent statement
-    reconstruction done and checked equivalent in Lean (CORRESPONDENCE.md section 13). The lab
-    status is still VERIFIED until the promotion step is recorded; CI comparator not run. Informally, F is an ordinary theorem by the laboratory's review
+    reconstruction done and checked equivalent in Lean (CORRESPONDENCE.md section 13). Lab status
+    (aiseminar claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F. CI comparator at 10d4722
+    (2026-10-17, GitHub Actions run 39005390724): "Your solution is okay!"; con-ron (22291
+    declarations, --verified), nanoda and the Lean default kernel accepted the solution. Ready
+    for submission from the registry's side; remaining: repository visibility (currently
+    private), a human read of CORRESPONDENCE.md, optional packaging (TODO(ben)). Informally, F is an ordinary theorem by the laboratory's review
     protocol (docs/PROOF.md, aiseminar claim_0005). Theorem W is a conjecture, admitted in
     Targets/FiniteWidth.lean, outside Solution's import closure and outside defaultTargets.
     sorry_count convention: occurrences of `sorry` outside Challenge.lean (whose two
@@ -120,7 +124,8 @@ review:
     (2026-10-16, aiseminar agents/astra/transcripts/20261016T234404_adversary-*_claim_0005.md),
     both ACCEPT_WITH_FIXES 0.97, no mathematical counterexample or verification-chain escape;
     their documentation/provenance fixes were applied in 956ab8d and 4c9349b, except the
-    stale header of the frozen Challenge.lean and the Linux comparator request. Reviewer pass 1
+    stale header of the frozen Challenge.lean and the Linux comparator request (the latter since
+    met: CI comparator passed at 10d4722, 2026-10-17). Reviewer pass 1
     (2026-10-17, aiseminar agents/astra/transcripts/20261017T000811_reviewer-formal_claim_0005.md):
     ACCEPT_WITH_FIXES 0.98, no mathematical gap; its documentation fixes (byte-identity record,
     replay record, minimality exposition, scope and status wording) are applied in the commit
@@ -130,12 +135,14 @@ review:
     retain its literal argv and is superseded. The nine Minimality proofs were produced by GPT-6
     Astra and applied mechanically.
     Lab status (aiseminar claim_0005 STATUS.yaml, 2026-10-17, commit 11ce3ea): FORMALLY_VERIFIED for
-    Theorem F (Solution closure; displayed-presentation corollary and conjecture W are not records). CI
-    comparator, leanchecker --fresh and NanoDa/con-ron remain unrun (additional assurance, not required
-    by AGENTS.md §3).
+    Theorem F (Solution closure; displayed-presentation corollary and conjecture W are not records).
+    CI comparator passed at 10d4722 (2026-10-17,
+    https://github.com/benkeene/five-generator-betti/actions/runs/39005390724): con-ron,
+    nanoda and the Lean default kernel accepted. leanchecker --fresh not run (optional).
 
 known_gaps:
-  - "Linux comparator (CI, NanoDa/con-ron) not yet run for b0a3671; leanchecker --fresh not run (the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
+  - "leanchecker --fresh not run (optional; the Linux CI comparator with NanoDa/con-ron passed at 10d4722, and the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
+  - "Repository is private (owner's decision); the registry must be able to clone it before submission."
   - "Frozen-file docstrings still call the family 'extremal' and Challenge.lean's header still says PROOF_ATTEMPT; F proves attainment of 2w+2 only (CORRESPONDENCE.md section 2)."
   - "The comparator contract freezes only the invariant spanRank = 4k+2, not the displayed presentation (generation, nonredundancy, count are proved but not part of the statement of record)."
   - "No named lemma MinimallyGenerates (familyGens k q) in Family/Defs.lean (checked ad hoc by the 'meaning' adversary; F does not depend on it)."

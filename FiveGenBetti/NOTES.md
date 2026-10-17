@@ -7,7 +7,9 @@ replays Minimality/Main/Thirteen/Solution with exit 0. In the development librar
 `lake env lean FiveGenBetti/AxiomAudit.lean` now prints only propext, Classical.choice, Quot.sound (it is informational
 and not run in CI; a green build or replay exit code alone does not exclude admissions). Adversary passes 'meaning' and
 'trust' (2026-10-16) returned ACCEPT_WITH_FIXES 0.97 (documentation fixes applied). Reviewer pass 1 (2026-10-17): ACCEPT_WITH_FIXES
-0.98; independent statement reconstruction checked equivalent in Lean (CORRESPONDENCE §13). CI comparator not run. Audit record: `CORRESPONDENCE.md` §11.
+0.98; independent statement reconstruction checked equivalent in Lean (CORRESPONDENCE §13). CI comparator passed at 10d4722
+(2026-10-17; con-ron, nanoda, Lean kernel accepted); lab status FORMALLY_VERIFIED (claim_0005).
+Audit record: `CORRESPONDENCE.md` §11.
 
 Rules: definitions frozen byte-for-byte; theorem *signatures* frozen, bodies edited only by their
 owner (A or B) in their owner's files; no theorem relocation after bootstrap.
