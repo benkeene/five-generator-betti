@@ -1,9 +1,9 @@
 # Development notes
 
 Plan of record: `docs/astra/2026-10-16_lean_plan.md` (§0 ownership and DAG, §1 frozen interfaces,
-§2 stream A, §3 stream B, §4 integration). State: **Bootstrap** milestone — every planned module
-exists, all real definitions are in place, all handoff signatures are frozen, the final assembly of
-Theorem F is real proof text, and the tree builds. A green build with admitted dependencies is not
+§2 stream A, §3 stream B, §4 integration). State (2026-10-16, after merging main into stream-B): Stream A complete and sorry-free; Stream B
+B1–B4 proved (Defs, Relations, NormalForms, Generation, Apery sorry-free by `lake env lean`);
+only B5 (Family/Minimality.lean, 9 declarations) remains admitted, plus Targets W. A green build with admitted dependencies is not
 evidence that F is proved: `lake env lean FiveGenBetti/AxiomAudit.lean` still reports `sorryAx`.
 
 Rules: definitions frozen byte-for-byte; theorem *signatures* frozen, bodies edited only by their
@@ -72,29 +72,29 @@ with `toricKer_le_ideal_aux` (the proof body of the handoff, inside `section Hel
 |---|---|---|---|
 | `Family.gens` (+ five `rfl` value lemmas), `HIndex`, `NIndex` | Family/Defs.lean | B | def / proved |
 | `Family.gens_pos` | Family/Defs.lean | B | proved |
-| `Family.gens_strictMono` | Family/Defs.lean | B | stub |
-| `Family.gens_gcd` | Family/Defs.lean | B | stub |
+| `Family.gens_strictMono` | Family/Defs.lean | B | proved (sorry-free) |
+| `Family.gens_gcd` | Family/Defs.lean | B | proved (sorry-free) |
 | `exp5`, `hExp`, `nExp`, `RelIndex`, `relExp`, `relation`, `familyIdeal`, `relationDegree`, `nOffset` | Family/Data.lean | B | def |
 | `NormalB`, `NormalBC`, `NormalD`, `NormalCD`, `NormalForm`, `normalExp`, `normalOffset`, `normalMono` | Family/Data.lean | B | def |
 | `offset`, `psi`, `attainable`, `IsApery` | Family/Data.lean | B | def |
-| `relIndex_card` (handoff) | Family/Relations.lean | B | stub |
-| `h_weight` | Family/Relations.lean | B | stub |
-| `n_weight` | Family/Relations.lean | B | stub |
-| `relation_weightedHomogeneous` (handoff) | Family/Relations.lean | B | stub |
-| `relationDegree_pos` (handoff) | Family/Relations.lean | B | stub |
-| `relation_mem_toricKer` | Family/Relations.lean | B | stub |
-| `normalOffset_lt` | Family/NormalForms.lean | B | stub |
-| `normalOffset_injective` | Family/NormalForms.lean | B | stub |
-| `normalOffset_surjective` | Family/NormalForms.lean | B | stub |
+| `relIndex_card` (handoff) | Family/Relations.lean | B | proved (sorry-free) |
+| `h_weight` | Family/Relations.lean | B | proved (sorry-free) |
+| `n_weight` | Family/Relations.lean | B | proved (sorry-free) |
+| `relation_weightedHomogeneous` (handoff) | Family/Relations.lean | B | proved (sorry-free) |
+| `relationDegree_pos` (handoff) | Family/Relations.lean | B | proved (sorry-free) |
+| `relation_mem_toricKer` | Family/Relations.lean | B | proved (sorry-free) |
+| `normalOffset_lt` | Family/NormalForms.lean | B | proved (sorry-free) |
+| `normalOffset_injective` | Family/NormalForms.lean | B | proved (sorry-free) |
+| `normalOffset_surjective` | Family/NormalForms.lean | B | proved (sorry-free) |
 | `normalOffsetEquiv` | Family/NormalForms.lean | B | def (from stubs) |
 | `card_normalForm` | Family/NormalForms.lean | B | proved |
-| `normalWeight` | Family/NormalForms.lean | B | stub |
-| `normal_repr_injective` | Family/NormalForms.lean | B | stub |
-| `residual_step` | Family/Generation.lean | B | stub |
-| `monomial_normal_form` | Family/Generation.lean | B | stub |
-| `familyIdeal_eq_toricKer` (handoff) | Family/Generation.lean | B | stub |
-| `normalWeight_isApery` | Family/Apery.lean | B | stub |
-| `apery_iff_normalWeight` | Family/Apery.lean | B | stub |
+| `normalWeight` | Family/NormalForms.lean | B | proved (sorry-free) |
+| `normal_repr_injective` | Family/NormalForms.lean | B | proved (sorry-free) |
+| `residual_step` | Family/Generation.lean | B | proved (sorry-free) |
+| `monomial_normal_form` | Family/Generation.lean | B | proved (sorry-free) |
+| `familyIdeal_eq_toricKer` (handoff) | Family/Generation.lean | B | proved (sorry-free) |
+| `normalWeight_isApery` | Family/Apery.lean | B | proved (sorry-free) |
+| `apery_iff_normalWeight` | Family/Apery.lean | B | proved (sorry-free) |
 | `psi_H` | Family/Minimality.lean | B | stub |
 | `psi_N` | Family/Minimality.lean | B | stub |
 | `psi_N_ne_zero` | Family/Minimality.lean | B | stub |
