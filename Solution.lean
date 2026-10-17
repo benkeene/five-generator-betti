@@ -32,9 +32,11 @@ Betti number `β₁` of `K[S]`, stated below as `Submodule.spanRank` (a cardinal
 * `FiveGenBetti.beta1_five_le_two_width_add_two` (Theorem W, conjectural): `β₁ ≤ 2w + 2` for
   every minimally five-generated `S` with `4 ≤ w ≤ 40`.
 
-Status 2026-10-16: Theorem F is a PROOF_ATTEMPT (docs/PROOF.md), Theorem W a conjecture to be
-supported by a certified sweep; version 1 of this development targets F only. The four-generator
-case `β₁ ≤ 2w` is Palomar entry PALOMAR-2026-10-07-000005. Proofs are in `Solution.lean`.
+Status 2026-10-17: Theorem F's informal proof (docs/PROOF.md) is VERIFIED by the lab protocol;
+its Lean development is sorry-free at `b0a3671`, formal review pending (not formally verified).
+Theorem W is a conjecture to be supported by a certified sweep; version 1 targets F only.
+The four-generator case `β₁ ≤ 2w` is Palomar entry PALOMAR-2026-10-07-000005.
+Proofs are in `Solution.lean`.
 -/
 
 /-! ## Proofs (this module)
