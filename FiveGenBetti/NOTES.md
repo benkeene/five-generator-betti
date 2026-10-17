@@ -1,9 +1,10 @@
 # Development notes
 
 Plan of record: `docs/astra/2026-10-16_lean_plan.md` (§0 ownership and DAG, §1 frozen interfaces,
-§2 stream A, §3 stream B, §4 integration). State (2026-10-16, after merging main into stream-B): Stream A complete and sorry-free; Stream B
-B1–B4 proved (Defs, Relations, NormalForms, Generation, Apery sorry-free by `lake env lean`);
-only B5 (Family/Minimality.lean, 9 declarations) remains admitted, plus Targets W. A green build with admitted dependencies is not
+§2 stream A, §3 stream B, §4 integration). State (2026-10-16, b0a3671): Theorem F is sorry-free. Every Stream A and Stream B declaration is proved;
+`FiveGenBetti.family_spanRank_eq` depends only on propext, Classical.choice, Quot.sound; `lake env leanchecker`
+replays Minimality/Main/Thirteen/Solution with exit 0. Only Targets W (conjecture, outside Solution) is admitted.
+Formal status under the lab protocol is pending adversary/reviewer passes on the formal development. A green build with admitted dependencies is not
 evidence that F is proved: `lake env lean FiveGenBetti/AxiomAudit.lean` still reports `sorryAx`.
 
 Rules: definitions frozen byte-for-byte; theorem *signatures* frozen, bodies edited only by their
@@ -95,19 +96,19 @@ with `toricKer_le_ideal_aux` (the proof body of the handoff, inside `section Hel
 | `familyIdeal_eq_toricKer` (handoff) | Family/Generation.lean | B | proved (sorry-free) |
 | `normalWeight_isApery` | Family/Apery.lean | B | proved (sorry-free) |
 | `apery_iff_normalWeight` | Family/Apery.lean | B | proved (sorry-free) |
-| `psi_H` | Family/Minimality.lean | B | stub |
-| `psi_N` | Family/Minimality.lean | B | stub |
-| `psi_N_ne_zero` | Family/Minimality.lean | B | stub |
-| `H_nonredundant` | Family/Minimality.lean | B | stub |
-| `N_nonredundant` | Family/Minimality.lean | B | stub |
-| `H_degree_lt_D` | Family/Minimality.lean | B | stub |
-| `H_boundary_collisions` | Family/Minimality.lean | B | stub |
-| `H_degree_lt_D_add_m` | Family/Minimality.lean | B | stub |
-| `relation_nonredundant` (handoff) | Family/Minimality.lean | B | stub |
-| `Family.spanRank_eq` (Theorem F, internal) | Family/Main.lean | B | proved (assembly; depends on stubs) |
+| `psi_H` | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
+| `psi_N` | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
+| `psi_N_ne_zero` | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
+| `H_nonredundant` | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
+| `N_nonredundant` | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
+| `H_degree_lt_D` | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
+| `H_boundary_collisions` | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
+| `H_degree_lt_D_add_m` | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
+| `relation_nonredundant` (handoff) | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
+| `Family.spanRank_eq` (Theorem F, internal) | Family/Main.lean | B | proved (sorry-free) |
 | `Examples.thirteen`, `thirteenApery` | Examples/Thirteen.lean | B | def |
 | `Examples.thirteen_spanRank_eq_fourteen` | Examples/Thirteen.lean | B | proved (specialization of F) |
-| `family_spanRank_eq` (public Theorem F) | Solution.lean | B | proved (wrapper of `Family.spanRank_eq`) |
+| `family_spanRank_eq` (public Theorem F) | Solution.lean | B | proved (sorry-free; axioms propext, Classical.choice, Quot.sound) |
 | `Targets.beta1_five_le_two_width_add_two` (Theorem W) | Targets/FiniteWidth.lean | — | admitted, outside Solution |
 
 ## Contract deviations
