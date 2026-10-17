@@ -23,7 +23,7 @@ check passed, and con-ron, nanoda and the Lean default kernel accepted the solut
 statements of record for F, `FiveGenBetti.familyGens_minimallyGenerates` (the five generators are a minimal generating
 set) and `FiveGenBetti.family_presentation` (the explicit `4k+2` binomials generate the toric ideal, none is redundant,
 and there are `4k+2` of them), both listed in `comparator.json` and proved in `Solution.lean` by thin calls into the
-development; the CI comparator has not yet run on the commit containing them. `lake env lean FiveGenBetti/AxiomAudit.lean`
+development; the CI comparator passed with all three on the rewritten main `0a897c8` (run 39036226197). `lake env lean FiveGenBetti/AxiomAudit.lean`
 (from `Solution`) prints [propext, Classical.choice, Quot.sound] for each of the three statements. Adversary passes on the formal development ('meaning',
 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97, documentation fixes applied. (2) conjecture, admitted in
 `Targets/FiniteWidth.lean` outside Solution's import closure. Informal argument in `docs/PROOF.md`;
@@ -62,13 +62,13 @@ Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 
 ## Submission
 Palomar submissions go through https://submit.palomar-registry.org/ with the full 40-character commit SHA. This repository is
-ready for submission from the registry's side once the CI comparator passes on the commit to be
-submitted: it passed at 0223cfc (2026-10-17,
-https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; con-ron, nanoda
-and the Lean default kernel accepted the solution) for `family_spanRank_eq` alone, and the
-2026-10-17 packaging commit adds `familyGens_minimallyGenerates` and `family_presentation` to
-`comparator.json` (local build, axiom audit and replay recorded in `CORRESPONDENCE.md` §11; CI
-pending). Remaining before submitting, the owner's decisions: repository visibility (currently
-private; the registry must be able to clone) and a human read of `CORRESPONDENCE.md`.
+ready for submission from the registry's side: the CI comparator passed with all three statements
+of record (`family_spanRank_eq`, `familyGens_minimallyGenerates`, `family_presentation`) on the
+rewritten main `0a897c8` (2026-10-17,
+https://github.com/benkeene/five-generator-betti/actions/runs/39036226197; con-ron, nanoda and
+the Lean default kernel accepted the solution), after an earlier pass at 0223cfc for
+`family_spanRank_eq` alone. Remaining before submitting, the owner's decisions: repository
+visibility (currently private; the registry must be able to clone) and a human read of
+`CORRESPONDENCE.md`. Submit the full SHA of the main head at submission time.
 `leanchecker --fresh` has not run (optional; the registry's comparator performs independent
 replay). See `status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §11.

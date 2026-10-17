@@ -42,8 +42,8 @@ status:
     family_presentation (the explicit 4k+2 binomials generate the toric ideal, none is
     redundant, their index type has 4k+2 elements), added to Challenge.lean, Solution.lean and
     comparator.json; local build, axiom audit (three standard axioms for each of the three) and
-    replay recorded in CORRESPONDENCE.md section 11; the CI comparator has not yet run on that
-    commit. Remaining: CI comparator on the submitted commit, repository visibility (currently
+    replay recorded in CORRESPONDENCE.md section 11; the CI comparator passed on the rewritten
+    main 0a897c8 with all three (run 39036226197). Remaining: repository visibility (currently
     private), a human read of CORRESPONDENCE.md. Informally, F is an ordinary theorem by the laboratory's review
     protocol (docs/PROOF.md, aiseminar claim_0005). Theorem W is a conjecture, admitted in
     Targets/FiniteWidth.lean, outside Solution's import closure and outside defaultTargets.
@@ -151,6 +151,7 @@ review:
 known_gaps:
   - "leanchecker --fresh not run (optional; the Linux CI comparator with NanoDa/con-ron passed at 0223cfc, and the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
   - "Repository is private (owner's decision); the registry must be able to clone it before submission."
+  - "The two packaging records of 2026-10-17 (familyGens_minimallyGenerates, family_presentation) postdate the formal adversary and reviewer passes, which saw family_spanRank_eq alone; they are thin calls into library declarations those passes covered, and the CI comparator passed with all three at 0a897c8."
   - "The reverse fiber bridge (betaFiber <= spanRank) is not formalized; it is not needed for F, which does not assert equality with betaFiber."
   - "The finite-width theorem is unproved; periodicity and exhaustive replay are out of version 1."
 

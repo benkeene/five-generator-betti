@@ -15,8 +15,8 @@ their documentation fixes are applied here; the reviewer pass-1 documentation fi
 commit following 9006821. Packaging commit of 2026-10-17 (after 0223cfc): two further statements of
 record for F, `familyGens_minimallyGenerates` and `family_presentation` (§2, §4, §8), added to
 `comparator.json`; the frozen-file headers and docstrings were corrected (comment-only, §2); the
-vendored four-generator copy was removed (docs/PORTING.md). The CI comparator has not yet run on that
-commit. Commands and outcomes are in §11.
+vendored four-generator copy was removed (docs/PORTING.md). The CI comparator passed with all three
+statements of record on the rewritten main `0a897c8` (run 39036226197, §11). Commands and outcomes are in §11.
 
 ## 1. Informal claims and status
 * **F** (informal: VERIFIED as an ordinary theorem, aiseminar claim_0005; formal: sorry-free,
