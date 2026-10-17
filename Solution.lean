@@ -40,9 +40,9 @@ case `β₁ ≤ 2w` is Palomar entry PALOMAR-2026-10-07-000005. Proofs are in `S
 /-! ## Proofs (this module)
 
 The definitions of `Challenge.lean` restated verbatim and Theorem F proved by a thin bridge into the
-development library (`FiveGenBetti.Family.spanRank_eq`, currently admitted). This module does not
-import `Challenge`; the comparator checks that statements and definitions agree. Theorem W is not
-restated here (version 1 is family-only; see `Targets/FiniteWidth.lean`). -/
+development library (`FiveGenBetti.Family.spanRank_eq`, sorry-free since b0a3671). This module
+does not import `Challenge`; the comparator checks that statements and definitions agree. Theorem W
+is not restated here (version 1 is family-only; see `Targets/FiniteWidth.lean`). -/
 
 @[expose] public section
 

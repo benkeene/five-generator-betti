@@ -4,8 +4,10 @@ Plan of record: `docs/astra/2026-10-16_lean_plan.md` (§0 ownership and DAG, §1
 §2 stream A, §3 stream B, §4 integration). State (2026-10-16, b0a3671): Theorem F is sorry-free. Every Stream A and Stream B declaration is proved;
 `FiveGenBetti.family_spanRank_eq` depends only on propext, Classical.choice, Quot.sound; `lake env leanchecker`
 replays Minimality/Main/Thirteen/Solution with exit 0. Only Targets W (conjecture, outside Solution) is admitted.
-Formal status under the lab protocol is pending adversary/reviewer passes on the formal development. A green build with admitted dependencies is not
-evidence that F is proved: `lake env lean FiveGenBetti/AxiomAudit.lean` still reports `sorryAx`.
+`lake env lean FiveGenBetti/AxiomAudit.lean` now prints only propext, Classical.choice, Quot.sound (it is informational
+and not run in CI; a green build or replay exit code alone does not exclude admissions). Adversary passes 'meaning' and
+'trust' (2026-10-16) returned ACCEPT_WITH_FIXES 0.97 (documentation fixes applied); reviewer pass, independent statement
+reconstruction and the CI comparator are pending. Audit record: `CORRESPONDENCE.md` §11.
 
 Rules: definitions frozen byte-for-byte; theorem *signatures* frozen, bodies edited only by their
 owner (A or B) in their owner's files; no theorem relocation after bootstrap.

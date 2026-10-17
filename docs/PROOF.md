@@ -1,11 +1,11 @@
-# Informal proof of Theorem F (lab status VERIFIED as an ordinary theorem, 2026-10-16; not formally verified)
+# Informal proof of Theorem F (lab status VERIFIED as an ordinary theorem, 2026-10-16; Lean: sorry-free, kernel-replayed locally at b0a3671, pending reviewer pass, statement reconstruction and CI comparator)
 
 Source: `docs/astra/2026-10-16_workflow_betti.md` §2 and the scaffold plan (§8). Labels are the
 intended Lean names. Review record (aiseminar claim_0005): adversary 20261016T191015 (ACCEPT 0.97, answered);
 independent reconstruction from the statement alone 20261016T191015 (Proof B, agrees); reviewer
 20261016T191635 (ACCEPT_WITH_FIXES 0.97, applied); confirming reviewer 20261016T192329 (ACCEPT 0.98,
 replayed all 32 in-range instances). The objection log records the refuted indispensability claim
-and its correction to nonredundancy. Lean formalization of `Family.Minimality` may now start.
+and its correction to nonredundancy. `Family.Minimality` is formalized and sorry-free (b0a3671; see CORRESPONDENCE.md §11).
 
 Variables a, b, c, d, e of weights m, m+1, m+k, m+2k−1, m+2k; m = 2kq + 1, k ≥ 3, q ≥ k − 1.
 Hypotheses made explicit: all exponents are nonnegative integers; the N-degrees use the global index
