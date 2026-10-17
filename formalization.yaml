@@ -129,6 +129,10 @@ review:
     "lake env leanchecker FiveGenBetti Challenge Solution FiveGenBetti.Algebra FiveGenBetti.Bridge FiveGenBetti.Certificate.Defs FiveGenBetti.Defs FiveGenBetti.Examples.Thirteen FiveGenBetti.Family.Apery FiveGenBetti.Family.Data FiveGenBetti.Family.Defs FiveGenBetti.Family.Generation FiveGenBetti.Family.Lemmas FiveGenBetti.Family.Main FiveGenBetti.Family.Minimality FiveGenBetti.Family.NormalForms FiveGenBetti.Family.Relations FiveGenBetti.Fiber FiveGenBetti.Graded.Indecomposables FiveGenBetti.Graded.Projection FiveGenBetti.GradedGenerators FiveGenBetti.Interface FiveGenBetti.Main" (23 modules: umbrella FiveGenBetti, Challenge, Solution and the 20 FiveGenBetti.* modules with oleans; AxiomAudit and Targets.FiniteWidth have none) at 0a2a156, exit 0, 569 s wall (two earlier identical attempts were SIGKILLed, rc 137, not counted). The 2026-10-16 record "all 22 built modules ... 13 min 19 s" at b0a3671 did not
     retain its literal argv and is superseded. The nine Minimality proofs were produced by GPT-6
     Astra and applied mechanically.
+    Lab status (aiseminar claim_0005 STATUS.yaml, 2026-10-17, commit 11ce3ea): FORMALLY_VERIFIED for
+    Theorem F (Solution closure; displayed-presentation corollary and conjecture W are not records). CI
+    comparator, leanchecker --fresh and NanoDa/con-ron remain unrun (additional assurance, not required
+    by AGENTS.md §3).
 
 known_gaps:
   - "Linux comparator (CI, NanoDa/con-ron) not yet run for b0a3671; leanchecker --fresh not run (the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
