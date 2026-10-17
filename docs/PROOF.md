@@ -1,4 +1,4 @@
-# Informal proof of Theorem F (lab status VERIFIED as an ordinary theorem, 2026-10-16; Lean: sorry-free at b0a3671, kernel-replayed locally; formal reviewer pass 1 ACCEPT_WITH_FIXES 0.98 and independent statement reconstruction done 2026-10-17; CI comparator not run)
+# Informal proof of Theorem F (lab status VERIFIED as an ordinary theorem, 2026-10-16; Lean: sorry-free at b0a3671, kernel-replayed locally; formal reviewer pass 1 ACCEPT_WITH_FIXES 0.98 and independent statement reconstruction done 2026-10-17; CI comparator passed 2026-10-17 at 10d4722; lab status FORMALLY_VERIFIED 2026-10-17)
 
 Source: `docs/astra/2026-10-16_workflow_betti.md` §2 and the scaffold plan (§8). Labels are the
 intended Lean names. Review record (aiseminar claim_0005): adversary 20261016T191015 (ACCEPT 0.97, answered);

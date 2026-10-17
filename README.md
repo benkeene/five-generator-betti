@@ -15,8 +15,11 @@ kernel-replayed locally (literal 23-module `leanchecker` replay, `CORRESPONDENCE
 reviewer pass 1 on the formal development (2026-10-17) returned ACCEPT_WITH_FIXES 0.98 and judged
 that F qualifies for FORMALLY_VERIFIED under the lab's AGENTS.md §3; an independent statement
 reconstruction was checked equivalent in Lean (`CORRESPONDENCE.md` §13). Lab status (aiseminar
-claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F with the scope in `CORRESPONDENCE.md` §2;
-the CI comparator, `leanchecker --fresh` and NanoDa/con-ron have not been run. `#print axioms FiveGenBetti.family_spanRank_eq` (from `Solution`) is
+claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F with the scope in `CORRESPONDENCE.md` §2.
+CI comparator passed at 10d4722 (2026-10-17, GitHub Actions run
+https://github.com/benkeene/five-generator-betti/actions/runs/39005390724): statement and axiom
+check passed, and con-ron, nanoda and the Lean default kernel accepted the solution;
+`leanchecker --fresh` has not been run (optional). `#print axioms FiveGenBetti.family_spanRank_eq` (from `Solution`) is
 [propext, Classical.choice, Quot.sound]. Adversary passes on the formal development ('meaning',
 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97, documentation fixes applied. (2) conjecture, admitted in
 `Targets/FiniteWidth.lean` outside Solution's import closure. Informal argument in `docs/PROOF.md`;
@@ -43,7 +46,7 @@ lake build
 python3 scripts/check-lean-sources.py
 ruby scripts/validate-formalization.rb
 lake env lean FiveGenBetti/AxiomAudit.lean   # informational only (not run in CI): expect propext, Classical.choice, Quot.sound
-./scripts/verify-comparator.sh          # Linux with bubblewrap only; not yet run for b0a3671
+./scripts/verify-comparator.sh          # Linux with bubblewrap only; passed in CI at 10d4722
 ```
 
 Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
@@ -51,5 +54,12 @@ Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 
 ## Submission
 Palomar submissions go through https://submit.palomar-registry.org/ with the full 40-character commit SHA. This repository is
-not ready for submission (Linux comparator not yet run): see
-`status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §11.
+ready for submission from the registry's side: the CI comparator passed at 10d4722 (2026-10-17,
+https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; con-ron, nanoda
+and the Lean default kernel accepted the solution). Remaining before submitting, all the owner's
+decisions: repository visibility (currently private; the registry must be able to clone), a
+human read of `CORRESPONDENCE.md`, and the optional packaging items (presentation corollary of
+record, named `MinimallyGenerates` lemma; `CORRESPONDENCE.md` §4, §8, `known_gaps`, aiseminar
+claim_0005 `RESPONSE_CLAUDE.md`, `TODO(ben)`). `leanchecker --fresh` has not run
+(optional; the registry's comparator performs independent replay). See `status.scope` in
+`formalization.yaml` and `CORRESPONDENCE.md` §11.
