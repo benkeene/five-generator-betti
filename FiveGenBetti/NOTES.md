@@ -22,42 +22,49 @@ lemmas); **stub** = `sorry` body; **frozen** = shared interface, not to be edite
 
 ## Stream A
 
+All Stream A files are sorry-free (A1–A5); every handoff's `#print axioms` is
+`[propext, Classical.choice, Quot.sound]`.
+
 | declaration | file | owner | status |
 |---|---|---|---|
 | `toricMap` | Algebra.lean | A | def |
 | `mono_coe` | Algebra.lean | A | proved |
-| `toricMap_monomial` | Algebra.lean | A | stub |
-| `toricMap_mono` | Algebra.lean | A | stub |
+| `toricMap_monomial` | Algebra.lean | A | proved (sorry-free) |
+| `toricMap_mono` | Algebra.lean | A | proved (sorry-free) |
 | `mem_toricKer` | Algebra.lean | A | proved |
-| `mono_sub_mem_toricKer` | Algebra.lean | A | stub |
-| `coeff_sum_eq_zero` | Algebra.lean | A | stub |
-| `toricKer_le_ideal_of_mono_sub_mem` (handoff to B) | Algebra.lean | A | stub |
+| `mono_sub_mem_toricKer` | Algebra.lean | A | proved (sorry-free) |
+| `coeff_sum_eq_zero` | Algebra.lean | A | proved (sorry-free) |
+| `toricKer_le_ideal_of_mono_sub_mem` (handoff to B) | Algebra.lean | A | proved (sorry-free) |
 | `SharesVar`, its `DecidableRel` instance | Fiber.lean | A | def |
 | `SharesVar.symm` | Fiber.lean | A | proved |
 | `GenData.nabla`, `ncomp`, `contributes`, `betaFiber` (+ decidability instances) | Fiber.lean | A | def |
-| `GenData.mem_fiber` | Fiber.lean | A | stub |
-| `GenData.reachable_of_coord_gt` | Fiber.lean | A | stub |
-| `GenData.coord_le_of_contributes` | Fiber.lean | A | stub |
-| `GenData.le_cutoff_of_contributes` | Fiber.lean | A | stub |
-| `GenData.ncomp_le_one_of_cutoff_lt` | Fiber.lean | A | stub |
-| `GenData.betaFiber_eq_sum_of_le` | Fiber.lean | A | stub |
-| `X_mul_mono` | Bridge.lean | A | stub |
-| `GenData.spanRank_toricKer_le_beta1` | Bridge.lean | A | stub |
-| `homogeneousComponent_mul_right` | Graded/Projection.lean | A | stub |
-| `homogeneous_mem_span_range` (handoff to B) | Graded/Projection.lean | A | stub |
-| `weighted_component_eq_zero_of_small` (handoff to B) | Graded/Projection.lean | A | stub |
+| `GenData.mem_fiber` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.reachable_of_coord_gt` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.coord_le_of_contributes` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.le_cutoff_of_contributes` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.ncomp_le_one_of_cutoff_lt` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.betaFiber_eq_sum_of_le` | Fiber.lean | A | proved (sorry-free) |
+| `GenData.n_pos`, `nu_zero`, `nu_add`, `nu_single`, `nu_sub`, `single_le_nu`, `m_mul_le_nu`, `nu_pos_of_pos`, `le_div_m_of_nu_eq`, `nu_replace`, `reachable_of_sharesVar`, `ncomp_le_one_of_reachable`, `exists_not_reachable`, `reachable_of_bridge` (new A helpers, vendor port) | Fiber.lean | A | proved (sorry-free) |
+| `X_mul_mono` | Bridge.lean | A | proved (sorry-free) |
+| `GenData.rep`, `genSet`, `binomGens` | Bridge.lean | A | def |
+| `GenData.nu_rep`, `rep_mk`, `card_genSet_le`, `card_binomGens_le`, `binomGens_subset_toricKer`, `sub_mem_of_sharesVar`, `sub_mem_of_reachable`, `rep_sub_rep_mem`, `mono_sub_mem_span`, `toricKer_eq_span` (new A helpers, vendor port; containment via A1's handoff) | Bridge.lean | A | proved (sorry-free) |
+| `GenData.spanRank_toricKer_le_beta1` | Bridge.lean | A | proved (sorry-free) |
+| `homogeneousComponent_mul_right` | Graded/Projection.lean | A | proved (sorry-free) |
+| `homogeneous_mem_span_range` (handoff to B) | Graded/Projection.lean | A | proved (sorry-free) |
+| `weighted_component_eq_zero_of_small` (handoff to B) | Graded/Projection.lean | A | proved (sorry-free) |
 | `augmentationIdeal`, `decomposables`, `Indecomposables`, `indecomposablesMk` | Graded/Indecomposables.lean | A | def |
-| `mem_augmentationIdeal_iff` | Graded/Indecomposables.lean | A | stub |
-| `indecomposablesMk_mul` | Graded/Indecomposables.lean | A | stub |
-| `span_indecomposablesMk_eq_top` | Graded/Indecomposables.lean | A | stub |
+| `mem_augmentationIdeal_iff` | Graded/Indecomposables.lean | A | proved (sorry-free) |
+| `indecomposablesMk_mul` | Graded/Indecomposables.lean | A | proved (sorry-free) |
+| `span_indecomposablesMk_eq_top` | Graded/Indecomposables.lean | A | proved (sorry-free) |
 | `generatorClass` | Graded/Indecomposables.lean | A | def |
-| `linearIndependent_generatorClass` | Graded/Indecomposables.lean | A | stub |
-| `card_le_card_of_span_eq` | GradedGenerators.lean | A | stub |
-| `card_le_spanRank_of_independent_generatorClass` | GradedGenerators.lean | A | proved |
-| `spanRank_eq_card_of_weightedHomogeneous_irredundant` (handoff to B) | GradedGenerators.lean | A | stub |
+| `sub_C_coeff_zero_mem_augmentationIdeal`, `indecomposablesMk_eq_zero_iff` (new A helpers) | Graded/Indecomposables.lean | A | proved (sorry-free) |
+| `linearIndependent_generatorClass` | Graded/Indecomposables.lean | A | proved (sorry-free) |
+| `card_le_card_of_span_eq` | GradedGenerators.lean | A | proved (sorry-free) |
+| `card_le_spanRank_of_independent_generatorClass` | GradedGenerators.lean | A | proved (sorry-free) |
+| `spanRank_eq_card_of_weightedHomogeneous_irredundant` (handoff to B) | GradedGenerators.lean | A | proved (sorry-free) |
 
-The plan's private helpers `degreeRoot` / `weight_degreeRoot` (§2 A1) are not yet in Algebra.lean;
-A adds them (privately) when proving `toricKer_le_ideal_of_mono_sub_mem`.
+The plan's helpers `degreeRoot` / `weight_degreeRoot` (§2 A1) are private in Algebra.lean, together
+with `toricKer_le_ideal_aux` (the proof body of the handoff, inside `section Helpers`).
 
 ## Stream B
 
@@ -114,6 +121,8 @@ needed. Layout-only choices (no change to any statement):
   single `variable (G : GenData e)` instead of the plan's two blocks that redeclare `{e}`.
 * `gens_pos` lives in Family/Defs.lean (plan §3 B1 adds it next to `gens_strictMono`/`gens_gcd`).
 
-Linter noise accepted from verbatim plan text: `linter.style.whitespace` ("`k-1` should be written
+Linter noise accepted from verbatim plan text: the unused hypothesis `hm : 0 < m` in the frozen
+signature of `weighted_component_eq_zero_of_small` (implied by `0 < n < m`); the unused `hd : ∀ i, 0 < d i`
+in `linearIndependent_generatorClass` (the independence argument does not need positive degrees); `linter.style.whitespace` ("`k-1` should be written
 `k - 1`", 32 instances) and the unused-`[Fintype ι]` linter on `linearIndependent_generatorClass`.
 Fixing either would alter frozen text; leave them, or clean up together after completion.
