@@ -12,7 +12,11 @@ the Lean default kernel accepted the solution; §11). Theorem W is admitted
 (`Targets/FiniteWidth.lean`, outside Solution's import closure and not in `defaultTargets`).
 Adversary passes on the formal development ('meaning', 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97;
 their documentation fixes are applied here; the reviewer pass-1 documentation fixes are applied in the
-commit following 0a2a156. Commands and outcomes are in §11.
+commit following 0a2a156. Packaging commit of 2026-10-17 (after 10d4722): two further statements of
+record for F, `familyGens_minimallyGenerates` and `family_presentation` (§2, §4, §8), added to
+`comparator.json`; the frozen-file headers and docstrings were corrected (comment-only, §2); the
+vendored four-generator copy was removed (docs/PORTING.md). The CI comparator has not yet run on that
+commit. Commands and outcomes are in §11.
 
 ## 1. Informal claims and status
 * **F** (informal: VERIFIED as an ordinary theorem, aiseminar claim_0005; formal: sorry-free,
@@ -24,15 +28,28 @@ commit following 0a2a156. Commands and outcomes are in §11.
 Claim packet: `~/aiseminar/agents/shared/claim_0005/`.
 
 ## 2. Statements of record
-`Challenge.lean`: `FiveGenBetti.family_spanRank_eq`, `FiveGenBetti.beta1_five_le_two_width_add_two`.
-`Solution.lean` restates the definitions and proves F via `FiveGenBetti.Family.spanRank_eq`.
-W's admitted development statement is `FiveGenBetti.Targets.beta1_five_le_two_width_add_two`
-(outside Solution's import closure; `comparator.all-targets.json` must fail until proved).
-Docstring wording in the frozen files: "the extremal family" (`Challenge.lean:49,63`,
-`Solution.lean:57,71`) names the family attaining 2w + 2; F proves attainment only, not extremality
-among all minimally five-generated semigroups (that is the conjecture W). `Challenge.lean:34` still
-carries the 2026-10-16 header "Theorem F is a PROOF_ATTEMPT"; Challenge.lean is the frozen statement
-of record and is left unchanged; current status is recorded here and in `formalization.yaml`.
+`Challenge.lean`, for F (all three in `comparator.json` since the 2026-10-17 packaging commit):
+* `FiveGenBetti.family_spanRank_eq`: `(toricIdeal K (familyGens k q)).spanRank = 4k + 2`;
+* `FiveGenBetti.familyGens_minimallyGenerates`: `MinimallyGenerates (familyGens k q)` (no generator
+  lies in the additive closure of the other four), so `spanRank` is `β₁` of a minimally
+  five-generated numerical semigroup of width `2k` (strict monotonicity and `gcd = 1` are
+  `Family.gens_strictMono`, `Family.gens_gcd` in the development);
+* `FiveGenBetti.family_presentation`: `Ideal.span (Set.range (familyRelation K k q)) = toricIdeal K
+  (familyGens k q)`, every `familyRelation K k q i` is outside the span of the others, and
+  `Fintype.card (FamilyRelIndex k) = 4k + 2`. `FamilyRelIndex`, `familyRelExp`, `familyRelation` are
+  restated in `Challenge.lean` with Mathlib-only imports (`![…]` vectors, `MvPolynomial.monomial`);
+  `Solution.lean` proves `familyRelation K k q = Family.relation K k q` by `funext` and case
+  analysis (`fin_cases` on the four initial `H` indices, `rfl` elsewhere) and then calls
+  `Family.familyIdeal_eq_toricKer`, `Family.relation_nonredundant`, `Family.relIndex_card`.
+For W: `FiveGenBetti.beta1_five_le_two_width_add_two`. W's admitted development statement is
+`FiveGenBetti.Targets.beta1_five_le_two_width_add_two` (outside Solution's import closure;
+`comparator.all-targets.json` must fail until proved).
+Frozen-file text, corrected 2026-10-17 (comment-only; the comparator compares elaborated
+statements, and comment-only edits to `Solution.lean` had already passed it at 10d4722): the
+module headers no longer say PROOF_ATTEMPT or "formal review pending", and the docstrings of
+`familyGens` and Theorem F no longer call the family "extremal" (F proves attainment of 2w + 2
+only; extremality among all minimally five-generated semigroups is the conjecture W). All
+definitions and the two original theorem statements are unchanged (§11).
 
 ## 3. Generator indexing and natural subtraction
 `familyGens k q` matches on `i.val`; the wildcard is index 4 (domain `Fin 5`); `m + (2*k - 1)` is
@@ -44,10 +61,11 @@ positivity, `StrictMono n` (so `n 0` is the multiplicity and `n 4 - n 0` does no
 `Finset.univ.gcd n = 1` (numerical), `MinimallyGenerates n` (no generator in the additive
 closure of the others; prove the equivalence with "no expression using the others", both ways).
 For the family: strict monotonicity (`Family.gens_strictMono`), gcd 1 (`Family.gens_gcd`), minimality
-from n₄ < 2n₀. Known gap (packaging): no named lemma `MinimallyGenerates (familyGens k q)` exists in
-`Family/Defs.lean`; F does not depend on it. The 'meaning' adversary checked it with an ad-hoc Lean
-`example` (transcript 20261016T234404_adversary-meaning, accepted, exit 0); whether to add it as a named
-lemma is open.
+from n₄ < 2n₀: `Family.gens_minimallyGenerates` (`Family/MinimalGeneration.lean`, 2026-10-17; every
+element of the closure of the other generators is `0`, one of those generators, or at least `2m`, and
+`m + 2k < 2m` once `q ≥ 1`), public statement of record `familyGens_minimallyGenerates`. F does not
+depend on it. The 'meaning' adversary had checked it with an ad-hoc Lean `example` (transcript
+20261016T234404_adversary-meaning, accepted, exit 0); the former packaging gap is closed.
 
 ## 5. Kernel ideal and fields
 `toricIdeal K n = RingHom.ker (MvPolynomial.aeval (fun i => X ^ n i)).toRingHom`, `K : Type*`
@@ -73,13 +91,15 @@ applied to the explicit presentation. F therefore does not formally assert equal
 | Apéry set = weights of (A), |Ap| = m | `Family.Apery` |
 | nonredundancy of H ∪ N (ψ(N_r) = s^{q+1} t^r (t^m − s)); boundary q = k − 1 | `Family.Minimality` |
 | spanRank = 4k + 2 | `Family.spanRank_eq`; public `family_spanRank_eq` (Solution) |
+| the five generators are minimal (m + 2k < 2m) | `Family.gens_minimallyGenerates`; public `familyGens_minimallyGenerates` (Solution) |
+| explicit presentation: generation, nonredundancy, count 4k + 2 | public `family_presentation` (Solution), from `familyIdeal_eq_toricKer`, `relation_nonredundant`, `relIndex_card` |
 
-Scope of the statement of record: `Challenge.lean` and `comparator.json` freeze only the invariant
-μ(I) = 4k + 2. The displayed presentation (generation `familyIdeal_eq_toricKer`, nonredundancy
-`relation_nonredundant`, count `relIndex_card`) is proved in the development but is not part of the
-comparator contract (packaging suggestion from both adversaries: a presentation corollary of record;
-open). `Examples/Thirteen.lean` is a specialisation of F at (k,q) = (3,2), not an independent check;
-its `decide` facts check finite arithmetic only.
+Scope of the statements of record: until the 2026-10-17 packaging commit, `Challenge.lean` and
+`comparator.json` froze only the invariant μ(I) = 4k + 2 (the comparator pass at 10d4722 covers that
+statement alone). Since then the displayed presentation (generation, nonredundancy, count) and
+minimal generation are statements of record as well (§2), as suggested by both adversaries and the
+reviewer. `Examples/Thirteen.lean` is a specialisation of F at (k,q) = (3,2), not an independent
+check; its `decide` facts check finite arithmetic only.
 
 ## 9. Certificate semantics
 `AperyCertificate m`: parent generator index per residue; parent residue `(r + m − n_j % m) % m`;
@@ -109,6 +129,13 @@ Formal periodicity, the complete width-40 replay, novelty, the reverse fiber bri
 | 2026-10-17 | `lake build` (before the replay) | 0a2a156 | exit 0, 8984 jobs |
 | 2026-10-17 | `lake env leanchecker FiveGenBetti Challenge Solution FiveGenBetti.Algebra FiveGenBetti.Bridge FiveGenBetti.Certificate.Defs FiveGenBetti.Defs FiveGenBetti.Examples.Thirteen FiveGenBetti.Family.Apery FiveGenBetti.Family.Data FiveGenBetti.Family.Defs FiveGenBetti.Family.Generation FiveGenBetti.Family.Lemmas FiveGenBetti.Family.Main FiveGenBetti.Family.Minimality FiveGenBetti.Family.NormalForms FiveGenBetti.Family.Relations FiveGenBetti.Fiber FiveGenBetti.Graded.Indecomposables FiveGenBetti.Graded.Projection FiveGenBetti.GradedGenerators FiveGenBetti.Interface FiveGenBetti.Main` (23 modules: every module with an `.olean` under `.lake/build/lib/lean`, i.e. the umbrella `FiveGenBetti`, `Challenge`, `Solution` and the 20 `FiveGenBetti.*` descendants; `FiveGenBetti.AxiomAudit` has no olean and `Targets.FiniteWidth` is not built; list computed by a shell loop over the oleans) | 0a2a156 (Lean sources = b0a3671 except Solution.lean comments) | exit 0, 569 s wall (9 min 29 s; `/usr/bin/time -l`: 570.16 s real, max RSS 29.5 GB), no output. Two earlier attempts of the identical command the same morning were killed by SIGKILL (rc 137, after 425 s and 418 s, no output; the first concurrently with other Lean processes; cause not established, likely memory pressure) and are not counted as replays |
 | 2026-10-17 | Linux comparator `scripts/verify-comparator.sh` with bundled NanoDa / con-ron (GitHub Actions, bubblewrap; job "Check statement against solution", run https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; all four jobs success) | 10d4722 (Lean sources = b0a3671 except Solution.lean comments) | build 8981 jobs; `FiveGenBetti.family_spanRank_eq` plus `propext`, `Quot.sound`, `Classical.choice` exported; con-ron accepted 22291 declarations (`--verified`), nanoda accepted, Lean default kernel accepted; `Your solution is okay!` |
+| 2026-10-17 | `git diff --stat 2869b0b -- <same 7 frozen files>` after the packaging edits (working tree) | packaging commit | `Challenge.lean \| 74 +++…`, `Family/Defs.lean \| 10` (as before), `Solution.lean \| 90 +++…`: Challenge/Solution gain the definitions `FamilyRelIndex`, `familyRelExp`, `familyRelation`, the theorems `familyGens_minimallyGenerates`, `family_presentation`, three Mathlib imports (`Data.Finsupp.Defs`, `Data.Fintype.Sum`, `RingTheory.Ideal.Span`) and comment edits; `toricIdeal`, `familyGens`, `MinimallyGenerates`, `family_spanRank_eq`, `beta1_five_le_two_width_add_two` unchanged |
+| 2026-10-17 | `lake env lean Challenge.lean` | packaging commit | exit 0; `declaration uses sorry` at the four deliberate admissions only (lines 109, 114, 121, 130) |
+| 2026-10-17 | `lake build` (default targets, with the new module `FiveGenBetti.Family.MinimalGeneration`) | packaging commit | exit 0, 8985 jobs; `declaration uses sorry` only for the four Challenge admissions |
+| 2026-10-17 | `lake env lean FiveGenBetti/AxiomAudit.lean` (now prints `family_spanRank_eq`, `familyGens_minimallyGenerates`, `family_presentation`) | packaging commit | `[propext, Classical.choice, Quot.sound]` for each of the three |
+| 2026-10-17 | `python3 scripts/check-lean-sources.py`; `ruby scripts/validate-formalization.rb` | packaging commit | both pass |
+| 2026-10-17 | `lake env leanchecker Challenge Solution FiveGenBetti.Family.MinimalGeneration FiveGenBetti` (the modules changed or added by the packaging edits; the other 19 `FiveGenBetti.*` modules are byte-identical to 0a2a156 and covered by the 23-module replay above) | packaging commit | exit 0, 560 s wall (`/usr/bin/time -l`: 559.82 s real, max RSS 27.1 GB), no output |
+| — | Linux CI comparator on the packaging commit (three theorem names) | — | PENDING (passed at 10d4722 for `family_spanRank_eq` alone) |
 | — | `leanchecker --fresh` (optional) | — | NOT RUN |
 
 Commit anchoring: e1554c4 differs from b0a3671 only in `FiveGenBetti/NOTES.md`; all Lean sources

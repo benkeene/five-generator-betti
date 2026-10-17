@@ -19,24 +19,32 @@ claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F with the scope in `CORR
 CI comparator passed at 10d4722 (2026-10-17, GitHub Actions run
 https://github.com/benkeene/five-generator-betti/actions/runs/39005390724): statement and axiom
 check passed, and con-ron, nanoda and the Lean default kernel accepted the solution;
-`leanchecker --fresh` has not been run (optional). `#print axioms FiveGenBetti.family_spanRank_eq` (from `Solution`) is
-[propext, Classical.choice, Quot.sound]. Adversary passes on the formal development ('meaning',
+`leanchecker --fresh` has not been run (optional). Packaging additions of 2026-10-17 (after 10d4722): two further
+statements of record for F, `FiveGenBetti.familyGens_minimallyGenerates` (the five generators are a minimal generating
+set) and `FiveGenBetti.family_presentation` (the explicit `4k+2` binomials generate the toric ideal, none is redundant,
+and there are `4k+2` of them), both listed in `comparator.json` and proved in `Solution.lean` by thin calls into the
+development; the CI comparator has not yet run on the commit containing them. `lake env lean FiveGenBetti/AxiomAudit.lean`
+(from `Solution`) prints [propext, Classical.choice, Quot.sound] for each of the three statements. Adversary passes on the formal development ('meaning',
 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97, documentation fixes applied. (2) conjecture, admitted in
 `Targets/FiniteWidth.lean` outside Solution's import closure. Informal argument in `docs/PROOF.md`;
 plans in `docs/astra/`; audit record in `CORRESPONDENCE.md` §11. Template and reusable library: `~/semigroup-betti`
 (Palomar entry PALOMAR-2026-10-07-000005; four-generator case β₁ ≤ 2w).
 
 ## Layout
-- `Challenge.lean` — statements of record F and W (Mathlib-only imports, deliberate `sorry`s).
-- `Solution.lean` — restates the definitions and proves F by a thin call into
-  `FiveGenBetti.Family.spanRank_eq` (sorry-free). W is not restated: version 1 is family-only.
+- `Challenge.lean` — statements of record (Mathlib-only imports, deliberate `sorry`s): F as
+  `family_spanRank_eq` (the invariant), `family_presentation` (the explicit presentation) and
+  `familyGens_minimallyGenerates` (minimal generation); W as `beta1_five_le_two_width_add_two`.
+- `Solution.lean` — restates the definitions and proves the three F statements by thin calls into
+  `FiveGenBetti.Family` (`spanRank_eq`, `familyIdeal_eq_toricKer`, `relation_nonredundant`,
+  `relIndex_card`, `gens_minimallyGenerates`); sorry-free. W is not restated: version 1 is family-only.
 - `FiveGenBetti/` — Defs (generic `GenData e`, `toricKer`), Family/ (generators, relations,
-  main theorem), Certificate/ (Apéry predecessor-tree certificates), Examples/Thirteen,
-  `NOTES.md`, `AxiomAudit.lean`.
+  minimal generation, main theorem), Certificate/ (Apéry predecessor-tree certificates),
+  Examples/Thirteen, `NOTES.md`, `AxiomAudit.lean`.
 - `Targets/FiniteWidth.lean` — W, admitted, outside Solution's import closure;
   `comparator.json` (family only) and `comparator.all-targets.json` (both; must fail until W is proved).
 - `docs/PROOF.md` (labelled informal proof of F; lab status VERIFIED as an ordinary theorem), `docs/PORTING.md`,
   `docs/CHECKER.md`, `docs/astra/`, `CORRESPONDENCE.md`.
+- `paper/` — LaTeX write-up of Theorem F (`main.tex`, `refs.bib`; build outputs are ignored).
 
 ## Building and checking
 
@@ -45,7 +53,7 @@ lake exe cache get      # on a clean machine; locally .lake/packages is cloned f
 lake build
 python3 scripts/check-lean-sources.py
 ruby scripts/validate-formalization.rb
-lake env lean FiveGenBetti/AxiomAudit.lean   # informational only (not run in CI): expect propext, Classical.choice, Quot.sound
+lake env lean FiveGenBetti/AxiomAudit.lean   # informational only (not run in CI): expect propext, Classical.choice, Quot.sound for all three statements
 ./scripts/verify-comparator.sh          # Linux with bubblewrap only; passed in CI at 10d4722
 ```
 
@@ -54,12 +62,13 @@ Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 
 ## Submission
 Palomar submissions go through https://submit.palomar-registry.org/ with the full 40-character commit SHA. This repository is
-ready for submission from the registry's side: the CI comparator passed at 10d4722 (2026-10-17,
+ready for submission from the registry's side once the CI comparator passes on the commit to be
+submitted: it passed at 10d4722 (2026-10-17,
 https://github.com/benkeene/five-generator-betti/actions/runs/39005390724; con-ron, nanoda
-and the Lean default kernel accepted the solution). Remaining before submitting, all the owner's
-decisions: repository visibility (currently private; the registry must be able to clone), a
-human read of `CORRESPONDENCE.md`, and the optional packaging items (presentation corollary of
-record, named `MinimallyGenerates` lemma; `CORRESPONDENCE.md` §4, §8, `known_gaps`, aiseminar
-claim_0005 `RESPONSE_CLAUDE.md`, `TODO(ben)`). `leanchecker --fresh` has not run
-(optional; the registry's comparator performs independent replay). See `status.scope` in
-`formalization.yaml` and `CORRESPONDENCE.md` §11.
+and the Lean default kernel accepted the solution) for `family_spanRank_eq` alone, and the
+2026-10-17 packaging commit adds `familyGens_minimallyGenerates` and `family_presentation` to
+`comparator.json` (local build, axiom audit and replay recorded in `CORRESPONDENCE.md` §11; CI
+pending). Remaining before submitting, the owner's decisions: repository visibility (currently
+private; the registry must be able to clone) and a human read of `CORRESPONDENCE.md`.
+`leanchecker --fresh` has not run (optional; the registry's comparator performs independent
+replay). See `status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §11.

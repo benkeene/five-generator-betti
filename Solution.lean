@@ -16,6 +16,9 @@ public import Mathlib.Algebra.GCDMonoid.Finset
 public import Mathlib.Data.Nat.GCD.Basic
 public import Mathlib.Order.Monotone.Basic
 public import Mathlib.Algebra.Group.Submonoid.Basic
+public import Mathlib.Data.Finsupp.Defs
+public import Mathlib.Data.Fintype.Sum
+public import Mathlib.RingTheory.Ideal.Span
 import FiveGenBetti
 
 /-!
@@ -27,16 +30,21 @@ width `w = n 4 - n 0`. The toric ideal `I` of `S` over a field `K` is the kernel
 Betti number `β₁` of `K[S]`, stated below as `Submodule.spanRank` (a cardinal).
 
 * `FiveGenBetti.family_spanRank_eq` (Theorem F): for `k ≥ 3`, `q ≥ k − 1`, `m = 2kq + 1`, the
-  semigroup `⟨m, m+1, m+k, m+2k−1, m+2k⟩` has `β₁ = 4k + 2` (an explicit minimal presentation
-  with `2k+2` ordinary-homogeneous and `2k` inhomogeneous binomials).
+  semigroup `⟨m, m+1, m+k, m+2k−1, m+2k⟩` has `β₁ = 4k + 2`.
+* `FiveGenBetti.family_presentation` (Theorem F, presentation form): the `4k + 2` explicit
+  binomials `familyRelation` (`2k+2` ordinary-homogeneous `H`, `2k` inhomogeneous `N`) generate
+  the toric ideal and none of them is redundant.
+* `FiveGenBetti.familyGens_minimallyGenerates`: the five generators are a minimal generating set
+  of their semigroup, so `β₁` and the width `w = 2k` refer to a minimally five-generated
+  numerical semigroup (strict monotonicity and `gcd = 1` are immediate from the generators).
 * `FiveGenBetti.beta1_five_le_two_width_add_two` (Theorem W, conjectural): `β₁ ≤ 2w + 2` for
   every minimally five-generated `S` with `4 ≤ w ≤ 40`.
 
-Status 2026-10-17: Theorem F's informal proof (docs/PROOF.md) is VERIFIED by the lab protocol;
-its Lean development is sorry-free at `b0a3671`, formal review pending (not formally verified).
-Theorem W is a conjecture to be supported by a certified sweep; version 1 targets F only.
-The four-generator case `β₁ ≤ 2w` is Palomar entry PALOMAR-2026-10-07-000005.
-Proofs are in `Solution.lean`.
+Status 2026-10-17: Theorem F is proved in `Solution.lean` (sorry-free; axioms `propext`,
+`Classical.choice`, `Quot.sound`; Palomar comparator passed in CI). Theorem W is a conjecture,
+admitted in `Targets/FiniteWidth.lean` outside the `Solution` import closure; version 1 of this
+development targets F only. The four-generator case `β₁ ≤ 2w` is Palomar entry
+PALOMAR-2026-10-07-000005.
 -/
 
 /-! ## Proofs (this module)
@@ -56,7 +64,8 @@ noncomputable def toricIdeal (K : Type*) [Field K] (n : Fin 5 → ℕ) :
     Ideal (MvPolynomial (Fin 5) K) :=
   RingHom.ker (MvPolynomial.aeval (fun i => (Polynomial.X : Polynomial K) ^ n i)).toRingHom
 
-/-- The generators `m, m+1, m+k, m+2k−1, m+2k` of the extremal family, `m = 2kq + 1`. -/
+/-- The generators `m, m+1, m+k, m+2k−1, m+2k`, `m = 2kq + 1`, of the family attaining
+`β₁ = 2w + 2` (width `w = 2k`). -/
 def familyGens (k q : ℕ) (i : Fin 5) : ℕ :=
   let m := 2 * k * q + 1
   match i.val with
@@ -70,9 +79,68 @@ def familyGens (k q : ℕ) (i : Fin 5) : ℕ :=
 def MinimallyGenerates (n : Fin 5 → ℕ) : Prop :=
   ∀ i : Fin 5, n i ∉ AddSubmonoid.closure (n '' {j | j ≠ i})
 
-/-- **Theorem F.** The extremal family attains `β₁ = 4k + 2`. -/
+/-- Index type of the `4k + 2` relations: the `2k + 2` ordinary-homogeneous relations `H`
+(four initial ones and two families of `k − 1`) and the `2k` inhomogeneous relations `N`
+(two families of `k`). -/
+abbrev FamilyRelIndex (k : ℕ) :=
+  (Fin 4 ⊕ (Fin (k - 1) ⊕ Fin (k - 1))) ⊕ (Fin k ⊕ Fin k)
+
+/-- Exponent vectors `(u, v)` of the relation `X^u − X^v` with index `i`, in the variables
+`a, b, c, d, e` of weights `m, m+1, m+k, m+2k−1, m+2k`.
+
+`H`: `c² − bd`, `bd − ae`, `bᵏ − aᵏ⁻¹c`, `dᵏ − c eᵏ⁻¹`, and for `0 ≤ i ≤ k − 2`
+`b^{k−1−i} c eⁱ − a^{k−1−i} d^{i+1}`, `b^{k−1−i} e^{i+1} − a^{k−2−i} c d^{i+1}`.
+`N`: for `0 ≤ r < k`, `c d^{k−1−r} e^{q+1+r−k} − a^{q+2−r} bʳ`; for `0 ≤ s < k`,
+`d^{k−1−s} e^{q+2+s−k} − a^{q+1−s} bˢ c`. -/
+def familyRelExp (k q : ℕ) : FamilyRelIndex k → (Fin 5 → ℕ) × (Fin 5 → ℕ)
+  | .inl (.inl i) => match i.val with
+    | 0 => (![0, 0, 2, 0, 0], ![0, 1, 0, 1, 0])
+    | 1 => (![0, 1, 0, 1, 0], ![1, 0, 0, 0, 1])
+    | 2 => (![0, k, 0, 0, 0], ![k - 1, 0, 1, 0, 0])
+    | _ => (![0, 0, 0, k, 0], ![0, 0, 1, 0, k - 1])
+  | .inl (.inr (.inl i)) =>
+      (![0, k - 1 - i.val, 1, 0, i.val], ![k - 1 - i.val, 0, 0, i.val + 1, 0])
+  | .inl (.inr (.inr i)) =>
+      (![0, k - 1 - i.val, 0, 0, i.val + 1], ![k - 2 - i.val, 0, 1, i.val + 1, 0])
+  | .inr (.inl r) =>
+      (![0, 0, 1, k - 1 - r.val, q + 1 + r.val - k], ![q + 2 - r.val, r.val, 0, 0, 0])
+  | .inr (.inr s) =>
+      (![0, 0, 0, k - 1 - s.val, q + 2 + s.val - k], ![q + 1 - s.val, s.val, 1, 0, 0])
+
+/-- The relation binomial `X^u − X^v` with index `i`, where `(u, v) = familyRelExp k q i`. -/
+noncomputable def familyRelation (K : Type*) [Field K] (k q : ℕ) (i : FamilyRelIndex k) :
+    MvPolynomial (Fin 5) K :=
+  MvPolynomial.monomial (Finsupp.equivFunOnFinite.symm (familyRelExp k q i).1) 1 -
+    MvPolynomial.monomial (Finsupp.equivFunOnFinite.symm (familyRelExp k q i).2) 1
+
+/-- **Theorem F.** The family `⟨m, m+1, m+k, m+2k−1, m+2k⟩` has `β₁ = 4k + 2 = 2w + 2`. -/
 theorem family_spanRank_eq (K : Type*) [Field K] (k q : ℕ) (hk : 3 ≤ k) (hq : k - 1 ≤ q) :
     (toricIdeal K (familyGens k q)).spanRank = (4 * k + 2 : ℕ) := by
   exact Family.spanRank_eq K k q hk hq
+
+/-- The five generators of the family are a minimal generating set of their semigroup. -/
+theorem familyGens_minimallyGenerates (k q : ℕ) (hk : 3 ≤ k) (hq : k - 1 ≤ q) :
+    MinimallyGenerates (familyGens k q) := by
+  exact Family.gens_minimallyGenerates k q hk hq
+
+/-- **Theorem F, presentation form.** The `4k + 2` binomials `familyRelation K k q` generate the
+toric ideal of the family, none of them lies in the ideal generated by the others, and their index
+type has exactly `4k + 2` elements. -/
+theorem family_presentation (K : Type*) [Field K] (k q : ℕ) (hk : 3 ≤ k) (hq : k - 1 ≤ q) :
+    Ideal.span (Set.range (familyRelation K k q)) = toricIdeal K (familyGens k q) ∧
+    (∀ i : FamilyRelIndex k,
+      familyRelation K k q i ∉ Ideal.span (familyRelation K k q '' {j | j ≠ i})) ∧
+    Fintype.card (FamilyRelIndex k) = 4 * k + 2 := by
+  have he : familyRelation K k q = Family.relation K k q := by
+    funext i
+    rcases i with (i | i | i) | (r | s)
+    · fin_cases i <;> rfl
+    all_goals rfl
+  refine ⟨?_, ?_, Family.relIndex_card k hk⟩
+  · rw [he]
+    exact Family.familyIdeal_eq_toricKer K k q hk hq
+  · intro i
+    rw [he]
+    exact Family.relation_nonredundant K k q hk hq i
 
 end FiveGenBetti

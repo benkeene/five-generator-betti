@@ -36,9 +36,15 @@ status:
     reconstruction done and checked equivalent in Lean (CORRESPONDENCE.md section 13). Lab status
     (aiseminar claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F. CI comparator at 10d4722
     (2026-10-17, GitHub Actions run 39005390724): "Your solution is okay!"; con-ron (22291
-    declarations, --verified), nanoda and the Lean default kernel accepted the solution. Ready
-    for submission from the registry's side; remaining: repository visibility (currently
-    private), a human read of CORRESPONDENCE.md, optional packaging (TODO(ben)). Informally, F is an ordinary theorem by the laboratory's review
+    declarations, --verified), nanoda and the Lean default kernel accepted the solution, for
+    family_spanRank_eq alone. Packaging commit of 2026-10-17: two further statements of record
+    for F, familyGens_minimallyGenerates (the five generators are a minimal generating set) and
+    family_presentation (the explicit 4k+2 binomials generate the toric ideal, none is
+    redundant, their index type has 4k+2 elements), added to Challenge.lean, Solution.lean and
+    comparator.json; local build, axiom audit (three standard axioms for each of the three) and
+    replay recorded in CORRESPONDENCE.md section 11; the CI comparator has not yet run on that
+    commit. Remaining: CI comparator on the submitted commit, repository visibility (currently
+    private), a human read of CORRESPONDENCE.md. Informally, F is an ordinary theorem by the laboratory's review
     protocol (docs/PROOF.md, aiseminar claim_0005). Theorem W is a conjecture, admitted in
     Targets/FiniteWidth.lean, outside Solution's import closure and outside defaultTargets.
     sorry_count convention: occurrences of `sorry` outside Challenge.lean (whose two
@@ -52,6 +58,8 @@ status:
   axioms: ["propext", "Classical.choice", "Quot.sound"]
   main_results:
     - "FiveGenBetti.family_spanRank_eq"
+    - "FiveGenBetti.family_presentation"
+    - "FiveGenBetti.familyGens_minimallyGenerates"
 
 fidelity:
   divergences: >-
@@ -143,9 +151,7 @@ review:
 known_gaps:
   - "leanchecker --fresh not run (optional; the Linux CI comparator with NanoDa/con-ron passed at 10d4722, and the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
   - "Repository is private (owner's decision); the registry must be able to clone it before submission."
-  - "Frozen-file docstrings still call the family 'extremal' and Challenge.lean's header still says PROOF_ATTEMPT; F proves attainment of 2w+2 only (CORRESPONDENCE.md section 2)."
-  - "The comparator contract freezes only the invariant spanRank = 4k+2, not the displayed presentation (generation, nonredundancy, count are proved but not part of the statement of record)."
-  - "No named lemma MinimallyGenerates (familyGens k q) in Family/Defs.lean (checked ad hoc by the 'meaning' adversary; F does not depend on it)."
+  - "The CI comparator pass at 10d4722 covers family_spanRank_eq alone; it has not yet run on the 2026-10-17 packaging commit that adds family_presentation and familyGens_minimallyGenerates to comparator.json."
   - "The reverse fiber bridge (betaFiber <= spanRank) is not formalized; it is not needed for F, which does not assert equality with betaFiber."
   - "The finite-width theorem is unproved; periodicity and exhaustive replay are out of version 1."
 
@@ -159,5 +165,9 @@ alignment:
   statements:
     - source: "Theorem F: beta1 = 4k+2 for <m, m+1, m+k, m+2k-1, m+2k>, m = 2kq+1, k >= 3, q >= k-1"
       lean: "FiveGenBetti.family_spanRank_eq"
+    - source: "Theorem F, presentation form: the 2k+2 relations H and 2k relations N generate the toric ideal, none is redundant, and there are 4k+2 of them"
+      lean: "FiveGenBetti.family_presentation"
+    - source: "The generators m, m+1, m+k, m+2k-1, m+2k minimally generate their numerical semigroup (so S is minimally five-generated of width 2k)"
+      lean: "FiveGenBetti.familyGens_minimallyGenerates"
     - source: "Theorem W (conjecture): beta1 <= 2w+2 for minimally five-generated S with 4 <= w <= 40"
       lean: "FiveGenBetti.beta1_five_le_two_width_add_two"

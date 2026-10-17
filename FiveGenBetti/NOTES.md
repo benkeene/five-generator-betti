@@ -9,7 +9,9 @@ and not run in CI; a green build or replay exit code alone does not exclude admi
 'trust' (2026-10-16) returned ACCEPT_WITH_FIXES 0.97 (documentation fixes applied). Reviewer pass 1 (2026-10-17): ACCEPT_WITH_FIXES
 0.98; independent statement reconstruction checked equivalent in Lean (CORRESPONDENCE §13). CI comparator passed at 10d4722
 (2026-10-17; con-ron, nanoda, Lean kernel accepted); lab status FORMALLY_VERIFIED (claim_0005).
-Audit record: `CORRESPONDENCE.md` §11.
+Packaging (2026-10-17, after 10d4722): `Family/MinimalGeneration.lean` (new module, `gens_minimallyGenerates`), and two
+further statements of record in Challenge/Solution, `familyGens_minimallyGenerates` and `family_presentation` (CI comparator
+pending on that commit). Audit record: `CORRESPONDENCE.md` §11.
 
 Rules: definitions frozen byte-for-byte; theorem *signatures* frozen, bodies edited only by their
 owner (A or B) in their owner's files; no theorem relocation after bootstrap.
@@ -110,9 +112,12 @@ with `toricKer_le_ideal_aux` (the proof body of the handoff, inside `section Hel
 | `H_degree_lt_D_add_m` | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
 | `relation_nonredundant` (handoff) | Family/Minimality.lean | B | proved (sorry-free; Astra r1, judged 2026-10-16) |
 | `Family.spanRank_eq` (Theorem F, internal) | Family/Main.lean | B | proved (sorry-free) |
+| `gens_le`, `le_gens`, `gens_minimallyGenerates` (packaging, 2026-10-17) | Family/MinimalGeneration.lean | — | proved (sorry-free) |
 | `Examples.thirteen`, `thirteenApery` | Examples/Thirteen.lean | B | def |
 | `Examples.thirteen_spanRank_eq_fourteen` | Examples/Thirteen.lean | B | proved (specialization of F) |
 | `family_spanRank_eq` (public Theorem F) | Solution.lean | B | proved (sorry-free; axioms propext, Classical.choice, Quot.sound) |
+| `FamilyRelIndex`, `familyRelExp`, `familyRelation` (restated relation data, 2026-10-17) | Challenge.lean / Solution.lean | — | def |
+| `familyGens_minimallyGenerates`, `family_presentation` (public statements of record, 2026-10-17) | Solution.lean | — | proved (sorry-free; same three axioms) |
 | `Targets.beta1_five_le_two_width_add_two` (Theorem W) | Targets/FiniteWidth.lean | — | admitted, outside Solution |
 
 ## Contract deviations

@@ -3,6 +3,8 @@
   "solution_module": "Solution",
   "theorem_names": [
     "FiveGenBetti.family_spanRank_eq",
+    "FiveGenBetti.familyGens_minimallyGenerates",
+    "FiveGenBetti.family_presentation",
     "FiveGenBetti.beta1_five_le_two_width_add_two"
   ],
   "permitted_axioms": [

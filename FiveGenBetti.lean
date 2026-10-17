@@ -15,6 +15,7 @@ public import FiveGenBetti.Graded.Projection
 public import FiveGenBetti.Graded.Indecomposables
 public import FiveGenBetti.GradedGenerators
 public import FiveGenBetti.Family.Defs
+public import FiveGenBetti.Family.MinimalGeneration
 public import FiveGenBetti.Family.Data
 public import FiveGenBetti.Family.Lemmas
 public import FiveGenBetti.Family.Relations
