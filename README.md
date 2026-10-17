@@ -19,7 +19,7 @@ claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F with the scope in `CORR
 CI comparator passed at 0223cfc (2026-10-17, GitHub Actions run
 https://github.com/benkeene/five-generator-betti/actions/runs/39005390724): statement and axiom
 check passed, and con-ron, nanoda and the Lean default kernel accepted the solution;
-`leanchecker --fresh` has not been run (optional). Packaging additions of 2026-10-17 (after 0223cfc): two further
+`leanchecker --fresh` has not been run (optional). The CI comparator then passed with all three statements of record on the rewritten main 0a897c8 (2026-10-17, run 39036226197: con-ron accepted 22338 declarations with --verified, nanoda and the Lean default kernel accepted; "Your solution is okay!"). Packaging additions of 2026-10-17 (after 0223cfc): two further
 statements of record for F, `FiveGenBetti.familyGens_minimallyGenerates` (the five generators are a minimal generating
 set) and `FiveGenBetti.family_presentation` (the explicit `4k+2` binomials generate the toric ideal, none is redundant,
 and there are `4k+2` of them), both listed in `comparator.json` and proved in `Solution.lean` by thin calls into the

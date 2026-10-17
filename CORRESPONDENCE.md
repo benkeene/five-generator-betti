@@ -135,7 +135,7 @@ Formal periodicity, the complete width-40 replay, novelty, the reverse fiber bri
 | 2026-10-17 | `lake env lean FiveGenBetti/AxiomAudit.lean` (now prints `family_spanRank_eq`, `familyGens_minimallyGenerates`, `family_presentation`) | packaging commit | `[propext, Classical.choice, Quot.sound]` for each of the three |
 | 2026-10-17 | `python3 scripts/check-lean-sources.py`; `ruby scripts/validate-formalization.rb` | packaging commit | both pass |
 | 2026-10-17 | `lake env leanchecker Challenge Solution FiveGenBetti.Family.MinimalGeneration FiveGenBetti` (the modules changed or added by the packaging edits; the other 19 `FiveGenBetti.*` modules are byte-identical to 9006821 and covered by the 23-module replay above) | packaging commit | exit 0, 560 s wall (`/usr/bin/time -l`: 559.82 s real, max RSS 27.1 GB), no output |
-| — | Linux CI comparator on the packaging commit (three theorem names) | — | PENDING (passed at 0223cfc for `family_spanRank_eq` alone) |
+| 2026-10-17 | Linux CI comparator on the rewritten main (three theorem names; GitHub Actions run https://github.com/benkeene/five-generator-betti/actions/runs/39036226197; all four jobs success) | `0a897c8` (post-rewrite; Lean text = `2680ae0`) | `family_spanRank_eq`, `familyGens_minimallyGenerates`, `family_presentation` exported; con-ron accepted 22338 declarations (`--verified`), nanoda accepted, Lean default kernel accepted; `Your solution is okay!` |
 | — | `leanchecker --fresh` (optional) | — | NOT RUN |
 
 Commit anchoring: 215661b differs from 793e759 only in `FiveGenBetti/NOTES.md`; all Lean sources

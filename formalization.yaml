@@ -37,7 +37,7 @@ status:
     (aiseminar claim_0005, 2026-10-17): FORMALLY_VERIFIED for Theorem F. CI comparator at 0223cfc
     (2026-10-17, GitHub Actions run 39005390724): "Your solution is okay!"; con-ron (22291
     declarations, --verified), nanoda and the Lean default kernel accepted the solution, for
-    family_spanRank_eq alone. Packaging commit of 2026-10-17: two further statements of record
+    family_spanRank_eq alone. The CI comparator then passed with all three statements of record on the rewritten main 0a897c8 (2026-10-17, run 39036226197: con-ron accepted 22338 declarations with --verified, nanoda and the Lean default kernel accepted; Your solution is okay!). Packaging commit of 2026-10-17: two further statements of record
     for F, familyGens_minimallyGenerates (the five generators are a minimal generating set) and
     family_presentation (the explicit 4k+2 binomials generate the toric ideal, none is
     redundant, their index type has 4k+2 elements), added to Challenge.lean, Solution.lean and
@@ -151,7 +151,6 @@ review:
 known_gaps:
   - "leanchecker --fresh not run (optional; the Linux CI comparator with NanoDa/con-ron passed at 0223cfc, and the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
   - "Repository is private (owner's decision); the registry must be able to clone it before submission."
-  - "The CI comparator pass at 0223cfc covers family_spanRank_eq alone; it has not yet run on the 2026-10-17 packaging commit that adds family_presentation and familyGens_minimallyGenerates to comparator.json."
   - "The reverse fiber bridge (betaFiber <= spanRank) is not formalized; it is not needed for F, which does not assert equality with betaFiber."
   - "The finite-width theorem is unproved; periodicity and exhaustive replay are out of version 1."
 
