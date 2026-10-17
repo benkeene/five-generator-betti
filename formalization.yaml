@@ -114,12 +114,14 @@ review:
     No external human review. Formal development: adversary passes 'meaning' and 'trust'
     (2026-10-16, aiseminar agents/astra/transcripts/20261016T234404_adversary-*_claim_0005.md),
     both ACCEPT_WITH_FIXES 0.97, no mathematical counterexample or verification-chain escape;
-    their fixes were documentation/provenance and are applied. Reviewer pass, independent
+    their fixes were documentation/provenance and are applied. Per-module leanchecker replay of
+    all 22 built modules (Challenge, Solution, FiveGenBetti.*; excluding AxiomAudit and
+    Targets.FiniteWidth) at b0a3671: exit 0, 13 min 19 s. Reviewer pass, independent
     statement reconstruction and the CI comparator run are pending. The nine Minimality proofs
     were produced by GPT-6 Astra and applied mechanically.
 
 known_gaps:
-  - "Linux comparator (CI, NanoDa/con-ron) not yet run for b0a3671; leanchecker --fresh not run; whole-project per-module replay in progress."
+  - "Linux comparator (CI, NanoDa/con-ron) not yet run for b0a3671; leanchecker --fresh not run."
   - "Reviewer pass and independent statement reconstruction of the formal development are pending."
   - "The comparator contract freezes only the invariant spanRank = 4k+2, not the displayed presentation (generation, nonredundancy, count are proved but not part of the statement of record)."
   - "No named lemma MinimallyGenerates (familyGens k q) in Family/Defs.lean (checked ad hoc by the 'meaning' adversary; F does not depend on it)."
