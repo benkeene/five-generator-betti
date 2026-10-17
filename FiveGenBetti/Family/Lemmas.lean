@@ -74,4 +74,47 @@ theorem mono_sub_mem_toricKer' (K : Type*) [Field K] {e : ℕ} (n : Fin e → �
   simp only [AlgHom.toRingHom_eq_coe, RingHom.coe_coe, map_sub]
   rw [aeval_mono, aeval_mono, h, sub_self]
 
+theorem exp5_add (a b c d e a' b' c' d' e' : ℕ) :
+    exp5 a b c d e + exp5 a' b' c' d' e' = exp5 (a+a') (b+b') (c+c') (d+d') (e+e') := by
+  funext i; fin_cases i <;> rfl
+
+theorem exp5_congr {a b c d e a' b' c' d' e' : ℕ} (ha : a = a') (hb : b = b') (hc : c = c')
+    (hd : d = d') (he : e = e') : exp5 a b c d e = exp5 a' b' c' d' e' := by
+  subst ha hb hc hd he; rfl
+
+theorem eta5 (z : Fin 5 → ℕ) : z = exp5 (z 0) (z 1) (z 2) (z 3) (z 4) := by
+  funext i; fin_cases i <;> rfl
+
+theorem X0_pow_mul_mono (K : Type*) [Field K] (A b c d e : ℕ) :
+    (MvPolynomial.X 0 : MvPolynomial (Fin 5) K) ^ A * mono K (exp5 0 b c d e) =
+      mono K (exp5 A b c d e) := by
+  have h : exp5 A b c d e = exp5 A 0 0 0 0 + exp5 0 b c d e := by
+    rw [exp5_add]; simp
+  rw [h, mono_add]
+  congr 1
+  have h1 : Finsupp.single (0 : Fin 5) A = Finsupp.equivFunOnFinite.symm (exp5 A 0 0 0 0) := by
+    ext i; fin_cases i <;> simp [exp5]
+  rw [MvPolynomial.X_pow_eq_monomial, mono, h1]
+
+theorem relExp_H0 (k q : ℕ) : relExp k q (.inl (.inl 0)) = (exp5 0 0 2 0 0, exp5 0 1 0 1 0) :=
+  rfl
+theorem relExp_H1 (k q : ℕ) : relExp k q (.inl (.inl 1)) = (exp5 0 1 0 1 0, exp5 1 0 0 0 1) :=
+  rfl
+theorem relExp_H2 (k q : ℕ) : relExp k q (.inl (.inl 2)) = (exp5 0 k 0 0 0, exp5 (k-1) 0 1 0 0) :=
+  rfl
+theorem relExp_H3 (k q : ℕ) : relExp k q (.inl (.inl 3)) = (exp5 0 0 0 k 0, exp5 0 0 1 0 (k-1)) :=
+  rfl
+theorem relExp_HF (k q : ℕ) (i : Fin (k-1)) : relExp k q (.inl (.inr (.inl i))) =
+    (exp5 0 (k-1-i.val) 1 0 i.val, exp5 (k-1-i.val) 0 0 (i.val+1) 0) :=
+  rfl
+theorem relExp_HG (k q : ℕ) (i : Fin (k-1)) : relExp k q (.inl (.inr (.inr i))) =
+    (exp5 0 (k-1-i.val) 0 0 (i.val+1), exp5 (k-2-i.val) 0 1 (i.val+1) 0) :=
+  rfl
+theorem relExp_NU (k q : ℕ) (r : Fin k) : relExp k q (.inr (.inl r)) =
+    (exp5 0 0 1 (k-1-r.val) (q+1+r.val-k), exp5 (q+2-r.val) r.val 0 0 0) :=
+  rfl
+theorem relExp_NV (k q : ℕ) (s : Fin k) : relExp k q (.inr (.inr s)) =
+    (exp5 0 0 0 (k-1-s.val) (q+2+s.val-k), exp5 (q+1-s.val) s.val 1 0 0) :=
+  rfl
+
 end FiveGenBetti.Family
