@@ -44,7 +44,7 @@ status:
     comparator.json; local build, axiom audit (three standard axioms for each of the three) and
     replay recorded in CORRESPONDENCE.md section 11; the CI comparator passed on the rewritten
     main 0a897c8 with all three (run 39036226197). Remaining: repository visibility (currently
-    private), a human read of CORRESPONDENCE.md. Informally, F is an ordinary theorem by the laboratory's review
+    private). CORRESPONDENCE.md was read in full by Ben Keene on 2026-10-17. Informally, F is an ordinary theorem by the laboratory's review
     protocol (docs/PROOF.md, aiseminar claim_0005). Theorem W is a conjecture, admitted in
     Targets/FiniteWidth.lean, outside Solution's import closure and outside defaultTargets.
     sorry_count convention: occurrences of `sorry` outside Challenge.lean (whose two
@@ -119,7 +119,7 @@ automation:
 review:
   status: self-assessed
   reviewers:
-    - "Ben Keene"
+    - "Ben Keene (read CORRESPONDENCE.md in full, 2026-10-17)"
     - "GPT-6 Astra (adversary, reviewer, independent prover; four passes on the informal proof, 2026-10-16)"
     - "GPT-6 Astra (adversary 'meaning' and 'trust' on the formal development at 793e759, 2026-10-16)"
     - "GPT-6 Astra (reviewer-formal pass 1 at 2d32ff7, and independent statement reconstruction, 2026-10-17)"

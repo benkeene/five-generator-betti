@@ -68,7 +68,7 @@ rewritten main `0a897c8` (2026-10-17,
 https://github.com/benkeene/five-generator-betti/actions/runs/39036226197; con-ron, nanoda and
 the Lean default kernel accepted the solution), after an earlier pass at 0223cfc for
 `family_spanRank_eq` alone. Remaining before submitting, the owner's decisions: repository
-visibility (currently private; the registry must be able to clone) and a human read of
-`CORRESPONDENCE.md`. Submit the full SHA of the main head at submission time.
+visibility (currently private; the registry must be able to clone). Ben Keene read
+`CORRESPONDENCE.md` in full on 2026-10-17. Submit the full SHA of the main head at submission time.
 `leanchecker --fresh` has not run (optional; the registry's comparator performs independent
 replay). See `status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §11.
