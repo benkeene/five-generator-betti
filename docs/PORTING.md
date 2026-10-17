@@ -3,6 +3,11 @@
 Source commit: aa266b8a7db2794e49a0053978852ade100d23da (working tree had uncommitted README,
 metadata and correspondence edits; nothing from the working tree was copied).
 
+The read-only vendored copy `vendor/SemigroupBetti-aa266b8/` used during the port was removed on
+2026-10-17 once the port was complete (it was never a Lake target); it remains in this repository's
+git history before that date and at commit aa266b8 of the public repository
+https://github.com/benkeene/semigroup-betti.
+
 Copied unchanged: `lean-toolchain`, `LICENSE`, `lake-manifest.json` (root name changed to
 `fivegenbetti` only), `scripts/check-lean-sources.py`, `scripts/validate-formalization.rb`,
 `scripts/verify-comparator.sh`, `.github/workflows/ci.yml`; `.lake/packages` APFS-cloned.

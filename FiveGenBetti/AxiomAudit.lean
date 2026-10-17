@@ -8,6 +8,8 @@ module
 import Solution
 
 /-! Axiom audit from `Solution` (never `Challenge`): `lake env lean FiveGenBetti/AxiomAudit.lean`.
-The completed family release shows only `propext`, `Classical.choice`, `Quot.sound`. -/
+The three statements of record show only `propext`, `Classical.choice`, `Quot.sound`. -/
 
 #print axioms FiveGenBetti.family_spanRank_eq
+#print axioms FiveGenBetti.familyGens_minimallyGenerates
+#print axioms FiveGenBetti.family_presentation

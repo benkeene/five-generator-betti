@@ -2,7 +2,9 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "FiveGenBetti.family_spanRank_eq"
+    "FiveGenBetti.family_spanRank_eq",
+    "FiveGenBetti.familyGens_minimallyGenerates",
+    "FiveGenBetti.family_presentation"
   ],
   "permitted_axioms": [
     "propext",
