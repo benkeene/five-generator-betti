@@ -9,6 +9,7 @@ module
 public import FiveGenBetti.Family.Main
 public import FiveGenBetti.Certificate.Defs
 public import FiveGenBetti.Examples.Thirteen
+public import FiveGenBetti.Bridge
 
 /-! Exports consumed by `Solution.lean`: the family theorem. Theorem W lives in
 `Targets/FiniteWidth.lean`, outside this import closure. -/
