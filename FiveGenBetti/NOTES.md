@@ -43,9 +43,9 @@ lemmas); **stub** = `sorry` body; **frozen** = shared interface, not to be edite
 | `GenData.betaFiber_eq_sum_of_le` | Fiber.lean | A | stub |
 | `X_mul_mono` | Bridge.lean | A | stub |
 | `GenData.spanRank_toricKer_le_beta1` | Bridge.lean | A | stub |
-| `homogeneousComponent_mul_right` | Graded/Projection.lean | A | stub |
-| `homogeneous_mem_span_range` (handoff to B) | Graded/Projection.lean | A | stub |
-| `weighted_component_eq_zero_of_small` (handoff to B) | Graded/Projection.lean | A | stub |
+| `homogeneousComponent_mul_right` | Graded/Projection.lean | A | proved (sorry-free) |
+| `homogeneous_mem_span_range` (handoff to B) | Graded/Projection.lean | A | proved (sorry-free) |
+| `weighted_component_eq_zero_of_small` (handoff to B) | Graded/Projection.lean | A | proved (sorry-free) |
 | `augmentationIdeal`, `decomposables`, `Indecomposables`, `indecomposablesMk` | Graded/Indecomposables.lean | A | def |
 | `mem_augmentationIdeal_iff` | Graded/Indecomposables.lean | A | stub |
 | `indecomposablesMk_mul` | Graded/Indecomposables.lean | A | stub |
@@ -114,6 +114,7 @@ needed. Layout-only choices (no change to any statement):
   single `variable (G : GenData e)` instead of the plan's two blocks that redeclare `{e}`.
 * `gens_pos` lives in Family/Defs.lean (plan §3 B1 adds it next to `gens_strictMono`/`gens_gcd`).
 
-Linter noise accepted from verbatim plan text: `linter.style.whitespace` ("`k-1` should be written
+Linter noise accepted from verbatim plan text: the unused hypothesis `hm : 0 < m` in the frozen
+signature of `weighted_component_eq_zero_of_small` (implied by `0 < n < m`); `linter.style.whitespace` ("`k-1` should be written
 `k - 1`", 32 instances) and the unused-`[Fintype ι]` linter on `linearIndependent_generatorClass`.
 Fixing either would alter frozen text; leave them, or clean up together after completion.
