@@ -1,6 +1,6 @@
 # five-generator-betti
 
-Lean 4 / Mathlib formalization (in preparation) of two statements about minimally
+Lean 4 / Mathlib formalization of two statements about minimally
 five-generated numerical semigroups S = ⟨n₀ < n₁ < n₂ < n₃ < n₄⟩ of width w = n₄ − n₀:
 
 1. The family S(m,k) = ⟨m, m+1, m+k, m+2k−1, m+2k⟩ with m = 2kq + 1, k ≥ 3, q ≥ k − 1 has
@@ -10,14 +10,20 @@ five-generated numerical semigroups S = ⟨n₀ < n₁ < n₂ < n₃ < n₄⟩ o
    statement, to be supported by a certified sweep over the periodicity window m ≤ w² + w).
 
 Status: (1) VERIFIED as an ordinary theorem by the aiseminar review protocol (2026-10-16; four Astra
-passes incl. an independent reconstruction), Lean development admitted; (2) conjecture. Informal argument in `docs/PROOF.md`;
-scaffolding plan in `docs/astra/`. Template and reusable library: `~/semigroup-betti`
+passes incl. an independent reconstruction). Its Lean development is a sorry-free Lean development,
+kernel-replayed locally (per module, `leanchecker`, at commit b0a3671), pending a reviewer pass,
+independent statement reconstruction, and the CI comparator; it is not yet "formally verified" under
+the lab protocol. `#print axioms FiveGenBetti.family_spanRank_eq` (from `Solution`) is
+[propext, Classical.choice, Quot.sound]. Adversary passes on the formal development ('meaning',
+'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97, documentation fixes applied. (2) conjecture, admitted in
+`Targets/FiniteWidth.lean` outside Solution's import closure. Informal argument in `docs/PROOF.md`;
+plans in `docs/astra/`; audit record in `CORRESPONDENCE.md` §11. Template and reusable library: `~/semigroup-betti`
 (Palomar entry PALOMAR-2026-10-07-000005; four-generator case β₁ ≤ 2w).
 
 ## Layout
 - `Challenge.lean` — statements of record F and W (Mathlib-only imports, deliberate `sorry`s).
 - `Solution.lean` — restates the definitions and proves F by a thin call into
-  `FiveGenBetti.Family.spanRank_eq` (admitted). W is not restated: version 1 is family-only.
+  `FiveGenBetti.Family.spanRank_eq` (sorry-free). W is not restated: version 1 is family-only.
 - `FiveGenBetti/` — Defs (generic `GenData e`, `toricKer`), Family/ (generators, relations,
   main theorem), Certificate/ (Apéry predecessor-tree certificates), Examples/Thirteen,
   `NOTES.md`, `AxiomAudit.lean`.
@@ -33,8 +39,8 @@ lake exe cache get      # on a clean machine; locally .lake/packages is cloned f
 lake build
 python3 scripts/check-lean-sources.py
 ruby scripts/validate-formalization.rb
-lake env lean FiveGenBetti/AxiomAudit.lean   # expected to show sorryAx while the development is admitted
-./scripts/verify-comparator.sh          # Linux with bubblewrap only; fails until the proofs are complete
+lake env lean FiveGenBetti/AxiomAudit.lean   # informational only (not run in CI): expect propext, Classical.choice, Quot.sound
+./scripts/verify-comparator.sh          # Linux with bubblewrap only; not yet run for b0a3671
 ```
 
 Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
@@ -42,4 +48,5 @@ Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 
 ## Submission
 Palomar submissions go through https://submit.palomar-registry.org/ with the full 40-character commit SHA. This repository is
-not ready for submission: see `status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §10.
+not ready for submission (comparator, reviewer pass and statement reconstruction pending): see
+`status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §11.

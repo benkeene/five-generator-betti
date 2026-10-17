@@ -11,7 +11,7 @@ project:
     infrastructure, both algebraic bridges, the corrected singleton-counting decomposition
     beta1 + p = 5 + N, the pair-component antichain lemma and certificate-checker soundness
     needed for (W) a proposed finite-width bound beta1 <= 2w+2 (4 <= w <= 40). Version 1
-    targets F; W is stated and excluded from the release comparator. Currently a scaffold.
+    targets F; W is stated and excluded from the release comparator. F is sorry-free at b0a3671.
   authors:
     - "Ben Keene"
   license: "Apache-2.0"
@@ -27,15 +27,21 @@ classification:
 
 status:
   scope: >-
-    SCAFFOLD (2026-10-16). Theorem F is an ordinary theorem by the laboratory's review
-    protocol (adversary, reviewer, independent reconstruction and confirming review, all
-    recorded in docs/PROOF.md and the aiseminar claim_0005 packet); its informal proof
-    (docs/PROOF.md) is complete and not yet formalized. Theorem W is a conjecture.
-    Both statements of record compile; the development library is admitted. Formal
-    periodicity and the complete width-40 replay are outside version 1.
-  sorry_count: 4
+    Theorem F (2026-10-16, commit of record b0a3671): sorry-free Lean development,
+    kernel-replayed locally (per module, leanchecker), pending reviewer pass, independent
+    statement reconstruction, and CI comparator; not yet formally verified under the
+    aiseminar protocol. Informally, F is an ordinary theorem by the laboratory's review
+    protocol (docs/PROOF.md, aiseminar claim_0005). Theorem W is a conjecture, admitted in
+    Targets/FiniteWidth.lean, outside Solution's import closure and outside defaultTargets.
+    sorry_count convention: occurrences of `sorry` outside Challenge.lean (whose two
+    statement-of-record placeholders are deliberate) in the default build targets
+    (FiveGenBetti, Challenge, Solution) = 0; Targets/FiniteWidth.lean (W) has one admitted
+    `sorry`, excluded from this count. The axioms list is that of the main result
+    FiveGenBetti.family_spanRank_eq imported from Solution. Formal periodicity and the
+    complete width-40 replay are outside version 1.
+  sorry_count: 0
   sorry_in_definitions: 0
-  axioms: ["propext", "Classical.choice", "Quot.sound", "sorryAx"]
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
   main_results:
     - "FiveGenBetti.family_spanRank_eq"
 
@@ -54,7 +60,8 @@ sources:
     relationship: other
     note: >-
       Informal presentation and minimality argument produced by GPT-6 Astra (2026-10-16,
-      docs/astra/) and adversarially checked once; not yet through the full review protocol.
+      docs/astra/); the informal proof has since passed the full aiseminar review protocol
+      (claim_0005, VERIFIED as an ordinary theorem, 2026-10-16).
   - title: "Minimal presentations of shifted numerical monoids"
     authors: ["Rebecca Conaway", "Felix Gotti", "Jesse Horton", "Christopher O'Neill", "Roberto Pelayo", "Mesa Pracht", "Brian Wissman"]
     type: "article"
@@ -97,21 +104,32 @@ review:
   status: self-assessed
   reviewers:
     - "Ben Keene"
-    - "GPT-6 Astra (adversary, reviewer, independent prover; four passes, 2026-10-16)"
+    - "GPT-6 Astra (adversary, reviewer, independent prover; four passes on the informal proof, 2026-10-16)"
+    - "GPT-6 Astra (adversary 'meaning' and 'trust' on the formal development at b0a3671, 2026-10-16)"
   notes: >-
     The informal proof of Theorem F passed an adversary pass (objections answered), a reviewer
     pass (fixes applied), an independent reconstruction from the statement alone, and a
     confirming reviewer pass that replayed the 32 in-range small instances and their
     presentation checks (aiseminar experiments/local/2026-10-16_semigroup_e5_family_tests).
-    No external human review. Nothing is Lean-verified yet.
+    No external human review. Formal development: adversary passes 'meaning' and 'trust'
+    (2026-10-16, aiseminar agents/astra/transcripts/20261016T234404_adversary-*_claim_0005.md),
+    both ACCEPT_WITH_FIXES 0.97, no mathematical counterexample or verification-chain escape;
+    their fixes were documentation/provenance and are applied. Reviewer pass, independent
+    statement reconstruction and the CI comparator run are pending. The nine Minimality proofs
+    were produced by GPT-6 Astra and applied mechanically.
 
 known_gaps:
-  - "Family generation and minimum generator cardinality are not formalized."
-  - "The reverse fiber bridge (betaFiber <= spanRank) is not formalized."
+  - "Linux comparator (CI, NanoDa/con-ron) not yet run for b0a3671; leanchecker --fresh not run; whole-project per-module replay in progress."
+  - "Reviewer pass and independent statement reconstruction of the formal development are pending."
+  - "The comparator contract freezes only the invariant spanRank = 4k+2, not the displayed presentation (generation, nonredundancy, count are proved but not part of the statement of record)."
+  - "No named lemma MinimallyGenerates (familyGens k q) in Family/Defs.lean (checked ad hoc by the 'meaning' adversary; F does not depend on it)."
+  - "The reverse fiber bridge (betaFiber <= spanRank) is not formalized; it is not needed for F, which does not assert equality with betaFiber."
   - "The finite-width theorem is unproved; periodicity and exhaustive replay are out of version 1."
 
 limitations:
   - "No novelty claim is made; the family's novelty confidence is 0.70 after a literature audit."
+  - "FiveGenBetti/AxiomAudit.lean is informational: #print axioms does not fail on unexpected axioms and the audit is not run in CI; only the comparator enforces the axiom allowance."
+  - "Examples/Thirteen.lean specialises F at (k,q) = (3,2); it is not an independent computation of the rank."
 
 alignment:
   namespace: "FiveGenBetti"
