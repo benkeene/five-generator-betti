@@ -6,7 +6,7 @@ Authors: Ben Keene
 
 module
 
-public import FiveGenBetti.Defs
+public import FiveGenBetti.Interface
 
 /-! The extremal family `⟨m, m+1, m+k, m+2k−1, m+2k⟩`, `m = 2kq + 1`, and its `4k + 2` relations
 (`H`: `2k+2` ordinary-homogeneous binomials; `N`: `2k` binomials of semigroup degree `(q+2)m + r`).
@@ -38,6 +38,10 @@ abbrev HIndex (k : ℕ) := Fin 4 ⊕ (Fin (k - 1) ⊕ Fin (k - 1))
 
 /-- Index type of the `N`-relations. -/
 abbrev NIndex (k : ℕ) := Fin k ⊕ Fin k
+
+theorem gens_pos (k q : ℕ) (i : Fin 5) :
+    0 < gens k q i := by
+  fin_cases i <;> simp [gens]
 
 theorem gens_strictMono (k q : ℕ) (hk : 3 ≤ k) : StrictMono (gens k q) := by
   sorry
