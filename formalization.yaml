@@ -47,8 +47,9 @@ status:
     private). CORRESPONDENCE.md was read in full by Ben Keene on 2026-10-17. Informally, F is an ordinary theorem by the laboratory's review
     protocol (docs/PROOF.md, aiseminar claim_0005). Theorem W is a conjecture, admitted in
     Targets/FiniteWidth.lean, outside Solution's import closure and outside defaultTargets.
-    sorry_count convention: occurrences of `sorry` outside Challenge.lean (whose two
-    statement-of-record placeholders are deliberate) in the default build targets
+    sorry_count convention: occurrences of `sorry` outside Challenge.lean (whose four
+    placeholders are deliberate: the three statements of record and the conjectural W, which
+    is stated there but not named in comparator.json) in the default build targets
     (FiveGenBetti, Challenge, Solution) = 0; Targets/FiniteWidth.lean (W) has one admitted
     `sorry`, excluded from this count. The axioms list is that of the main result
     FiveGenBetti.family_spanRank_eq imported from Solution. Formal periodicity and the
