@@ -53,9 +53,9 @@ lemmas); **stub** = `sorry` body; **frozen** = shared interface, not to be edite
 | `generatorClass` | Graded/Indecomposables.lean | A | def |
 | `sub_C_coeff_zero_mem_augmentationIdeal`, `indecomposablesMk_eq_zero_iff` (new A helpers) | Graded/Indecomposables.lean | A | proved (sorry-free) |
 | `linearIndependent_generatorClass` | Graded/Indecomposables.lean | A | proved (sorry-free) |
-| `card_le_card_of_span_eq` | GradedGenerators.lean | A | stub |
-| `card_le_spanRank_of_independent_generatorClass` | GradedGenerators.lean | A | proved |
-| `spanRank_eq_card_of_weightedHomogeneous_irredundant` (handoff to B) | GradedGenerators.lean | A | stub |
+| `card_le_card_of_span_eq` | GradedGenerators.lean | A | proved (sorry-free) |
+| `card_le_spanRank_of_independent_generatorClass` | GradedGenerators.lean | A | proved (sorry-free) |
+| `spanRank_eq_card_of_weightedHomogeneous_irredundant` (handoff to B) | GradedGenerators.lean | A | proved (sorry-free) |
 
 The plan's helpers `degreeRoot` / `weight_degreeRoot` (§2 A1) are private in Algebra.lean, together
 with `toricKer_le_ideal_aux` (the proof body of the handoff, inside `section Helpers`).
