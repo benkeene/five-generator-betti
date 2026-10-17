@@ -3,11 +3,11 @@
 Plan of record: `docs/astra/2026-10-16_lean_plan.md` (§0 ownership and DAG, §1 frozen interfaces,
 §2 stream A, §3 stream B, §4 integration). State (2026-10-16, b0a3671): Theorem F is sorry-free. Every Stream A and Stream B declaration is proved;
 `FiveGenBetti.family_spanRank_eq` depends only on propext, Classical.choice, Quot.sound; `lake env leanchecker`
-replays Minimality/Main/Thirteen/Solution with exit 0. Only Targets W (conjecture, outside Solution) is admitted.
+replays Minimality/Main/Thirteen/Solution with exit 0. In the development library only Targets W (conjecture, outside Solution) is admitted; the root `Challenge.lean` deliberately keeps its statement-of-record admissions.
 `lake env lean FiveGenBetti/AxiomAudit.lean` now prints only propext, Classical.choice, Quot.sound (it is informational
 and not run in CI; a green build or replay exit code alone does not exclude admissions). Adversary passes 'meaning' and
-'trust' (2026-10-16) returned ACCEPT_WITH_FIXES 0.97 (documentation fixes applied); reviewer pass, independent statement
-reconstruction and the CI comparator are pending. Audit record: `CORRESPONDENCE.md` §11.
+'trust' (2026-10-16) returned ACCEPT_WITH_FIXES 0.97 (documentation fixes applied). Reviewer pass 1 (2026-10-17): ACCEPT_WITH_FIXES
+0.98; independent statement reconstruction checked equivalent in Lean (CORRESPONDENCE §13). CI comparator not run. Audit record: `CORRESPONDENCE.md` §11.
 
 Rules: definitions frozen byte-for-byte; theorem *signatures* frozen, bodies edited only by their
 owner (A or B) in their owner's files; no theorem relocation after bootstrap.
@@ -89,7 +89,7 @@ with `toricKer_le_ideal_aux` (the proof body of the handoff, inside `section Hel
 | `normalOffset_lt` | Family/NormalForms.lean | B | proved (sorry-free) |
 | `normalOffset_injective` | Family/NormalForms.lean | B | proved (sorry-free) |
 | `normalOffset_surjective` | Family/NormalForms.lean | B | proved (sorry-free) |
-| `normalOffsetEquiv` | Family/NormalForms.lean | B | def (from stubs) |
+| `normalOffsetEquiv` | Family/NormalForms.lean | B | def (sorry-free; `Equiv.ofBijective` from `normalOffset_injective`/`_surjective`) |
 | `card_normalForm` | Family/NormalForms.lean | B | proved |
 | `normalWeight` | Family/NormalForms.lean | B | proved (sorry-free) |
 | `normal_repr_injective` | Family/NormalForms.lean | B | proved (sorry-free) |

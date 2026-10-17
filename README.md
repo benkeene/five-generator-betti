@@ -11,9 +11,11 @@ five-generated numerical semigroups S = ⟨n₀ < n₁ < n₂ < n₃ < n₄⟩ o
 
 Status: (1) VERIFIED as an ordinary theorem by the aiseminar review protocol (2026-10-16; four Astra
 passes incl. an independent reconstruction). Its Lean development is a sorry-free Lean development,
-kernel-replayed locally (per module, `leanchecker`, at commit b0a3671), pending a reviewer pass,
-independent statement reconstruction, and the CI comparator; it is not yet "formally verified" under
-the lab protocol. `#print axioms FiveGenBetti.family_spanRank_eq` (from `Solution`) is
+kernel-replayed locally (literal 23-module `leanchecker` replay, `CORRESPONDENCE.md` §11). The Astra
+reviewer pass 1 on the formal development (2026-10-17) returned ACCEPT_WITH_FIXES 0.98 and judged
+that F qualifies for FORMALLY_VERIFIED under the lab's AGENTS.md §3; an independent statement
+reconstruction was checked equivalent in Lean (`CORRESPONDENCE.md` §13). The lab status is still
+VERIFIED until the promotion step is recorded; the CI comparator has not been run. `#print axioms FiveGenBetti.family_spanRank_eq` (from `Solution`) is
 [propext, Classical.choice, Quot.sound]. Adversary passes on the formal development ('meaning',
 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97, documentation fixes applied. (2) conjecture, admitted in
 `Targets/FiniteWidth.lean` outside Solution's import closure. Informal argument in `docs/PROOF.md`;
@@ -29,7 +31,7 @@ plans in `docs/astra/`; audit record in `CORRESPONDENCE.md` §11. Template and r
   `NOTES.md`, `AxiomAudit.lean`.
 - `Targets/FiniteWidth.lean` — W, admitted, outside Solution's import closure;
   `comparator.json` (family only) and `comparator.all-targets.json` (both; must fail until W is proved).
-- `docs/PROOF.md` (labelled informal proof of F, PROOF_ATTEMPT), `docs/PORTING.md`,
+- `docs/PROOF.md` (labelled informal proof of F; lab status VERIFIED as an ordinary theorem), `docs/PORTING.md`,
   `docs/CHECKER.md`, `docs/astra/`, `CORRESPONDENCE.md`.
 
 ## Building and checking
@@ -48,5 +50,5 @@ Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 
 ## Submission
 Palomar submissions go through https://submit.palomar-registry.org/ with the full 40-character commit SHA. This repository is
-not ready for submission (comparator, reviewer pass and statement reconstruction pending): see
+not ready for submission (Linux comparator not yet run): see
 `status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §11.

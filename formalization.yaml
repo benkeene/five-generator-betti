@@ -7,10 +7,11 @@ project:
   description: >-
     A Lean 4 / Mathlib formalization project for (F) an explicit two-parameter family of
     minimally five-generated numerical semigroups <m, m+1, m+k, m+2k-1, m+2k>, m = 2kq+1,
-    whose toric ideal has spanRank exactly 4k+2, together with the generic fiber-graph
-    infrastructure, both algebraic bridges, the corrected singleton-counting decomposition
-    beta1 + p = 5 + N, the pair-component antichain lemma and certificate-checker soundness
-    needed for (W) a proposed finite-width bound beta1 <= 2w+2 (4 <= w <= 40). Version 1
+    whose toric ideal has spanRank exactly 4k+2. Planned scope for (W), a proposed finite-width
+    bound beta1 <= 2w+2 (4 <= w <= 40), not all formalized: the generic fiber-graph
+    infrastructure, both algebraic bridges (only the upper bridge is formalized; the reverse
+    bridge is not), the corrected singleton-counting decomposition beta1 + p = 5 + N, the
+    pair-component antichain lemma and certificate-checker soundness (not yet written). Version 1
     targets F; W is stated and excluded from the release comparator. F is sorry-free at b0a3671.
   authors:
     - "Ben Keene"
@@ -28,9 +29,12 @@ classification:
 status:
   scope: >-
     Theorem F (2026-10-16, commit of record b0a3671): sorry-free Lean development,
-    kernel-replayed locally (per module, leanchecker), pending reviewer pass, independent
-    statement reconstruction, and CI comparator; not yet formally verified under the
-    aiseminar protocol. Informally, F is an ordinary theorem by the laboratory's review
+    kernel-replayed locally (literal 23-module leanchecker replay at 0a2a156, whose Lean
+    sources differ from b0a3671 only in Solution.lean comments). Astra reviewer pass 1 on the
+    formal development (2026-10-17): ACCEPT_WITH_FIXES 0.98; the reviewer judges that F
+    qualifies for FORMALLY_VERIFIED under aiseminar AGENTS.md section 3. Independent statement
+    reconstruction done and checked equivalent in Lean (CORRESPONDENCE.md section 13). The lab
+    status is still VERIFIED until the promotion step is recorded; CI comparator not run. Informally, F is an ordinary theorem by the laboratory's review
     protocol (docs/PROOF.md, aiseminar claim_0005). Theorem W is a conjecture, admitted in
     Targets/FiniteWidth.lean, outside Solution's import closure and outside defaultTargets.
     sorry_count convention: occurrences of `sorry` outside Challenge.lean (whose two
@@ -106,6 +110,7 @@ review:
     - "Ben Keene"
     - "GPT-6 Astra (adversary, reviewer, independent prover; four passes on the informal proof, 2026-10-16)"
     - "GPT-6 Astra (adversary 'meaning' and 'trust' on the formal development at b0a3671, 2026-10-16)"
+    - "GPT-6 Astra (reviewer-formal pass 1 at 4c9349b, and independent statement reconstruction, 2026-10-17)"
   notes: >-
     The informal proof of Theorem F passed an adversary pass (objections answered), a reviewer
     pass (fixes applied), an independent reconstruction from the statement alone, and a
@@ -114,15 +119,20 @@ review:
     No external human review. Formal development: adversary passes 'meaning' and 'trust'
     (2026-10-16, aiseminar agents/astra/transcripts/20261016T234404_adversary-*_claim_0005.md),
     both ACCEPT_WITH_FIXES 0.97, no mathematical counterexample or verification-chain escape;
-    their fixes were documentation/provenance and are applied. Per-module leanchecker replay of
-    all 22 built modules (Challenge, Solution, FiveGenBetti.*; excluding AxiomAudit and
-    Targets.FiniteWidth) at b0a3671: exit 0, 13 min 19 s. Reviewer pass, independent
-    statement reconstruction and the CI comparator run are pending. The nine Minimality proofs
-    were produced by GPT-6 Astra and applied mechanically.
+    their documentation/provenance fixes were applied in 956ab8d and 4c9349b, except the
+    stale header of the frozen Challenge.lean and the Linux comparator request. Reviewer pass 1
+    (2026-10-17, aiseminar agents/astra/transcripts/20261017T000811_reviewer-formal_claim_0005.md):
+    ACCEPT_WITH_FIXES 0.98, no mathematical gap; its documentation fixes (byte-identity record,
+    replay record, minimality exposition, scope and status wording) are applied in the commit
+    following 0a2a156. Independent statement reconstruction (20261017T000811_statement-recon):
+    checked equivalent in Lean (CORRESPONDENCE.md section 13). Kernel replay, literal:
+    "lake env leanchecker FiveGenBetti Challenge Solution FiveGenBetti.Algebra FiveGenBetti.Bridge FiveGenBetti.Certificate.Defs FiveGenBetti.Defs FiveGenBetti.Examples.Thirteen FiveGenBetti.Family.Apery FiveGenBetti.Family.Data FiveGenBetti.Family.Defs FiveGenBetti.Family.Generation FiveGenBetti.Family.Lemmas FiveGenBetti.Family.Main FiveGenBetti.Family.Minimality FiveGenBetti.Family.NormalForms FiveGenBetti.Family.Relations FiveGenBetti.Fiber FiveGenBetti.Graded.Indecomposables FiveGenBetti.Graded.Projection FiveGenBetti.GradedGenerators FiveGenBetti.Interface FiveGenBetti.Main" (23 modules: umbrella FiveGenBetti, Challenge, Solution and the 20 FiveGenBetti.* modules with oleans; AxiomAudit and Targets.FiniteWidth have none) at 0a2a156, exit 0, 569 s wall (two earlier identical attempts were SIGKILLed, rc 137, not counted). The 2026-10-16 record "all 22 built modules ... 13 min 19 s" at b0a3671 did not
+    retain its literal argv and is superseded. The nine Minimality proofs were produced by GPT-6
+    Astra and applied mechanically.
 
 known_gaps:
-  - "Linux comparator (CI, NanoDa/con-ron) not yet run for b0a3671; leanchecker --fresh not run."
-  - "Reviewer pass and independent statement reconstruction of the formal development are pending."
+  - "Linux comparator (CI, NanoDa/con-ron) not yet run for b0a3671; leanchecker --fresh not run (the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
+  - "Frozen-file docstrings still call the family 'extremal' and Challenge.lean's header still says PROOF_ATTEMPT; F proves attainment of 2w+2 only (CORRESPONDENCE.md section 2)."
   - "The comparator contract freezes only the invariant spanRank = 4k+2, not the displayed presentation (generation, nonredundancy, count are proved but not part of the statement of record)."
   - "No named lemma MinimallyGenerates (familyGens k q) in Family/Defs.lean (checked ad hoc by the 'meaning' adversary; F does not depend on it)."
   - "The reverse fiber bridge (betaFiber <= spanRank) is not formalized; it is not needed for F, which does not assert equality with betaFiber."

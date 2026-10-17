@@ -1,15 +1,20 @@
 # Correspondence: informal statements ↔ formal statements (2026-10-16)
 
-Status (commit of record b0a3671): Theorem F is a sorry-free Lean development, kernel-replayed
-locally (per module, all 22 built modules), pending reviewer pass, independent statement reconstruction, and CI
-comparator. It is not yet "formally verified" under the aiseminar protocol. Theorem W is admitted
+Status (commit of record b0a3671; Lean sources at 0a2a156 differ only in Solution.lean comments):
+Theorem F is a sorry-free Lean development, kernel-replayed locally (literal 23-module `leanchecker`
+replay at 0a2a156, §11). Astra reviewer pass 1 on the formal development (2026-10-17):
+ACCEPT_WITH_FIXES 0.98; the reviewer judges that F qualifies for FORMALLY_VERIFIED under aiseminar
+AGENTS.md §3 (reviewer's judgement, recorded here; the lab status remains VERIFIED until the
+promotion step is recorded in claim_0005). Independent statement reconstruction: done, equivalence
+with `family_spanRank_eq` checked in Lean (§13). Linux CI comparator: not run. Theorem W is admitted
 (`Targets/FiniteWidth.lean`, outside Solution's import closure and not in `defaultTargets`).
 Adversary passes on the formal development ('meaning', 'trust', 2026-10-16): ACCEPT_WITH_FIXES 0.97;
-their documentation fixes are applied here. Commands and outcomes are in §11.
+their documentation fixes are applied here; the reviewer pass-1 documentation fixes are applied in the
+commit following 0a2a156. Commands and outcomes are in §11.
 
 ## 1. Informal claims and status
 * **F** (informal: VERIFIED as an ordinary theorem, aiseminar claim_0005; formal: sorry-free,
-  kernel-replayed locally, reviewer/comparator pending): for every field K, k ≥ 3, q ≥ k − 1, m = 2kq + 1, the toric ideal of
+  kernel-replayed locally, reviewer pass 1 ACCEPT_WITH_FIXES 0.98; CI comparator not run): for every field K, k ≥ 3, q ≥ k − 1, m = 2kq + 1, the toric ideal of
   ⟨m, m+1, m+k, m+2k−1, m+2k⟩ has minimal number of generators 4k + 2.
 * **W** (conjecture): β₁ ≤ 2w + 2 for every minimally five-generated numerical semigroup of
   width 4 ≤ w ≤ 40. Out of version 1.
@@ -20,6 +25,11 @@ Claim packet: `~/aiseminar/agents/shared/claim_0005/`.
 `Solution.lean` restates the definitions and proves F via `FiveGenBetti.Family.spanRank_eq`.
 W's admitted development statement is `FiveGenBetti.Targets.beta1_five_le_two_width_add_two`
 (outside Solution's import closure; `comparator.all-targets.json` must fail until proved).
+Docstring wording in the frozen files: "the extremal family" (`Challenge.lean:49,63`,
+`Solution.lean:57,71`) names the family attaining 2w + 2; F proves attainment only, not extremality
+among all minimally five-generated semigroups (that is the conjecture W). `Challenge.lean:34` still
+carries the 2026-10-16 header "Theorem F is a PROOF_ATTEMPT"; Challenge.lean is the frozen statement
+of record and is left unchanged; current status is recorded here and in `formalization.yaml`.
 
 ## 3. Generator indexing and natural subtraction
 `familyGens k q` matches on `i.val`; the wildcard is index 4 (domain `Fin 5`); `m + (2*k - 1)` is
@@ -90,8 +100,11 @@ Formal periodicity, the complete width-40 replay, novelty, the reverse fiber bri
 | 2026-10-16 | `python3 scripts/check-lean-sources.py` (headers, symlinks, sizes only) | b0a3671 | satisfied |
 | 2026-10-16 | `ruby scripts/validate-formalization.rb` (metadata shape only, not status) | b0a3671 | passes |
 | 2026-10-16 | forbidden-construct scan of the Minimality diff | b0a3671 | 0 findings |
-| 2026-10-16 | frozen files (Defs, Interface, Certificate/Defs, Family/Data, Family/Defs, Challenge, Solution) vs bootstrap 2869b0b | b0a3671 | byte-identical |
-| 2026-10-16 | `lake env leanchecker <all 22 built modules: Challenge, Solution, FiveGenBetti.*, excluding AxiomAudit (standalone probe, no olean) and Targets.FiniteWidth (not in defaultTargets, admitted W)>` | b0a3671 | exit 0, 13 min 19 s wall |
+| 2026-10-16 (corrected 2026-10-17) | `git diff --stat 2869b0b b0a3671 -- FiveGenBetti/Defs.lean FiveGenBetti/Interface.lean FiveGenBetti/Certificate/Defs.lean FiveGenBetti/Family/Data.lean FiveGenBetti/Family/Defs.lean Challenge.lean Solution.lean` | b0a3671 | `FiveGenBetti/Family/Defs.lean \| 10 ++++++++--` only: the two `sorry` bodies of `gens_strictMono`, `gens_gcd` replaced by proofs (02409bc); all definitions and theorem signatures unchanged. (The earlier entry "byte-identical" was false.) |
+| 2026-10-17 | same, `git diff --stat 2869b0b HEAD -- <same 7 files>` | 0a2a156 | `Family/Defs.lean \| 10 ++++++++--`, `Solution.lean \| 14 ++++++++------`; the Solution.lean changes (956ab8d, 0a2a156 = amended 2b736c9) are comment-only (module docstrings) |
+| 2026-10-16 (historical, imprecise) | `lake env leanchecker <descriptive placeholder: "all 22 built modules: Challenge, Solution, FiveGenBetti.*">`; literal argv not retained, so whether the umbrella `FiveGenBetti` was included is unknown (there are 23 built modules) | b0a3671 | exit 0, 13 min 19 s wall; superseded by the literal replay below |
+| 2026-10-17 | `lake build` (before the replay) | 0a2a156 | exit 0, 8984 jobs |
+| 2026-10-17 | `lake env leanchecker FiveGenBetti Challenge Solution FiveGenBetti.Algebra FiveGenBetti.Bridge FiveGenBetti.Certificate.Defs FiveGenBetti.Defs FiveGenBetti.Examples.Thirteen FiveGenBetti.Family.Apery FiveGenBetti.Family.Data FiveGenBetti.Family.Defs FiveGenBetti.Family.Generation FiveGenBetti.Family.Lemmas FiveGenBetti.Family.Main FiveGenBetti.Family.Minimality FiveGenBetti.Family.NormalForms FiveGenBetti.Family.Relations FiveGenBetti.Fiber FiveGenBetti.Graded.Indecomposables FiveGenBetti.Graded.Projection FiveGenBetti.GradedGenerators FiveGenBetti.Interface FiveGenBetti.Main` (23 modules: every module with an `.olean` under `.lake/build/lib/lean`, i.e. the umbrella `FiveGenBetti`, `Challenge`, `Solution` and the 20 `FiveGenBetti.*` descendants; `FiveGenBetti.AxiomAudit` has no olean and `Targets.FiniteWidth` is not built; list computed by a shell loop over the oleans) | 0a2a156 (Lean sources = b0a3671 except Solution.lean comments) | exit 0, 569 s wall (9 min 29 s; `/usr/bin/time -l`: 570.16 s real, max RSS 29.5 GB), no output. Two earlier attempts of the identical command the same morning were killed by SIGKILL (rc 137, after 425 s and 418 s, no output; the first concurrently with other Lean processes; cause not established, likely memory pressure) and are not counted as replays |
 | — | Linux comparator (`scripts/verify-comparator.sh`, CI) | b0a3671 | NOT RUN |
 | — | NanoDa / con-ron external kernels; `leanchecker --fresh` | b0a3671 | NOT RUN |
 
@@ -100,10 +113,130 @@ are identical. The nine Minimality proofs were produced by GPT-6 Astra (job
 five-generator-betti/20261016T233235, aiseminar `agents/runs/2026-10-16_betti-B5-minimality/reply_r1.md`)
 and applied mechanically. Negative control recorded by the 'trust' adversary: under `import Challenge`
 the same axiom query reports `sorryAx` and `leanchecker Challenge` still exits 0, so replay exit codes
-alone do not exclude admissions; the axiom list is checked separately. Adversary-reported (not yet
-re-run by the orchestrator): `leanexport Solution -- FiveGenBetti.family_spanRank_eq | leanchecker
---from-export` accepted.
+alone do not exclude admissions; the axiom list is checked separately. Adversary-reported and
+independently re-run by the reviewer (pass 1, 2026-10-17, at 4c9349b; not re-run by the orchestrator):
+`lake env leanexport Solution -- FiveGenBetti.family_spanRank_eq | lake env leanchecker --from-export
+/dev/stdin`, EXPORT_EXIT 0, CHECKER_EXIT 0, 17.55 s (Lean's default kernel, empty environment; not an
+external kernel).
 
 ## 12. Source provenance
 Template PALOMAR-2026-10-07-000005 at commit aa266b8a7db2794e49a0053978852ade100d23da;
 reused files listed in docs/PORTING.md.
+
+## 13. Independent statement reconstruction, 2026-10-17
+GPT-6 Astra (role statement-recon, no access to this repository; aiseminar
+`agents/astra/transcripts/20261017T000811_statement-recon_claim_0005.md`, CONFIDENCE 0.97) wrote a
+Lean statement of F from CLAIM.md alone: `TheoremFStatement.F` (verbatim in the input below; it did
+not elaborate it, Mathlib being absent in its sandbox). Item-by-item comparison with
+`FiveGenBetti.family_spanRank_eq` (Challenge.lean / Solution.lean):
+
+| item | reconstruction | statement of record | verdict |
+|---|---|---|---|
+| generators | `exponents k q = ![m, m+1, m+k, m+(2*k-1), m+2*k]`, `m = 2*k*q+1` | `familyGens k q`, match on `i.val`, wildcard = index 4 | identical (`funext i; fin_cases i <;> rfl`) |
+| hypotheses | `k q : ℕ`, `3 ≤ k`, `k - 1 ≤ q` | `k q : ℕ`, `hk : 3 ≤ k`, `hq : k - 1 ≤ q` | identical |
+| field | `∀ (K : Type u) [Field K]` | `(K : Type*) [Field K]` | identical (universe-polymorphic, any characteristic) |
+| ideal | `RingHom.ker (MvPolynomial.aeval (fun i => (X : K[X]) ^ exponents k q i)).toRingHom` in `MvPolynomial (Fin 5) K`, codomain `Polynomial K` | `toricIdeal K n = RingHom.ker (MvPolynomial.aeval (fun i => (Polynomial.X : Polynomial K) ^ n i)).toRingHom`, codomain `Polynomial K` | identical after rewriting the exponent vector |
+| minimal number of generators | `HasMinimalNumberOfGenerators I n`: some `Finset` of card `n` spans `I`, and every spanning `Finset` has card `≥ n` | `I.spanRank = (n : Cardinal)`, `Submodule.spanRank` over the scalar ring `MvPolynomial (Fin 5) K` | equivalent for natural `n` (argument below) |
+
+Equivalence argument. `spanRank I` is the infimum of `#s` over all sets `s` with `span s = I`, and it
+is attained (`Submodule.exists_span_set_card_eq_spanRank`). If `spanRank I = n` with `n : ℕ`, the
+attaining set has cardinal `n < ℵ₀`, hence is finite, hence is (the coercion of) a `Finset` of card
+`n`; conversely every spanning `Finset G` satisfies `spanRank I ≤ #G = G.card`
+(`Submodule.spanRank_span_le_card`), so `n ≤ G.card`. (The converse implication also holds: a
+spanning Finset of card `n` gives `spanRank I ≤ n`, and an attaining set of smaller cardinal would be a
+spanning Finset of card `< n`. It is not needed here and was not checked in Lean.)
+
+Lean check (direction: statement of record ⇒ reconstruction, which is the direction that matters
+for trusting the formal statement). Run at 0a2a156 from the repository root, the scratch file not
+added to the repository: `lake env lean --stdin < recon_equiv.lean` (SHA-256 of input
+`480ff7cca25003bc2333496817087336887255610684c86978a6d7ec9724220f`). Input:
+
+```lean
+import Solution
+
+universe u
+
+namespace TheoremFStatement
+
+def exponents (k q : ℕ) : Fin 5 → ℕ :=
+  let m := 2 * k * q + 1
+  ![m, m + 1, m + k, m + (2 * k - 1), m + 2 * k]
+
+noncomputable def toricMap (K : Type u) [Field K] (k q : ℕ) :
+    MvPolynomial (Fin 5) K →ₐ[K] Polynomial K :=
+  MvPolynomial.aeval
+    (fun i => (Polynomial.X : Polynomial K) ^ exponents k q i)
+
+noncomputable def toricIdeal (K : Type u) [Field K] (k q : ℕ) :
+    Ideal (MvPolynomial (Fin 5) K) :=
+  RingHom.ker (toricMap K k q).toRingHom
+
+def HasMinimalNumberOfGenerators {R : Type*} [CommRing R]
+    (I : Ideal R) (n : ℕ) : Prop :=
+  (∃ G : Finset R, Ideal.span (↑G : Set R) = I ∧ G.card = n) ∧
+  (∀ G : Finset R, Ideal.span (↑G : Set R) = I → n ≤ G.card)
+
+-- The proposition being formalized; no proof is supplied.
+def F : Prop :=
+  ∀ (K : Type u) [Field K] (k q : ℕ),
+    3 ≤ k → k - 1 ≤ q →
+    HasMinimalNumberOfGenerators (toricIdeal K k q) (4 * k + 2)
+
+end TheoremFStatement
+
+open Cardinal in
+/-- Generic: a cardinal `spanRank` equal to a natural `n` gives the Finset formulation. -/
+theorem hasMinimal_of_spanRank_eq {R : Type*} [CommRing R] (I : Ideal R) (n : ℕ)
+    (h : I.spanRank = (n : Cardinal)) : TheoremFStatement.HasMinimalNumberOfGenerators I n := by
+  refine ⟨?_, ?_⟩
+  · obtain ⟨s, hs, hspan⟩ := Submodule.exists_span_set_card_eq_spanRank I
+    rw [h] at hs
+    have hfin : s.Finite :=
+      Cardinal.lt_aleph0_iff_set_finite.mp (hs ▸ Cardinal.natCast_lt_aleph0 (n := n))
+    obtain ⟨G, rfl⟩ := Set.Finite.exists_finset_coe hfin
+    refine ⟨G, hspan, ?_⟩
+    have h1 : (#(↑G : Set R)) = (G.card : Cardinal) := by simp
+    rw [hs] at h1
+    exact_mod_cast h1.symm
+  · intro G hG
+    have h2 := Submodule.spanRank_span_le_card (R := R) (↑G : Set R)
+    have h3 : Submodule.span R (↑G : Set R) = I := hG
+    have h4 : (#(↑G : Set R)) = (G.card : Cardinal) := by simp
+    rw [h3, h, h4] at h2
+    exact_mod_cast h2
+
+theorem toricIdeal_eq (K : Type u) [Field K] (k q : ℕ) :
+    TheoremFStatement.toricIdeal K k q =
+      FiveGenBetti.toricIdeal K (FiveGenBetti.familyGens k q) := by
+  have he : TheoremFStatement.exponents k q = FiveGenBetti.familyGens k q := by
+    funext i; fin_cases i <;> rfl
+  unfold TheoremFStatement.toricIdeal TheoremFStatement.toricMap FiveGenBetti.toricIdeal
+  rw [he]
+
+example (K : Type u) [Field K] (k q : ℕ) (hk : 3 ≤ k) (hq : k - 1 ≤ q) :
+    TheoremFStatement.HasMinimalNumberOfGenerators
+      (TheoremFStatement.toricIdeal K k q) (4*k+2) := by
+  rw [toricIdeal_eq]
+  exact hasMinimal_of_spanRank_eq _ _ (FiveGenBetti.family_spanRank_eq K k q hk hq)
+
+theorem F_holds : TheoremFStatement.F := by
+  intro K _ k q hk hq
+  rw [toricIdeal_eq]
+  exact hasMinimal_of_spanRank_eq _ _ (FiveGenBetti.family_spanRank_eq K k q hk hq)
+
+#print axioms F_holds
+```
+
+Output (complete stdout/stderr) and exit code:
+
+```
+'F_holds' depends on axioms: [propext, Classical.choice, Quot.sound]
+LEAN_EXIT 0
+```
+
+Outcome: success. The `example` requested
+(`HasMinimalNumberOfGenerators (TheoremFStatement.toricIdeal K k q) (4*k+2)` from `3 ≤ k`, `k - 1 ≤ q`)
+and the full proposition `TheoremFStatement.F` are proved from `FiveGenBetti.family_spanRank_eq`, with
+axioms `[propext, Classical.choice, Quot.sound]`. The reconstruction's own definitions are pasted
+unchanged (only `import Mathlib` replaced by `import Solution`). Fresh elaboration against the built
+oleans, not a kernel replay of the scratch file.
