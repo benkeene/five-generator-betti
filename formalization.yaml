@@ -157,8 +157,9 @@ review:
     coefficient-and-divisibility argument). Addressed on main on 2026-10-21, after the pinned
     commit: docs/PROOF.md (Family.Minimality, layer (i)) now gives the witness-monomial
     divisibility argument of H_nonredundant and identifies the paper's quotient argument
-    modulo (a, c^2, bd) as an alternative informal proof; no Lean source changed. The
-    registered v1 carries the warning until a new version is submitted.
+    modulo (a, c^2, bd) as an alternative informal proof; no Lean source changed. Version 1
+    retains its pinned proof account and recorded warning; a new version is required for review
+    of the revised account.
 
 known_gaps:
   - "leanchecker --fresh not run (optional; the Linux CI comparator with NanoDa/con-ron passed at 0223cfc, and the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."

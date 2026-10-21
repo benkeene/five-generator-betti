@@ -46,9 +46,14 @@ Recorded 2026-10-21. Items (a) and (b) were done on 2026-10-21 on main (no Lean 
       formalizes, and name the paper's quotient argument modulo (a, c², bd) as an alternative informal proof. The paper
       (`paper/main.tex:362`) already states the difference and was not changed.
 - [x] (b) Done 2026-10-21: `docs/PROOF.md` section Family.Minimality, layer (i) and the H bullet, rewritten (the old
-      sentence "a redundancy can be projected to the ordinary degree of f" was also inaccurate and is gone; ordinary
-      homogeneity only feeds `homogeneous_mem_span_range`, whose homogeneity of the coefficients is discarded);
-      warning notes in `README.md` and `formalization.yaml` updated to "addressed on main, after the pinned commit".
+      sentence about projecting to the ordinary degree of f was removed because it did not identify the decisive
+      coefficient-and-divisibility argument; the helper `homogeneous_mem_span_range` still performs that projection
+      internally, but its degree-related conclusions are discarded); warning notes in `README.md` and
+      `formalization.yaml` updated to "addressed on main, after the pinned commit". Adversarial review of the rewrite
+      by GPT-6 Astra (`docs/astra/2026-10-21_adversary_proofmd_hrewrite.md`, ACCEPT_WITH_FIXES 0.97): its eight
+      findings (scoping of the divisibility lemmas, the ae witness justification, the N bullet's signed degree, the
+      assembly's actual case split, the paper's degree-2 case, the Apéry quotient-basis sentence, the record wording)
+      were applied in the commit following aaae2b9.
 - [ ] (c) Decide whether to resubmit as v2 or leave v1 as registered. Recommendation: submit v2 (the registry reads the
       proof account at the pinned commit, so v1 keeps the warning; Lean sources are unchanged, so mechanical verification
       should pass again; v2 also retires the stale "private" wording at 65cd1b7). If v2 is registered, update the

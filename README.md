@@ -75,8 +75,9 @@ explicitly identify the quotient argument as an alternative informal proof rathe
 imported proof." Addressed on main on 2026-10-21 (after the pinned commit) by rewriting the H-only
 nonredundancy passage of `docs/PROOF.md` (section Family.Minimality, layer (i)) to the witness-monomial
 divisibility argument that `H_nonredundant` formalizes, with the paper's quotient argument modulo (a, c², bd)
-identified as an alternative informal proof; no Lean source changed. The registered v1 still shows the
-warning until a new version is submitted. Registration is not a review of novelty: no novelty claim is made. Theorem W is not part of the entry.
+identified as an alternative informal proof; no Lean source changed. Version 1 retains its pinned proof
+account and recorded warning; a new version is required for review of the revised account. Registration is
+not a review of novelty: no novelty claim is made. Theorem W is not part of the entry.
 To cite it:
 ```bibtex
 @misc{palomar-2026-10-17-000014-v1,
