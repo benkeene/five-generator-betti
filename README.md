@@ -62,7 +62,6 @@ Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 (`c55e6e786f49471c72fbddbec5415808896aec1e`), the same as PALOMAR-2026-10-07-000005. Never commit `.lake`.
 
 ## Palomar entry and citation
-Open TODO: the registry review warning on v1 is not yet addressed; see [docs/PALOMAR_REVIEW_TODO.md](docs/PALOMAR_REVIEW_TODO.md).
 This formalization is hosted on Palomar as
 [PALOMAR-2026-10-17-000014 v1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-17-000014&version=1).
 Version 1 pins commit `65cd1b7289ed27ff6ffec32c5644a8b4323918d2` (the main head when it was submitted; the
@@ -73,7 +72,11 @@ https://github.com/PalomarArchive/benkeene--five-generator-betti--724a4e2a049a. 
 (by Palomar's policy not an acceptance or endorsement), with one warning: "The proof account misidentifies the decisive
 H-only nonredundancy argument used by Lean. Replace that passage with the coefficient-and-divisibility argument, or
 explicitly identify the quotient argument as an alternative informal proof rather than the architecture of the
-imported proof." Registration is not a review of novelty: no novelty claim is made. Theorem W is not part of the entry.
+imported proof." Addressed on main on 2026-10-21 (after the pinned commit) by rewriting the H-only
+nonredundancy passage of `docs/PROOF.md` (section Family.Minimality, layer (i)) to the witness-monomial
+divisibility argument that `H_nonredundant` formalizes, with the paper's quotient argument modulo (a, c², bd)
+identified as an alternative informal proof; no Lean source changed. The registered v1 still shows the
+warning until a new version is submitted. Registration is not a review of novelty: no novelty claim is made. Theorem W is not part of the entry.
 To cite it:
 ```bibtex
 @misc{palomar-2026-10-17-000014-v1,

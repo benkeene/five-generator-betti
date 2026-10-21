@@ -1,6 +1,6 @@
 # TODO: address the Palomar review warning on PALOMAR-2026-10-17-000014 v1
 
-Recorded 2026-10-21. Nothing has been fixed yet; no proof text has been changed.
+Recorded 2026-10-21. Items (a) and (b) were done on 2026-10-21 on main (no Lean source changed); item (c) is open.
 
 - Entry: PALOMAR-2026-10-17-000014 v1, pinning commit `65cd1b7289ed27ff6ffec32c5644a8b4323918d2`
   - Page: https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-17-000014&version=1
@@ -42,6 +42,14 @@ Recorded 2026-10-21. Nothing has been fixed yet; no proof text has been changed.
 
 ## Checklist for Ben
 
-- [ ] (a) Decide: rewrite the passage with the coefficient-and-divisibility argument, or label the quotient argument as an alternative informal proof.
-- [ ] (b) Edit the file(s) identified above (at least `docs/PROOF.md` 64-79; then the warning notes in `README.md` and `formalization.yaml`).
-- [ ] (c) Decide whether to resubmit as v2 or leave v1 as registered.
+- [x] (a) Decided 2026-10-21: rewrite the passage with the witness-monomial divisibility argument that `H_nonredundant`
+      formalizes, and name the paper's quotient argument modulo (a, c², bd) as an alternative informal proof. The paper
+      (`paper/main.tex:362`) already states the difference and was not changed.
+- [x] (b) Done 2026-10-21: `docs/PROOF.md` section Family.Minimality, layer (i) and the H bullet, rewritten (the old
+      sentence "a redundancy can be projected to the ordinary degree of f" was also inaccurate and is gone; ordinary
+      homogeneity only feeds `homogeneous_mem_span_range`, whose homogeneity of the coefficients is discarded);
+      warning notes in `README.md` and `formalization.yaml` updated to "addressed on main, after the pinned commit".
+- [ ] (c) Decide whether to resubmit as v2 or leave v1 as registered. Recommendation: submit v2 (the registry reads the
+      proof account at the pinned commit, so v1 keeps the warning; Lean sources are unchanged, so mechanical verification
+      should pass again; v2 also retires the stale "private" wording at 65cd1b7). If v2 is registered, update the
+      bibtex and the entry links in `README.md` and `formalization.yaml`.
