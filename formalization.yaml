@@ -43,8 +43,9 @@ status:
     redundant, their index type has 4k+2 elements), added to Challenge.lean, Solution.lean and
     comparator.json; local build, axiom audit (three standard axioms for each of the three) and
     replay recorded in CORRESPONDENCE.md section 11; the CI comparator passed on the rewritten
-    main 0a897c8 with all three (run 39036226197). Remaining: repository visibility (currently
-    private). CORRESPONDENCE.md was read in full by Ben Keene on 2026-10-17. Informally, F is an ordinary theorem by the laboratory's review
+    main 0a897c8 with all three (run 39036226197). Registered on Palomar as PALOMAR-2026-10-17-000014
+    version 1 (2026-10-17, commit 65cd1b7289ed27ff6ffec32c5644a8b4323918d2); the repository was made public for the
+    submission. CORRESPONDENCE.md was read in full by Ben Keene on 2026-10-17. Informally, F is an ordinary theorem by the laboratory's review
     protocol (docs/PROOF.md, aiseminar claim_0005). Theorem W is a conjecture, admitted in
     Targets/FiniteWidth.lean, outside Solution's import closure and outside defaultTargets.
     sorry_count convention: occurrences of `sorry` outside Challenge.lean (whose four
@@ -148,10 +149,15 @@ review:
     CI comparator passed at 0223cfc (2026-10-17,
     https://github.com/benkeene/five-generator-betti/actions/runs/39005390724): con-ron,
     nanoda and the Lean default kernel accepted. leanchecker --fresh not run (optional).
+    Palomar PALOMAR-2026-10-17-000014 version 1 (registered 2026-10-17,
+    https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-17-000014&version=1) pins commit 65cd1b7289ed27ff6ffec32c5644a8b4323918d2; Palomar
+    mechanical verification run 39043271825 (nanoda, con-ron); registry review outcome "neutral"
+    (no blocking problem; by Palomar's policy this is not an acceptance or endorsement), with one warning:
+    the proof account misidentifies the H-only nonredundancy argument used by Lean (the
+    coefficient-and-divisibility argument), not yet addressed.
 
 known_gaps:
   - "leanchecker --fresh not run (optional; the Linux CI comparator with NanoDa/con-ron passed at 0223cfc, and the reviewer re-ran the exported-closure replay of F, leanexport | leanchecker --from-export, exit 0)."
-  - "Repository is private (owner's decision); the registry must be able to clone it before submission."
   - "The two packaging records of 2026-10-17 (familyGens_minimallyGenerates, family_presentation) postdate the formal adversary and reviewer passes, which saw family_spanRank_eq alone; they are thin calls into library declarations those passes covered, and the CI comparator passed with all three at 0a897c8."
   - "The reverse fiber bridge (betaFiber <= spanRank) is not formalized; it is not needed for F, which does not assert equality with betaFiber."
   - "The finite-width theorem is unproved; periodicity and exhaustive replay are out of version 1."

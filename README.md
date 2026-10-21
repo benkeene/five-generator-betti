@@ -29,6 +29,7 @@ development; the CI comparator passed with all three on the rewritten main `0a89
 `Targets/FiniteWidth.lean` outside Solution's import closure. Informal argument in `docs/PROOF.md`;
 plans in `docs/astra/`; audit record in `CORRESPONDENCE.md` §11. Template and reusable library: `~/semigroup-betti`
 (Palomar entry PALOMAR-2026-10-07-000005; four-generator case β₁ ≤ 2w).
+Registered on Palomar as PALOMAR-2026-10-17-000014 v1 (2026-10-17; see below).
 
 ## Layout
 - `Challenge.lean` — statements of record (Mathlib-only imports, deliberate `sorry`s): F as
@@ -60,15 +61,36 @@ lake env lean FiveGenBetti/AxiomAudit.lean   # informational only (not run in CI
 Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 (`c55e6e786f49471c72fbddbec5415808896aec1e`), the same as PALOMAR-2026-10-07-000005. Never commit `.lake`.
 
+## Palomar entry and citation
+This formalization is hosted on Palomar as
+[PALOMAR-2026-10-17-000014 v1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-17-000014&version=1).
+Version 1 pins commit `65cd1b7289ed27ff6ffec32c5644a8b4323918d2` (the main head when it was submitted; the
+README and `formalization.yaml` at that commit still describe the repository as private, which it
+was until submission). Palomar's mechanical verification (https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/39043271825) checked the three
+statements of record with Comparator, nanoda and con-ron; the pinned commit is preserved in
+https://github.com/PalomarArchive/benkeene--five-generator-betti--724a4e2a049a. Registry review outcome `neutral`
+(by Palomar's policy not an acceptance or endorsement), with one warning: "The proof account misidentifies the decisive
+H-only nonredundancy argument used by Lean. Replace that passage with the coefficient-and-divisibility argument, or
+explicitly identify the quotient argument as an alternative informal proof rather than the architecture of the
+imported proof." Registration is not a review of novelty: no novelty claim is made. Theorem W is not part of the entry.
+To cite it:
+```bibtex
+@misc{palomar-2026-10-17-000014-v1,
+  author = {{Ben Keene}},
+  title = {{First Betti numbers of five-generated numerical semigroups}},
+  year = {2026},
+  howpublished = {Palomar, PALOMAR-2026-10-17-000014 v1},
+  url = {https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-17-000014&version=1},
+}
+```
+
 ## Submission
-Palomar submissions go through https://submit.palomar-registry.org/ with the full 40-character commit SHA. This repository is
-ready for submission from the registry's side: the CI comparator passed with all three statements
+Palomar submissions (including new versions of this entry) go through https://submit.palomar-registry.org/ with the
+full 40-character commit SHA. Before the submission the CI comparator passed with all three statements
 of record (`family_spanRank_eq`, `familyGens_minimallyGenerates`, `family_presentation`) on the
 rewritten main `0a897c8` (2026-10-17,
 https://github.com/benkeene/five-generator-betti/actions/runs/39036226197; con-ron, nanoda and
 the Lean default kernel accepted the solution), after an earlier pass at 0223cfc for
-`family_spanRank_eq` alone. Remaining before submitting, the owner's decisions: repository
-visibility (currently private; the registry must be able to clone). Ben Keene read
-`CORRESPONDENCE.md` in full on 2026-10-17. Submit the full SHA of the main head at submission time.
-`leanchecker --fresh` has not run (optional; the registry's comparator performs independent
-replay). See `status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §11.
+`family_spanRank_eq` alone. Ben Keene read `CORRESPONDENCE.md` in full on 2026-10-17.
+`leanchecker --fresh` has not run (optional). Commits on main after `65cd1b7` are not part of version 1.
+See `status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §11.
