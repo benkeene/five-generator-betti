@@ -62,6 +62,7 @@ Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 (`c55e6e786f49471c72fbddbec5415808896aec1e`), the same as PALOMAR-2026-10-07-000005. Never commit `.lake`.
 
 ## Palomar entry and citation
+Open TODO: the registry review warning on v1 is not yet addressed; see [docs/PALOMAR_REVIEW_TODO.md](docs/PALOMAR_REVIEW_TODO.md).
 This formalization is hosted on Palomar as
 [PALOMAR-2026-10-17-000014 v1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-17-000014&version=1).
 Version 1 pins commit `65cd1b7289ed27ff6ffec32c5644a8b4323918d2` (the main head when it was submitted; the
