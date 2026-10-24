@@ -29,7 +29,7 @@ development; the CI comparator passed with all three on the rewritten main `0a89
 `Targets/FiniteWidth.lean` outside Solution's import closure. Informal argument in `docs/PROOF.md`;
 plans in `docs/astra/`; audit record in `CORRESPONDENCE.md` §11. Template and reusable library: `~/semigroup-betti`
 (Palomar entry PALOMAR-2026-10-07-000005; four-generator case β₁ ≤ 2w).
-Registered on Palomar as PALOMAR-2026-10-17-000014 v1 (2026-10-17; see below).
+Registered on Palomar as PALOMAR-2026-10-17-000014 (v1 2026-10-17, v2 2026-10-23; see below).
 
 ## Layout
 - `Challenge.lean` — statements of record (Mathlib-only imports, deliberate `sorry`s): F as
@@ -63,29 +63,32 @@ Pinned toolchain `leanprover/lean4:v4.35.0-rc3`, Mathlib `v4.35.0-rc3`
 
 ## Palomar entry and citation
 This formalization is hosted on Palomar as
-[PALOMAR-2026-10-17-000014 v1](https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-17-000014&version=1).
-Version 1 pins commit `65cd1b7289ed27ff6ffec32c5644a8b4323918d2` (the main head when it was submitted; the
-README and `formalization.yaml` at that commit still describe the repository as private, which it
-was until submission). Palomar's mechanical verification (https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/39043271825) checked the three
-statements of record with Comparator, nanoda and con-ron; the pinned commit is preserved in
+[PALOMAR-2026-10-17-000014 v2](https://palomar-registry.org/entry?id=PALOMAR-2026-10-17-000014&version=2)
+(registered 2026-10-23, pinning commit `8c57c1eaf991f5dbb1001fbc5f18835388787453`). Palomar's mechanical
+verification (https://github.com/PalomarRegistry/PalomarSubmission/actions/runs/39695728071) checked the three
+statements of record with Comparator, nanoda and con-ron (`--verified`); the pinned commit is preserved in
 https://github.com/PalomarArchive/benkeene--five-generator-betti--724a4e2a049a. Registry review outcome `neutral`
-(by Palomar's policy not an acceptance or endorsement), with one warning: "The proof account misidentifies the decisive
-H-only nonredundancy argument used by Lean. Replace that passage with the coefficient-and-divisibility argument, or
-explicitly identify the quotient argument as an alternative informal proof rather than the architecture of the
-imported proof." Addressed on main on 2026-10-21 (after the pinned commit) by rewriting the H-only
-nonredundancy passage of `docs/PROOF.md` (section Family.Minimality, layer (i)) to the witness-monomial
-divisibility argument that `H_nonredundant` formalizes, with the paper's quotient argument modulo (a, c², bd)
-identified as an alternative informal proof; no Lean source changed. Version 1 retains its pinned proof
-account and recorded warning; a new version is required for review of the revised account. Registration is
-not a review of novelty: no novelty claim is made. Theorem W is not part of the entry.
+(by Palomar's policy not an acceptance or endorsement), with no warnings.
+
+Version 1 ([entry](https://palomar-registry.org/entry?id=PALOMAR-2026-10-17-000014&version=1), 2026-10-17) pinned
+commit `65cd1b7289ed27ff6ffec32c5644a8b4323918d2` (the main head when it was submitted; the README and
+`formalization.yaml` at that commit still describe the repository as private, which it was until submission).
+Its review carried one warning: "The proof account misidentifies the decisive H-only nonredundancy argument used by
+Lean. Replace that passage with the coefficient-and-divisibility argument, or explicitly identify the quotient
+argument as an alternative informal proof rather than the architecture of the imported proof." Addressed on
+2026-10-21 by rewriting the H-only nonredundancy passage of `docs/PROOF.md` (section Family.Minimality, layer (i))
+to the witness-monomial divisibility argument that `H_nonredundant` formalizes, with the paper's quotient argument
+modulo (a, c², bd) identified as an alternative informal proof; no Lean source changed. Version 2 registers the
+revised account and its review recorded no warning. Registration is not a review of novelty: no novelty claim is
+made. Theorem W is not part of either version.
 To cite it:
 ```bibtex
-@misc{palomar-2026-10-17-000014-v1,
+@misc{palomar-2026-10-17-000014-v2,
   author = {{Ben Keene}},
   title = {{First Betti numbers of five-generated numerical semigroups}},
   year = {2026},
-  howpublished = {Palomar, PALOMAR-2026-10-17-000014 v1},
-  url = {https://palomar-registry.org/entry.html?id=PALOMAR-2026-10-17-000014&version=1},
+  howpublished = {Palomar, PALOMAR-2026-10-17-000014 v2},
+  url = {https://palomar-registry.org/entry?id=PALOMAR-2026-10-17-000014&version=2},
 }
 ```
 
@@ -97,5 +100,6 @@ rewritten main `0a897c8` (2026-10-17,
 https://github.com/benkeene/five-generator-betti/actions/runs/39036226197; con-ron, nanoda and
 the Lean default kernel accepted the solution), after an earlier pass at 0223cfc for
 `family_spanRank_eq` alone. Ben Keene read `CORRESPONDENCE.md` in full on 2026-10-17.
-`leanchecker --fresh` has not run (optional). Commits on main after `65cd1b7` are not part of version 1.
+`leanchecker --fresh` has not run (optional). Commits on main after `65cd1b7` are not part of version 1, and
+commits after `8c57c1e` are not part of version 2.
 See `status.scope` in `formalization.yaml` and `CORRESPONDENCE.md` §11.
